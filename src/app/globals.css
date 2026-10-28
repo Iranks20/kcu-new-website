@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+
+  /* KCU green. primary-600 is the official brand colour #0b6232; the scale is built around it. */
+  --color-primary-50: #eef7f1;
+  --color-primary-100: #d6ecdd;
+  --color-primary-200: #afd8bd;
+  --color-primary-300: #7fbd96;
+  --color-primary-400: #4a9c6c;
+  --color-primary-500: #23804b;
+  --color-primary-600: #0b6232;
+  --color-primary-700: #09532a;
+  --color-primary-800: #084423;
+  --color-primary-900: #06371c;
+  --color-primary-950: #03200f;
+
+  /* Crest gold, muted for a premium feel. A sparing accent only: credentials, highlights on dark green,
+     the closing call to action. Use 600+ for icons on white; 300/400 on dark green. Never body text on white. */
+  --color-gold-50: #fbf7ec;
+  --color-gold-100: #f5ebcf;
+  --color-gold-200: #ecd8a0;
+  --color-gold-300: #e2c26e;
+  --color-gold-400: #d6a945;
+  --color-gold-500: #c18f2a;
+  --color-gold-600: #9c7020;
+  --color-gold-700: #7a571b;
+
+  --color-ink: #0f1a15;
+  /* Warm ivory for alternating sections, so the page isn't green on green. */
+  --color-surface: #f7f6f2;
+
+  --shadow-card: 0 1px 2px rgb(15 26 21 / 0.04), 0 8px 24px -8px rgb(15 26 21 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(15 26 21 / 0.04), 0 24px 48px -16px rgb(15 26 21 / 0.18);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+}
+
+@keyframes carousel-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (width >= 40rem) { padding-inline: 1.5rem; }
+  @media (width >= 64rem) { padding-inline: 2rem; }
+}
+
+@utility heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary-600);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-base leading-relaxed text-slate-700 antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply heading text-ink;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { @apply bg-gold-200 text-ink; }
+  :focus-visible { @apply rounded-sm outline-2 outline-offset-2 outline-primary-500; }
+  [id] { scroll-margin-top: 6.5rem; }
+  summary { cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+}
+
+/* Long-form article text */
+.prose-kcu { @apply text-[1.0625rem] leading-8 text-slate-700; }
+.prose-kcu > * + * { margin-top: 1.25em; }
+.prose-kcu h2 { @apply mt-10 text-2xl; }
+.prose-kcu a { @apply font-medium text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700; }
+
+/* Scroll reveal, toggled by <Reveal> */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
