@@ -22,7 +22,7 @@ export type HeroSlide = {
   note?: string;
 };
 
-const INTERVAL = 7000;
+const INTERVAL = 5000;
 
 export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
