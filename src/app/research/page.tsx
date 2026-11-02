@@ -27,7 +27,7 @@ export default function ResearchPage() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {researchAreas.map((r) => (
             <div key={r.title} className="group rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-lift sm:p-8">
-              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-primary-600 transition group-hover:bg-primary-600 group-hover:text-white">
+              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-slate-600 transition group-hover:bg-ink group-hover:text-white">
                 <FlaskConical className="size-6" aria-hidden />
               </span>
               <h3 className="mt-5 text-xl">{r.title}</h3>
@@ -62,7 +62,7 @@ export default function ResearchPage() {
           </div>
         </Section>
       )}
-      <CtaBand title="Partner with KCU" text="We welcome research, clinical and academic partnerships. Get in touch with the Office of the Vice Chancellor." />
+      <CtaBand tone="quiet" title="Partner with KCU" text="We welcome research, clinical and academic partnerships. Get in touch with the Office of the Vice Chancellor." />
     </>
   );
 }

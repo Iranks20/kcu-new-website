@@ -29,12 +29,12 @@ export function NewsCard({ article, featured = false }: { article: NewsArticle; 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <time dateTime={article.date} className="text-sm text-slate-500">{formatDate(article.date)}</time>
         <h3 className={featured ? "mt-2 text-xl sm:text-2xl" : "mt-2 line-clamp-3 text-lg"}>
-          <Link href={`/news/${article.slug}`} className="after:absolute after:inset-0 group-hover:text-primary-700">
+          <Link href={`/news/${article.slug}`} className="after:absolute after:inset-0 group-hover:text-ink">
             {article.title}
           </Link>
         </h3>
         {featured && <p className="mt-3 line-clamp-3 text-slate-600">{article.excerpt}</p>}
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-primary-700">
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-ink">
           Read story <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
         </span>
       </div>
@@ -46,14 +46,14 @@ export function EventCard({ event }: { event: UniEvent }) {
   const d = dateParts(event.date);
   return (
     <article className="group relative flex gap-5 rounded-2xl bg-white p-5 shadow-card ring-1 ring-slate-100 transition duration-300 hover:-translate-y-0.5 hover:shadow-lift">
-      <div className="flex size-18 shrink-0 flex-col items-center justify-center rounded-xl bg-slate-50 text-primary-700">
+      <div className="flex size-18 shrink-0 flex-col items-center justify-center rounded-xl bg-slate-50 text-ink">
         <span className="heading text-2xl">{d.day}</span>
-        <span className="text-xs font-semibold uppercase tracking-wider">{d.month}</span>
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">{d.month}</span>
       </div>
       <div className="min-w-0">
-        <p className="text-sm font-semibold text-primary-600">{event.category}</p>
+        <p className="text-sm font-semibold text-slate-500">{event.category}</p>
         <h3 className="mt-1 text-lg">
-          <Link href={`/events/${event.slug}`} className="after:absolute after:inset-0 group-hover:text-primary-700">
+          <Link href={`/events/${event.slug}`} className="after:absolute after:inset-0 group-hover:text-ink">
             {event.title}
           </Link>
         </h3>
@@ -75,7 +75,7 @@ export function ProgrammeCard({ programme }: { programme: Programme }) {
         <span className="flex items-center gap-1 text-sm text-slate-500"><CalendarDays className="size-3.5" aria-hidden />{programme.duration}</span>
       </div>
       <h3 className="mt-4 text-lg leading-snug">
-        <Link href={`/programmes/${programme.slug}`} className="after:absolute after:inset-0 group-hover:text-primary-700">
+        <Link href={`/programmes/${programme.slug}`} className="after:absolute after:inset-0 group-hover:text-ink">
           {programme.title}
         </Link>
       </h3>
@@ -86,7 +86,7 @@ export function ProgrammeCard({ programme }: { programme: Programme }) {
           <p className="text-xs text-slate-500">Tuition per {programme.fees.per}</p>
           <p className="font-semibold text-ink">{programme.fees.local}</p>
         </div>
-        <span className="grid size-9 place-items-center rounded-full bg-slate-50 text-primary-700 transition group-hover:bg-primary-600 group-hover:text-white">
+        <span className="grid size-9 place-items-center rounded-full bg-slate-50 text-ink transition group-hover:bg-ink group-hover:text-white">
           <ArrowRight className="size-4" aria-hidden />
         </span>
       </div>
@@ -108,7 +108,7 @@ export function PersonCard({ person }: { person: Person }) {
           />
         ) : (
           <div className="grid h-full place-items-center">
-            <span className="heading text-4xl text-primary-300">{initials(person.name)}</span>
+            <span className="heading text-4xl text-slate-300">{initials(person.name)}</span>
           </div>
         )}
       </div>

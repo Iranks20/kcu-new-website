@@ -109,11 +109,11 @@ export default function HomePage() {
             const count = programmes.filter((x) => p.levels.includes(x.level)).length;
             return (
               <li key={p.title}>
-                <Link href={p.href} className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-primary-300 hover:shadow-lift">
-                  <span className="text-sm font-medium text-primary-600">{count} programmes</span>
-                  <span className="heading mt-2 text-xl text-ink transition-colors group-hover:text-primary-600">{p.title}</span>
+                <Link href={p.href} className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-slate-300 hover:shadow-lift">
+                  <span className="text-sm font-medium text-slate-500">{count} programmes</span>
+                  <span className="heading mt-2 text-xl text-ink">{p.title}</span>
                   <span className="mt-2 flex-1 text-slate-600">{p.text}</span>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600">
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
                     View programmes <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
                   </span>
                 </Link>
@@ -124,13 +124,13 @@ export default function HomePage() {
       </Section>
 
       {/* Proof: graduates and scale */}
-      <section className="bg-primary-900 text-white">
+      <section className="bg-slate-950 text-white">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[18rem] lg:min-h-full">
             <Image src="/images/kcu-2026/graduates-celebrating.webp" alt="KCU graduates celebrating at the 6th Graduation Ceremony" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>
           <div className="px-4 py-14 sm:px-12 lg:px-16 lg:py-20">
-            <p className="eyebrow text-gold-300">
+            <p className="eyebrow text-gold-400">
               {latestGraduation.name} · {latestGraduation.date}
             </p>
             <h2 className="mt-3 text-3xl text-white sm:text-4xl">Graduates ready for the world</h2>
@@ -142,7 +142,7 @@ export default function HomePage() {
               {[{ value: latestGraduation.graduates, label: "Graduates in 2026" }, { value: latestGraduation.doctors, label: "New medical doctors" }, ...stats.slice(1, 3)].map(
                 (s) => (
                   <div key={s.label}>
-                    <dd className="heading text-4xl text-gold-300 sm:text-5xl">{s.value}</dd>
+                    <dd className="heading text-4xl text-gold-400 sm:text-5xl">{s.value}</dd>
                     <dt className="mt-1 text-white/65">{s.label}</dt>
                   </div>
                 ),
@@ -173,8 +173,8 @@ export default function HomePage() {
                   <Image src={school.image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="p-6 sm:p-7">
-                  <p className="text-sm font-medium text-primary-600">{programmes.filter((p) => p.school === school.slug).length} programmes</p>
-                  <h3 className="mt-2 text-xl transition-colors group-hover:text-primary-600 sm:text-2xl">{school.shortName}</h3>
+                  <p className="text-sm font-medium text-slate-500">{programmes.filter((p) => p.school === school.slug).length} programmes</p>
+                  <h3 className="mt-2 text-xl sm:text-2xl">{school.shortName}</h3>
                   <p className="mt-2 text-slate-600">{school.tagline}</p>
                 </div>
               </Link>
@@ -206,7 +206,7 @@ export default function HomePage() {
             <ol className="grid gap-4 sm:grid-cols-3">
               {joinSteps.map((step, i) => (
                 <li key={step.title} className="rounded-2xl bg-white p-6 ring-1 ring-slate-200">
-                  <span className="heading grid size-10 place-items-center rounded-full bg-primary-600 text-white">{i + 1}</span>
+                  <span className="heading grid size-10 place-items-center rounded-full bg-ink text-white">{i + 1}</span>
                   <h3 className="mt-5 text-lg">{step.title}</h3>
                   <p className="mt-2 text-[0.9375rem] text-slate-600">{step.text}</p>
                 </li>
@@ -216,18 +216,18 @@ export default function HomePage() {
               <p className="font-semibold text-ink">Questions? Our admissions team will help you.</p>
               <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem]">
                 <li>
-                  <a href={site.contact.phoneHref} className="inline-flex items-center gap-2 font-medium text-primary-600 hover:text-primary-700">
-                    <Phone className="size-4" aria-hidden /> {site.contact.phone}
+                  <a href={site.contact.phoneHref} className="inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
+                    <Phone className="size-4 text-slate-500" aria-hidden /> {site.contact.phone}
                   </a>
                 </li>
                 <li>
-                  <a href={`mailto:${site.contact.admissionsEmail}`} className="inline-flex items-center gap-2 font-medium text-primary-600 hover:text-primary-700">
-                    <Mail className="size-4" aria-hidden /> {site.contact.admissionsEmail}
+                  <a href={`mailto:${site.contact.admissionsEmail}`} className="inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
+                    <Mail className="size-4 text-slate-500" aria-hidden /> {site.contact.admissionsEmail}
                   </a>
                 </li>
                 <li>
-                  <a href={site.chatUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-primary-600 hover:text-primary-700">
-                    <MessageCircle className="size-4" aria-hidden /> Live chat
+                  <a href={site.chatUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
+                    <MessageCircle className="size-4 text-slate-500" aria-hidden /> Live chat
                   </a>
                 </li>
               </ul>
@@ -251,7 +251,7 @@ export default function HomePage() {
             <ol className="mt-10 space-y-7">
               {whyKcu.map((w, i) => (
                 <li key={w.title} className="flex gap-5">
-                  <span className="heading w-8 shrink-0 pt-0.5 text-lg text-primary-600">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="heading w-8 shrink-0 pt-0.5 text-lg text-slate-400">{String(i + 1).padStart(2, "0")}</span>
                   <div className="border-l border-slate-200 pl-5">
                     <h3 className="text-lg">{w.title}</h3>
                     <p className="mt-1 text-slate-600">{w.text}</p>
@@ -274,7 +274,7 @@ export default function HomePage() {
               </div>
               <div className="p-6">
                 <p className="text-sm text-slate-500">{formatDate(a.date)}</p>
-                <h3 className="mt-2 text-lg leading-snug transition-colors group-hover:text-primary-600">{a.title}</h3>
+                <h3 className="mt-2 text-lg leading-snug">{a.title}</h3>
               </div>
             </Link>
           ))}
@@ -282,51 +282,49 @@ export default function HomePage() {
       </Section>
 
       {/* Leadership */}
-      <section className="bg-primary-900 py-16 text-white sm:py-20 lg:py-24">
-        <div className="container-x">
-          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl lg:col-span-4">
-              <Image src={asset(viceChancellor.image)} alt={`Portrait of ${viceChancellor.name}`} fill sizes="(min-width: 1024px) 30vw, 80vw" className="object-cover object-top" />
-            </div>
-            <div className="lg:col-span-8">
-              <p className="eyebrow text-gold-300">From the Vice Chancellor</p>
-              <blockquote className="heading mt-6 text-2xl font-semibold leading-snug text-white sm:text-3xl lg:text-[2.125rem]">
-                “Education is transformative. I invite you to join KCU as we transform lives, advance knowledge, and prepare globally competitive
-                professionals and leaders for the future.”
-              </blockquote>
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-6 border-t border-white/15 pt-6">
-                <div>
-                  <p className="text-lg font-semibold">{viceChancellor.name}</p>
-                  <p className="text-white/60">{viceChancellor.role}</p>
-                </div>
-                <Button href="/about#vice-chancellor" variant="ghost-light">
-                  Read the full message
-                </Button>
-              </div>
-            </div>
+      <Section tone="surface">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl lg:col-span-4">
+            <Image src={asset(viceChancellor.image)} alt={`Portrait of ${viceChancellor.name}`} fill sizes="(min-width: 1024px) 30vw, 80vw" className="object-cover object-top" />
           </div>
-          <div className="mt-14 grid gap-8 border-t border-white/15 pt-10 sm:grid-cols-2 lg:grid-cols-3">
-            <div>
-              <p className="text-white/70">KCU is governed by a Board of Trustees and a University Council of leaders in health, law, education and public service.</p>
-              <Link href="/about/leadership" className="group mt-3 inline-flex items-center gap-1.5 font-semibold text-white">
-                Meet our leadership <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
-              </Link>
-            </div>
-            {leaders.map(({ person, note }) => (
-              <div key={person.name} className="flex items-center gap-4">
-                <div className="relative size-16 shrink-0 overflow-hidden rounded-full bg-white/10">
-                  {person.image && <Image src={asset(person.image)} alt="" fill sizes="64px" className="object-cover object-top" />}
-                </div>
-                <div>
-                  <p className="font-semibold text-white">{person.name}</p>
-                  <p className="text-sm text-white/65">{person.role}</p>
-                  {note && <p className="text-sm text-white/45">{note}</p>}
-                </div>
+          <div className="lg:col-span-8">
+            <p className="eyebrow mb-3">From the Vice Chancellor</p>
+            <blockquote className="heading text-2xl font-semibold leading-snug text-ink sm:text-3xl lg:text-[2.125rem]">
+              “Education is transformative. I invite you to join KCU as we transform lives, advance knowledge, and prepare globally competitive
+              professionals and leaders for the future.”
+            </blockquote>
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-6 border-t border-slate-200 pt-6">
+              <div>
+                <p className="text-lg font-semibold text-ink">{viceChancellor.name}</p>
+                <p className="text-slate-500">{viceChancellor.role}</p>
               </div>
-            ))}
+              <Button href="/about#vice-chancellor" variant="outline">
+                Read the full message
+              </Button>
+            </div>
           </div>
         </div>
-      </section>
+        <div className="mt-14 grid gap-8 border-t border-slate-200 pt-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <p className="text-slate-600">KCU is governed by a Board of Trustees and a University Council of leaders in health, law, education and public service.</p>
+            <Link href="/about/leadership" className="group mt-3 inline-flex items-center gap-1.5 font-semibold text-ink">
+              Meet our leadership <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+            </Link>
+          </div>
+          {leaders.map(({ person, note }) => (
+            <div key={person.name} className="flex items-center gap-4">
+              <div className="relative size-16 shrink-0 overflow-hidden rounded-full bg-slate-100">
+                {person.image && <Image src={asset(person.image)} alt="" fill sizes="64px" className="object-cover object-top" />}
+              </div>
+              <div>
+                <p className="font-semibold text-ink">{person.name}</p>
+                <p className="text-sm text-slate-500">{person.role}</p>
+                {note && <p className="text-sm text-slate-400">{note}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
 
       {/* News */}
       <Section>
@@ -337,9 +335,9 @@ export default function HomePage() {
               {lead.image && <Image src={asset(lead.image)} alt={lead.imageAlt} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
             </div>
             <p className="mt-5 text-sm text-slate-500">
-              <span className="font-semibold text-primary-600">{lead.category}</span> · {formatDate(lead.date)}
+              <span className="font-semibold text-ink">{lead.category}</span> · {formatDate(lead.date)}
             </p>
-            <h3 className="mt-2 text-2xl transition-colors group-hover:text-primary-600 sm:text-3xl">{lead.title}</h3>
+            <h3 className="mt-2 text-2xl sm:text-3xl">{lead.title}</h3>
             <p className="mt-3 line-clamp-2 text-slate-600">{lead.excerpt}</p>
           </Link>
           <ul className="divide-y divide-slate-200 lg:col-span-5">
@@ -351,9 +349,9 @@ export default function HomePage() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm text-slate-500">
-                      <span className="font-semibold text-primary-600">{a.category}</span> · {formatDate(a.date, "short")}
+                      <span className="font-semibold text-ink">{a.category}</span> · {formatDate(a.date, "short")}
                     </p>
-                    <h3 className="mt-1.5 line-clamp-3 text-base leading-snug transition-colors group-hover:text-primary-600 sm:text-lg">{a.title}</h3>
+                    <h3 className="mt-1.5 line-clamp-3 text-base leading-snug sm:text-lg">{a.title}</h3>
                   </div>
                 </Link>
               </li>

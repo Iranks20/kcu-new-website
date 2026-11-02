@@ -42,7 +42,7 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
             onClick={() => setAlbum(a)}
             className={cn(
               "h-10 shrink-0 rounded-full px-5 text-sm font-medium transition",
-              album === a ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-primary-700",
+              album === a ? "bg-ink text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-ink",
             )}
           >
             {a}
@@ -62,8 +62,8 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <span className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-primary-950/85 via-transparent to-transparent p-5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-                <span className="text-xs font-semibold uppercase tracking-wider text-gold-300">{img.album}</span>
+              <span className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-transparent to-transparent p-5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span className="text-xs font-semibold uppercase tracking-wider text-gold-400">{img.album}</span>
                 <span className="mt-1 font-semibold text-white">{img.title}</span>
               </span>
             </button>

@@ -76,7 +76,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-primary-600);
+  color: var(--color-slate-600, #475569);
 }
 
 @layer base {
@@ -103,7 +103,7 @@
 .prose-kcu { @apply text-[1.0625rem] leading-8 text-slate-700; }
 .prose-kcu > * + * { margin-top: 1.25em; }
 .prose-kcu h2 { @apply mt-10 text-2xl; }
-.prose-kcu a { @apply font-medium text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700; }
+.prose-kcu a { @apply font-medium text-ink underline decoration-slate-300 underline-offset-4 hover:decoration-ink; }
 
 /* Scroll reveal, toggled by <Reveal> */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }

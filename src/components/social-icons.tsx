@@ -21,7 +21,7 @@ export function SocialLinks({ className = "" }: { className?: string }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`KCU on ${labels[key]}`}
-            className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white hover:text-primary-700"
+            className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white hover:text-ink"
           >
             <svg viewBox="0 0 24 24" className="size-[18px]" fill="currentColor" aria-hidden>
               <path d={icons[key]} />

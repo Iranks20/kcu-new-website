@@ -29,9 +29,9 @@ export default function NewsPage() {
                 <Badge>{lead.category}</Badge>
                 <time dateTime={lead.date} className="text-sm text-slate-500">{formatDate(lead.date)}</time>
               </div>
-              <h2 className="mt-4 text-2xl group-hover:text-primary-700 sm:text-3xl">{lead.title}</h2>
+              <h2 className="mt-4 text-2xl sm:text-3xl">{lead.title}</h2>
               <p className="mt-4 line-clamp-4 text-slate-600">{lead.excerpt}</p>
-              <span className="mt-6 inline-flex items-center gap-2 font-semibold text-primary-700">
+              <span className="mt-6 inline-flex items-center gap-2 font-semibold text-ink">
                 Read the full story <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
               </span>
             </div>

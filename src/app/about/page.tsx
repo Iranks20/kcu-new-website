@@ -25,8 +25,8 @@ export default function AboutPage() {
 
       <Section>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl bg-primary-700 p-8 text-white sm:p-10">
-            <Compass className="size-9 text-gold-300" aria-hidden />
+          <div className="rounded-2xl bg-slate-950 p-8 text-white sm:p-10">
+            <Compass className="size-9 text-gold-400" aria-hidden />
             <h2 className="mt-6 text-2xl text-white">Our mission</h2>
             <p className="mt-3 text-lg text-white/85">{mission}</p>
           </div>
@@ -39,7 +39,7 @@ export default function AboutPage() {
 
         <dl className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4">
           {stats.map((s) => (
-            <div key={s.label} className="border-l-2 border-primary-600 pl-5">
+            <div key={s.label} className="border-l-2 border-slate-300 pl-5">
               <dt className="text-sm text-slate-500">{s.label}</dt>
               <dd className="heading mt-1 text-3xl text-ink sm:text-4xl">{s.value}</dd>
             </div>
@@ -53,7 +53,7 @@ export default function AboutPage() {
           {coreValues.map((v, i) => (
             <Reveal key={v.title} delay={i * 70}>
               <div className="h-full rounded-2xl bg-white p-6 shadow-card">
-                <span className="heading grid size-12 place-items-center rounded-xl bg-slate-100 text-xl text-primary-700">{v.title[0]}</span>
+                <span className="heading grid size-12 place-items-center rounded-xl bg-slate-100 text-xl text-ink">{v.title[0]}</span>
                 <h3 className="mt-5 text-lg">{v.title}</h3>
                 <p className="mt-2 text-[0.9375rem] text-slate-600">{v.text}</p>
               </div>
@@ -68,11 +68,11 @@ export default function AboutPage() {
           <div className="absolute left-[1.375rem] top-0 h-full w-px bg-slate-200 md:left-0 md:top-[1.375rem] md:h-px md:w-full" aria-hidden />
           {history.map((h) => (
             <li key={h.year} className="relative flex gap-5 md:block">
-              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-4 border-white bg-primary-600 shadow-card ring-1 ring-slate-200">
+              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-4 border-white bg-ink shadow-card ring-1 ring-slate-200">
                 <span className="size-2 rounded-full bg-white" />
               </span>
               <div className="md:mt-6">
-                <p className="heading text-2xl text-primary-700">{h.year}</p>
+                <p className="heading text-2xl text-ink">{h.year}</p>
                 <h3 className="mt-1 text-lg">{h.title}</h3>
                 <p className="mt-2 text-[0.9375rem] text-slate-600">{h.text}</p>
               </div>
@@ -81,8 +81,8 @@ export default function AboutPage() {
         </ol>
       </Section>
 
-      <section id="vice-chancellor" className="bg-primary-900 py-16 text-white sm:py-20 lg:py-24">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+      <Section id="vice-chancellor" tone="surface">
+        <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
               <div className="relative mx-auto aspect-[4/5] max-w-sm overflow-hidden rounded-2xl">
@@ -91,18 +91,18 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="lg:col-span-8">
-            <p className="eyebrow text-gold-300">Message from the Vice Chancellor</p>
-            <h2 className="mt-3 text-3xl text-white sm:text-4xl">Welcome to King Ceasor University</h2>
-            <div className="mt-8 space-y-5 text-lg leading-8 text-white/80">
+            <p className="eyebrow mb-3">Message from the Vice Chancellor</p>
+            <h2 className="text-3xl sm:text-4xl">Welcome to King Ceasor University</h2>
+            <div className="mt-8 space-y-5 text-lg leading-8 text-slate-600">
               {viceChancellor.message.map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
-            <p className="mt-8 text-xl font-semibold text-white">{viceChancellor.name}</p>
-            <p className="text-white/60">{viceChancellor.role}</p>
+            <p className="mt-8 text-xl font-semibold text-ink">{viceChancellor.name}</p>
+            <p className="text-slate-500">{viceChancellor.role}</p>
           </div>
         </div>
-      </section>
+      </Section>
 
       <Section id="accreditation">
         <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -129,7 +129,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <CtaBand />
+      <CtaBand tone="quiet" />
     </>
   );
 }

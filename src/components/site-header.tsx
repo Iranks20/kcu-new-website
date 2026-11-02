@@ -161,7 +161,7 @@ export function SiteHeader() {
               <div className="col-span-3 border-r border-slate-100 pr-8">
                 <p className="heading text-2xl text-ink">{item.label}</p>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate-600">{item.intro}</p>
-                <Link href={item.href} onClick={closeAll} className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600">
+                <Link href={item.href} onClick={closeAll} className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
                   Explore {item.label.toLowerCase()} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
                 </Link>
               </div>
@@ -172,7 +172,7 @@ export function SiteHeader() {
                     <ul className="mt-4 space-y-1">
                       {col.links.map((link) => (
                         <li key={link.href}>
-                          <NavAnchor href={link.href} onClick={closeAll} className="-mx-3 block rounded-lg px-3 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-primary-600">
+                          <NavAnchor href={link.href} onClick={closeAll} className="-mx-3 block rounded-lg px-3 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-ink">
                             {link.label}
                           </NavAnchor>
                         </li>
@@ -186,7 +186,7 @@ export function SiteHeader() {
                   <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-surface">
                     <Image src={item.feature.image} alt="" fill sizes="400px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
-                  <p className="mt-4 font-semibold text-ink group-hover:text-primary-600">{item.feature.title}</p>
+                  <p className="mt-4 font-semibold text-ink">{item.feature.title}</p>
                   <p className="mt-1 text-sm text-slate-500">{item.feature.text}</p>
                 </Link>
               )}
@@ -234,13 +234,13 @@ export function SiteHeader() {
                 <div className={cn("grid transition-all duration-300", expanded === item.label ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
                   <ul className="overflow-hidden">
                     <li>
-                      <Link href={item.href} onClick={closeAll} className="block px-4 py-2.5 font-medium text-primary-600">
+                      <Link href={item.href} onClick={closeAll} className="block px-4 py-2.5 font-medium text-ink">
                         {item.label} overview
                       </Link>
                     </li>
                     {item.columns.flatMap((c) => c.links).map((link) => (
                       <li key={link.href}>
-                        <NavAnchor href={link.href} onClick={closeAll} className="block px-4 py-2.5 text-slate-600 hover:text-primary-600">
+                        <NavAnchor href={link.href} onClick={closeAll} className="block px-4 py-2.5 text-slate-600 hover:text-ink">
                           {link.label}
                         </NavAnchor>
                       </li>

@@ -15,9 +15,9 @@ type ButtonProps = {
 const buttonStyles = {
   primary: "bg-primary-600 text-white hover:bg-primary-700",
   gold: "bg-gold-400 text-ink hover:bg-gold-300",
-  outline: "border border-slate-300 bg-white text-ink hover:border-primary-600 hover:text-primary-700",
+  outline: "border border-slate-300 bg-white text-ink hover:border-ink hover:bg-slate-50",
   "ghost-light": "border border-white/40 text-white hover:bg-white/10",
-  white: "bg-white text-primary-700 hover:bg-slate-50",
+  white: "bg-white text-ink hover:bg-slate-50",
 };
 
 export function Button({ href, children, variant = "primary", size = "md", className, icon = true }: ButtonProps) {
@@ -42,7 +42,7 @@ export function Button({ href, children, variant = "primary", size = "md", class
 
 export function TextLink({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
   return (
-    <Link href={href} className={cn("group inline-flex items-center gap-1.5 font-semibold text-primary-700 hover:text-primary-800", className)}>
+    <Link href={href} className={cn("group inline-flex items-center gap-1.5 font-semibold text-ink hover:text-slate-700", className)}>
       {children}
       <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
     </Link>
@@ -56,7 +56,7 @@ export function Section({ children, className, id, tone = "white" }: { children:
       className={cn(
         "py-16 sm:py-20 lg:py-24",
         tone === "surface" && "bg-surface",
-        tone === "dark" && "bg-primary-900 text-white",
+        tone === "dark" && "bg-slate-950 text-white",
         className,
       )}
     >
@@ -136,10 +136,10 @@ export function Badge({ children, tone = "green", className }: { children: React
     <span
       className={cn(
         "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold",
-        tone === "green" && "bg-slate-100 text-primary-700",
-        tone === "gold" && "bg-gold-100 text-gold-600",
+        tone === "green" && "bg-slate-100 text-ink",
+        tone === "gold" && "bg-gold-100 text-gold-700",
         tone === "slate" && "bg-slate-100 text-slate-600",
-        tone === "white" && "bg-white/90 text-primary-800 backdrop-blur",
+        tone === "white" && "bg-white/90 text-ink backdrop-blur",
         className,
       )}
     >
@@ -151,22 +151,26 @@ export function Badge({ children, tone = "green", className }: { children: React
 export function CtaBand({
   title = "Ready to ignite your future?",
   text = "Applications for the January 2027 intake are open. Apply online in minutes, or talk to our admissions team.",
+  tone = "brand",
 }: {
   title?: string;
   text?: string;
+  /** brand = green conversion band; quiet = slate strip for non-conversion pages */
+  tone?: "brand" | "quiet";
 }) {
+  const quiet = tone === "quiet";
   return (
-    <section className="bg-primary-600">
+    <section className={quiet ? "border-t border-slate-200 bg-slate-50" : "bg-primary-600"}>
       <div className="container-x flex flex-col gap-8 py-14 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
-          <h2 className="text-3xl text-white sm:text-4xl">{title}</h2>
-          <p className="mt-3 text-lg text-white/80">{text}</p>
+          <h2 className={cn("text-3xl sm:text-4xl", quiet ? "text-ink" : "text-white")}>{title}</h2>
+          <p className={cn("mt-3 text-lg", quiet ? "text-slate-600" : "text-white/80")}>{text}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button href="https://apply.kcu.ac.ug/" variant="gold" size="lg">
+          <Button href="https://apply.kcu.ac.ug/" variant={quiet ? "primary" : "gold"} size="lg">
             Apply now
           </Button>
-          <Button href="/contact" variant="ghost-light" size="lg" icon={false}>
+          <Button href="/contact" variant={quiet ? "outline" : "ghost-light"} size="lg" icon={false}>
             Talk to admissions
           </Button>
         </div>

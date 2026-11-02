@@ -98,9 +98,9 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                   />
                 )}
               </div>
-              <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-950/95 via-primary-950/70 to-primary-950/0" />
-              <div className="absolute inset-0 -z-10 bg-primary-900/40 lg:hidden" />
-              <div className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-primary-950/80 to-transparent" />
+              <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/55 to-black/10" />
+              <div className="absolute inset-0 -z-10 bg-black/35 lg:hidden" />
+              <div className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-black/75 to-transparent" />
 
               {/* Content */}
               <div className="container-x flex h-full flex-col justify-center pb-24 pt-16 sm:pb-28">

@@ -12,10 +12,10 @@ export function ContactForm() {
   if (sent) {
     return (
       <div className="flex flex-col items-center rounded-2xl bg-slate-50 px-6 py-16 text-center">
-        <CheckCircle2 className="size-14 text-primary-600" aria-hidden />
+        <CheckCircle2 className="size-14 text-ink" aria-hidden />
         <h3 className="mt-5 text-2xl">Thank you!</h3>
         <p className="mt-2 max-w-sm text-slate-600">Your message has been received. Our team will get back to you within one working day.</p>
-        <button type="button" onClick={() => setSent(false)} className="mt-6 font-semibold text-primary-700 hover:text-primary-800">
+        <button type="button" onClick={() => setSent(false)} className="mt-6 font-semibold text-ink underline-offset-4 hover:underline">
           Send another message
         </button>
       </div>

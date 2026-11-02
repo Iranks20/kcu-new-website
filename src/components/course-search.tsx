@@ -43,7 +43,7 @@ export function CourseSearch() {
           <Link
             key={p}
             href={`/programmes?q=${encodeURIComponent(p)}`}
-            className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-slate-700 transition hover:border-primary-600 hover:text-primary-600"
+            className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-slate-700 transition hover:border-ink hover:text-ink"
           >
             {p}
           </Link>

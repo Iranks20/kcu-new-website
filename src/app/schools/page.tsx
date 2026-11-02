@@ -36,7 +36,7 @@ export default function SchoolsPage() {
                   <ul className="mt-6 space-y-2.5">
                     {school.highlights.map((h) => (
                       <li key={h} className="flex gap-3">
-                        <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
+                        <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-slate-400" aria-hidden />
                         {h}
                       </li>
                     ))}
@@ -53,7 +53,7 @@ export default function SchoolsPage() {
           ))}
         </div>
       </Section>
-      <CtaBand />
+      <CtaBand tone="quiet" />
     </>
   );
 }

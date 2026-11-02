@@ -27,7 +27,7 @@ export function NewsList({ articles }: { articles: NewsArticle[] }) {
             }}
             className={cn(
               "h-10 shrink-0 rounded-full px-5 text-sm font-medium transition",
-              category === c ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-primary-700",
+              category === c ? "bg-ink text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-ink",
             )}
           >
             {c}
@@ -44,7 +44,7 @@ export function NewsList({ articles }: { articles: NewsArticle[] }) {
           <button
             type="button"
             onClick={() => setShown((n) => n + PAGE)}
-            className="h-12 rounded-full border border-slate-300 px-8 font-semibold text-ink transition hover:border-primary-600 hover:text-primary-700"
+            className="h-12 rounded-full border border-slate-300 px-8 font-semibold text-ink transition hover:border-ink hover:bg-slate-50"
           >
             Load more stories ({filtered.length - shown} more)
           </button>

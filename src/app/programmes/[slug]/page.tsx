@@ -48,7 +48,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
         <dl className="container-x grid grid-cols-2 gap-px lg:grid-cols-4">
           {facts.map((f) => (
             <div key={f.label} className="flex items-start gap-3 py-6 pr-4">
-              <f.icon className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
+              <f.icon className="mt-0.5 size-5 shrink-0 text-slate-500" aria-hidden />
               <div>
                 <dt className="text-sm text-slate-500">{f.label}</dt>
                 <dd className="font-semibold text-ink">{f.value}</dd>
@@ -70,7 +70,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
               <ul className="mt-5 space-y-3">
                 {entryRequirements[programme.level].map((r) => (
                   <li key={r} className="flex gap-3">
-                    <CheckCircle2 className="mt-1 size-5 shrink-0 text-primary-600" aria-hidden />
+                    <CheckCircle2 className="mt-1 size-5 shrink-0 text-slate-400" aria-hidden />
                     <span>{r}</span>
                   </li>
                 ))}
@@ -81,7 +81,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {programme.careers.map((c) => (
                   <li key={c} className="flex items-center gap-3 rounded-xl bg-surface px-4 py-3.5">
-                    <Briefcase className="size-5 shrink-0 text-primary-600" aria-hidden />
+                    <Briefcase className="size-5 shrink-0 text-slate-500" aria-hidden />
                     <span className="font-medium text-ink">{c}</span>
                   </li>
                 ))}
@@ -91,9 +91,9 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
 
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
-            <div className="rounded-2xl bg-primary-900 p-6 text-white sm:p-8">
+            <div className="rounded-2xl bg-slate-950 p-6 text-white sm:p-8">
               <div className="flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-gold-300"><Wallet className="size-5" aria-hidden /></span>
+                <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-gold-400"><Wallet className="size-5" aria-hidden /></span>
                 <h2 className="text-xl text-white">Tuition fees</h2>
               </div>
               <dl className="mt-6 space-y-4">
@@ -116,11 +116,11 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
               <p className="font-semibold text-ink">Talk to admissions</p>
               <p className="mt-1 text-sm text-slate-600">Get help choosing, applying or paying fees. {site.contact.hours}.</p>
               <ul className="mt-4 space-y-2 text-[0.9375rem]">
-                <li><a href={site.contact.phoneHref} className="font-medium text-primary-600 hover:text-primary-700">{site.contact.phone}</a></li>
-                <li><a href={`mailto:${site.contact.admissionsEmail}`} className="font-medium text-primary-600 hover:text-primary-700">{site.contact.admissionsEmail}</a></li>
+                <li><a href={site.contact.phoneHref} className="font-medium text-ink underline-offset-4 hover:underline">{site.contact.phone}</a></li>
+                <li><a href={`mailto:${site.contact.admissionsEmail}`} className="font-medium text-ink underline-offset-4 hover:underline">{site.contact.admissionsEmail}</a></li>
               </ul>
               <p className="mt-4 flex items-start gap-2 border-t border-slate-100 pt-4 text-sm text-slate-600">
-                <BadgeCheck className="mt-0.5 size-4 shrink-0 text-primary-600" aria-hidden />
+                <BadgeCheck className="mt-0.5 size-4 shrink-0 text-slate-500" aria-hidden />
                 Accredited by the National Council for Higher Education (NCHE).
               </p>
             </div>

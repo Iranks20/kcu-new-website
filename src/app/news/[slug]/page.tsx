@@ -28,7 +28,7 @@ export default async function ArticlePage({ params }: PageProps<"/news/[slug]">)
     <>
       <article>
         <header className="container-x max-w-4xl pt-10 sm:pt-14">
-          <Link href="/news" className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 hover:text-primary-800">
+          <Link href="/news" className="inline-flex items-center gap-2 text-sm font-semibold text-ink underline-offset-4 hover:underline">
             <ArrowLeft className="size-4" aria-hidden /> All news
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-3">

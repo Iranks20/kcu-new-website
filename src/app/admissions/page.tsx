@@ -42,7 +42,7 @@ export default function AdmissionsPage() {
         <ul className="container-x flex gap-1 overflow-x-auto py-3">
           {quickLinks.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-primary-700">
+              <a href={l.href} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-ink">
                 {l.label}
               </a>
             </li>
@@ -56,7 +56,7 @@ export default function AdmissionsPage() {
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {applicationSteps.map((s, i) => (
             <li key={s.title} className="relative rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-slate-300 hover:shadow-card">
-              <span className="heading grid size-11 place-items-center rounded-full bg-primary-600 text-lg text-white">{i + 1}</span>
+              <span className="heading grid size-11 place-items-center rounded-full bg-ink text-lg text-white">{i + 1}</span>
               <h3 className="mt-5 text-lg">{s.title}</h3>
               <p className="mt-2 text-slate-600">{s.text}</p>
             </li>
@@ -74,7 +74,7 @@ export default function AdmissionsPage() {
               <ul className="mt-5 space-y-3">
                 {entryRequirements[level].map((r) => (
                   <li key={r} className="flex gap-3 text-slate-700">
-                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-slate-400" aria-hidden />
                     {r}
                   </li>
                 ))}
@@ -84,13 +84,13 @@ export default function AdmissionsPage() {
         </div>
         <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
           <div className="flex items-center gap-3">
-            <FileText className="size-6 text-primary-600" aria-hidden />
+            <FileText className="size-6 text-slate-500" aria-hidden />
             <h3 className="text-lg">Documents to prepare</h3>
           </div>
           <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
             {requiredDocuments.map((d) => (
               <li key={d} className="flex gap-2.5 text-slate-700">
-                <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary-600" aria-hidden />
+                <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-slate-400" aria-hidden />
                 {d}
               </li>
             ))}
@@ -103,9 +103,9 @@ export default function AdmissionsPage() {
         <SectionHeading eyebrow="Intakes & key dates" title="When you can start" intro="We admit students three times a year. Dates are indicative and confirmed by the Academic Registrar." />
         <div className="grid gap-5 lg:grid-cols-3">
           {intakes.map((intake, i) => (
-            <div key={intake.name} className={i === 0 ? "rounded-2xl bg-primary-700 p-6 text-white shadow-lift sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
+            <div key={intake.name} className={i === 0 ? "rounded-2xl bg-slate-950 p-6 text-white shadow-lift sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
               <div className="flex items-center justify-between gap-3">
-                <CalendarDays className={i === 0 ? "size-6 text-gold-300" : "size-6 text-primary-600"} aria-hidden />
+                <CalendarDays className={i === 0 ? "size-6 text-gold-400" : "size-6 text-slate-500"} aria-hidden />
                 <Badge tone={i === 0 ? "gold" : "slate"}>{intake.status}</Badge>
               </div>
               <h3 className={i === 0 ? "mt-5 text-xl text-white" : "mt-5 text-xl"}>{intake.name}</h3>
@@ -138,7 +138,7 @@ export default function AdmissionsPage() {
             <details key={school.slug} className="group overflow-hidden rounded-2xl bg-white shadow-card" open={school.slug === schools[0].slug}>
               <summary className="flex items-center justify-between gap-4 p-5 sm:p-6">
                 <span className="heading text-lg text-ink sm:text-xl">{school.name}</span>
-                <Plus className="size-5 shrink-0 text-primary-600 transition-transform group-open:rotate-45" aria-hidden />
+                <Plus className="size-5 shrink-0 text-slate-400 transition-transform group-open:rotate-45" aria-hidden />
               </summary>
               <div className="overflow-x-auto border-t border-slate-100">
                 <table className="w-full min-w-[640px] text-left text-[0.9375rem]">
@@ -156,7 +156,7 @@ export default function AdmissionsPage() {
                       .map((p) => (
                         <tr key={p.slug} className="hover:bg-slate-50">
                           <td className="px-5 py-3.5 sm:px-6">
-                            <Link href={`/programmes/${p.slug}`} className="font-medium text-ink hover:text-primary-700">{p.title}</Link>
+                            <Link href={`/programmes/${p.slug}`} className="font-medium text-ink underline-offset-4 hover:underline">{p.title}</Link>
                           </td>
                           <td className="whitespace-nowrap px-4 py-3.5 text-slate-600">{p.duration}</td>
                           <td className="whitespace-nowrap px-4 py-3.5 font-semibold text-ink">{p.fees.local}</td>
@@ -180,7 +180,7 @@ export default function AdmissionsPage() {
               <h3 className="text-lg">{f.title}</h3>
               <p className="mt-2 flex-1 text-slate-600">{f.text}</p>
               {f.href && (
-                <a href={f.href} target="_blank" rel="noopener noreferrer" className="mt-4 text-sm font-semibold text-primary-700 hover:text-primary-800">
+                <a href={f.href} target="_blank" rel="noopener noreferrer" className="mt-4 text-sm font-semibold text-ink underline-offset-4 hover:underline">
                   Visit HESFB ↗
                 </a>
               )}
@@ -190,13 +190,13 @@ export default function AdmissionsPage() {
       </Section>
 
       {/* International */}
-      <section id="international" className="bg-primary-900 text-white">
+      <section id="international" className="bg-slate-950 text-white">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[20rem]">
             <Image src="/images/kcu-2026/graduates-welcome-group.webp" alt="KCU students from across Africa" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>
           <div className="px-4 py-16 sm:px-12 lg:px-16 lg:py-24">
-            <Globe2 className="size-10 text-gold-300" aria-hidden />
+            <Globe2 className="size-10 text-gold-400" aria-hidden />
             <h2 className="mt-5 text-3xl text-white sm:text-4xl">International students</h2>
             <p className="mt-4 text-lg text-white/75">
               KCU welcomes students from across Africa and beyond. International fees are charged in US dollars, foreign qualifications are
@@ -204,7 +204,7 @@ export default function AdmissionsPage() {
             </p>
             <ul className="mt-6 space-y-2.5 text-white/85">
               {["Equated results from UNEB / NCHE", "Valid passport and student pass guidance", "Evidence of English proficiency where needed"].map((t) => (
-                <li key={t} className="flex gap-3"><CheckCircle2 className="mt-0.5 size-5 shrink-0 text-gold-300" aria-hidden />{t}</li>
+                <li key={t} className="flex gap-3"><CheckCircle2 className="mt-0.5 size-5 shrink-0 text-gold-400" aria-hidden />{t}</li>
               ))}
             </ul>
             <div className="mt-8">
@@ -221,8 +221,8 @@ export default function AdmissionsPage() {
             <p className="eyebrow mb-3">FAQs</p>
             <h2 className="text-3xl sm:text-4xl">Questions, answered</h2>
             <p className="mt-4 text-lg text-slate-600">
-              Can&apos;t find what you need? Call <a href={site.contact.phoneHref} className="font-semibold text-primary-700">{site.contact.phone}</a> or email{" "}
-              <a href={`mailto:${site.contact.admissionsEmail}`} className="font-semibold text-primary-700">{site.contact.admissionsEmail}</a>.
+              Can&apos;t find what you need? Call <a href={site.contact.phoneHref} className="font-semibold text-ink underline-offset-4 hover:underline">{site.contact.phone}</a> or email{" "}
+              <a href={`mailto:${site.contact.admissionsEmail}`} className="font-semibold text-ink underline-offset-4 hover:underline">{site.contact.admissionsEmail}</a>.
             </p>
           </div>
           <div className="divide-y divide-slate-200 border-y border-slate-200 lg:col-span-8">
@@ -230,7 +230,7 @@ export default function AdmissionsPage() {
               <details key={f.q} className="group py-5">
                 <summary className="flex items-center justify-between gap-4">
                   <span className="text-lg font-semibold text-ink">{f.q}</span>
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-primary-700 transition group-open:rotate-45 group-open:bg-primary-600 group-open:text-white">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:rotate-45 group-open:bg-ink group-open:text-white">
                     <Plus className="size-4" aria-hidden />
                   </span>
                 </summary>

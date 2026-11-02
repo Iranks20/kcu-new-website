@@ -29,7 +29,7 @@ export default function ContactPage() {
               {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="group rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-lift"
             >
-              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-primary-600 transition group-hover:bg-primary-600 group-hover:text-white">
+              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-slate-600 transition group-hover:bg-ink group-hover:text-white">
                 <c.icon className="size-5" aria-hidden />
               </span>
               <p className="mt-5 text-sm text-slate-500">{c.title}</p>
@@ -54,9 +54,9 @@ export default function ContactPage() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
               <div className="space-y-4 p-6 sm:p-8">
-                <p className="flex gap-3"><MapPin className="mt-1 size-5 shrink-0 text-primary-600" aria-hidden /><span><strong className="block text-ink">Main campus</strong>{site.contact.address}</span></p>
-                <p className="flex gap-3"><Clock className="mt-1 size-5 shrink-0 text-primary-600" aria-hidden /><span><strong className="block text-ink">Office hours</strong>{site.contact.hours}</span></p>
-                <a href={site.contact.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex font-semibold text-primary-700 hover:text-primary-800">
+                <p className="flex gap-3"><MapPin className="mt-1 size-5 shrink-0 text-slate-500" aria-hidden /><span><strong className="block text-ink">Main campus</strong>{site.contact.address}</span></p>
+                <p className="flex gap-3"><Clock className="mt-1 size-5 shrink-0 text-slate-500" aria-hidden /><span><strong className="block text-ink">Office hours</strong>{site.contact.hours}</span></p>
+                <a href={site.contact.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex font-semibold text-ink underline-offset-4 hover:underline">
                   Get directions ↗
                 </a>
               </div>

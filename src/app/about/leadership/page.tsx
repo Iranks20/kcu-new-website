@@ -27,7 +27,7 @@ export default function LeadershipPage() {
         <ul className="container-x flex gap-1 overflow-x-auto py-3">
           {groups.map((g) => (
             <li key={g.id}>
-              <a href={`#${g.id}`} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-700">
+              <a href={`#${g.id}`} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-ink">
                 {g.title}
               </a>
             </li>

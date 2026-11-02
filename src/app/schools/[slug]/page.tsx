@@ -36,7 +36,7 @@ function Avatar({ name, image, size = "lg" }: { name?: string; image?: string; s
       {image ? (
         <Image src={asset(image)} alt={name ? `Portrait of ${name}` : ""} fill sizes={size === "xl" ? "(min-width: 1024px) 30vw, 80vw" : "80px"} className="object-cover object-top" />
       ) : (
-        <div className="grid h-full place-items-center text-primary-600">
+        <div className="grid h-full place-items-center text-slate-400">
           {name ? <span className={`heading ${size === "xl" ? "text-6xl" : "text-xl"}`}>{initials(name)}</span> : <UserRound className={size === "xl" ? "size-20" : "size-8"} aria-hidden />}
         </div>
       )}
@@ -89,7 +89,7 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
         <ul className="container-x flex gap-1 overflow-x-auto py-3">
           {sections.map((s) => (
             <li key={s.id}>
-              <a href={`#${s.id}`} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-primary-700">
+              <a href={`#${s.id}`} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-ink">
                 {s.label}
               </a>
             </li>
@@ -125,7 +125,7 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
             <ul className="mt-10 grid gap-3 border-t border-slate-200 pt-8 sm:grid-cols-3">
               {school.highlights.map((h) => (
                 <li key={h} className="flex gap-2.5 text-[0.9375rem] text-slate-700">
-                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
+                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-slate-400" aria-hidden />
                   {h}
                 </li>
               ))}
@@ -206,7 +206,7 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
               </div>
               <div className="sm:col-span-2 sm:text-right">
                 {p.href && (
-                  <Link href={p.href} className="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 hover:text-primary-700">
+                  <Link href={p.href} className="inline-flex items-center gap-1 text-sm font-semibold text-ink underline-offset-4 hover:underline">
                     Read more <ArrowUpRight className="size-4" aria-hidden />
                   </Link>
                 )}
@@ -238,14 +238,14 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
               { icon: Clock, label: "Office hours", value: contact.hours },
             ].map((c) => (
               <div key={c.label} className="flex gap-4 bg-white p-6">
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100 text-primary-600">
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-500">
                   <c.icon className="size-5" aria-hidden />
                 </span>
                 <div>
                   <dt className="text-sm text-slate-500">{c.label}</dt>
                   <dd className="mt-0.5 font-medium text-ink">
                     {c.href ? (
-                      <a href={c.href} className="hover:text-primary-600">
+                      <a href={c.href} className="underline-offset-4 hover:underline">
                         {c.value}
                       </a>
                     ) : (
@@ -259,7 +259,7 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
         </div>
       </Section>
 
-      <CtaBand />
+      <CtaBand tone="quiet" />
     </>
   );
 }

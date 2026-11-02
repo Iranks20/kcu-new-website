@@ -69,7 +69,7 @@ export default function CampusLifePage() {
         <details className="group mt-10 rounded-2xl bg-white p-6 shadow-card">
           <summary className="flex items-center justify-between font-semibold text-ink">
             Meet the full Guild cabinet ({guildCabinet.length} ministers)
-            <span className="text-primary-600 transition group-open:rotate-45 text-2xl leading-none">+</span>
+            <span className="text-slate-400 transition group-open:rotate-45 text-2xl leading-none">+</span>
           </summary>
           <ul className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
             {guildCabinet.map((p) => (
@@ -104,7 +104,7 @@ export default function CampusLifePage() {
             const Icon = supportIcons[i];
             return (
               <div key={s.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-                <Icon className="size-8 text-gold-300" aria-hidden />
+                <Icon className="size-8 text-gold-400" aria-hidden />
                 <h3 className="mt-5 text-lg text-white">{s.title}</h3>
                 <p className="mt-2 text-white/70">{s.text}</p>
               </div>
@@ -118,10 +118,10 @@ export default function CampusLifePage() {
         <SectionHeading eyebrow="Accommodation" title="A place to call home" intro="KCU works with vetted private hostels within walking distance of campus. Indicative prices per semester." />
         <div className="grid gap-5 md:grid-cols-3">
           {accommodation.map((a, i) => (
-            <div key={a.name} className={i === 0 ? "rounded-2xl bg-white p-6 ring-2 ring-primary-600 sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
+            <div key={a.name} className={i === 0 ? "rounded-2xl bg-white p-6 ring-2 ring-ink sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
               {i === 0 && <Badge className="mb-4">Most popular</Badge>}
               <h3 className="text-xl">{a.name}</h3>
-              <p className="heading mt-3 text-2xl text-primary-700">{a.price}</p>
+              <p className="heading mt-3 text-2xl text-ink">{a.price}</p>
               <p className="mt-3 text-slate-600">{a.text}</p>
             </div>
           ))}
@@ -138,7 +138,7 @@ export default function CampusLifePage() {
           </div>
         </Section>
       )}
-      <CtaBand />
+      <CtaBand tone="quiet" />
     </>
   );
 }
