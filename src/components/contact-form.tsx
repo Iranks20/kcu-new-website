@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 
-const field = "mt-1.5 h-12 w-full rounded-xl border border-slate-200 bg-white px-4 outline-none transition focus:border-primary-400 focus:ring-4 focus:ring-primary-100";
+const field = "mt-1.5 h-12 w-full rounded-xl border border-slate-200 bg-white px-4 outline-none transition focus:border-primary-600 focus:ring-4 focus:ring-primary-600/15";
 
 /** Presentation-only form: validates in the browser and shows a confirmation. Wire to the backend later. */
 export function ContactForm() {
@@ -11,7 +11,7 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <div className="flex flex-col items-center rounded-2xl bg-primary-50 px-6 py-16 text-center">
+      <div className="flex flex-col items-center rounded-2xl bg-slate-50 px-6 py-16 text-center">
         <CheckCircle2 className="size-14 text-primary-600" aria-hidden />
         <h3 className="mt-5 text-2xl">Thank you!</h3>
         <p className="mt-2 max-w-sm text-slate-600">Your message has been received. Our team will get back to you within one working day.</p>

@@ -39,7 +39,7 @@ export default function AboutPage() {
 
         <dl className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4">
           {stats.map((s) => (
-            <div key={s.label} className="border-l-2 border-primary-500 pl-5">
+            <div key={s.label} className="border-l-2 border-primary-600 pl-5">
               <dt className="text-sm text-slate-500">{s.label}</dt>
               <dd className="heading mt-1 text-3xl text-ink sm:text-4xl">{s.value}</dd>
             </div>
@@ -53,7 +53,7 @@ export default function AboutPage() {
           {coreValues.map((v, i) => (
             <Reveal key={v.title} delay={i * 70}>
               <div className="h-full rounded-2xl bg-white p-6 shadow-card">
-                <span className="heading grid size-12 place-items-center rounded-xl bg-primary-50 text-xl text-primary-700">{v.title[0]}</span>
+                <span className="heading grid size-12 place-items-center rounded-xl bg-slate-100 text-xl text-primary-700">{v.title[0]}</span>
                 <h3 className="mt-5 text-lg">{v.title}</h3>
                 <p className="mt-2 text-[0.9375rem] text-slate-600">{v.text}</p>
               </div>
@@ -68,7 +68,7 @@ export default function AboutPage() {
           <div className="absolute left-[1.375rem] top-0 h-full w-px bg-slate-200 md:left-0 md:top-[1.375rem] md:h-px md:w-full" aria-hidden />
           {history.map((h) => (
             <li key={h.year} className="relative flex gap-5 md:block">
-              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-4 border-white bg-primary-600 shadow-card ring-1 ring-primary-200">
+              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-4 border-white bg-primary-600 shadow-card ring-1 ring-slate-200">
                 <span className="size-2 rounded-full bg-white" />
               </span>
               <div className="md:mt-6">

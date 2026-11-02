@@ -17,7 +17,7 @@ const buttonStyles = {
   gold: "bg-gold-400 text-ink hover:bg-gold-300",
   outline: "border border-slate-300 bg-white text-ink hover:border-primary-600 hover:text-primary-700",
   "ghost-light": "border border-white/40 text-white hover:bg-white/10",
-  white: "bg-white text-primary-700 hover:bg-primary-50",
+  white: "bg-white text-primary-700 hover:bg-slate-50",
 };
 
 export function Button({ href, children, variant = "primary", size = "md", className, icon = true }: ButtonProps) {
@@ -136,7 +136,7 @@ export function Badge({ children, tone = "green", className }: { children: React
     <span
       className={cn(
         "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold",
-        tone === "green" && "bg-primary-50 text-primary-700",
+        tone === "green" && "bg-slate-100 text-primary-700",
         tone === "gold" && "bg-gold-100 text-gold-600",
         tone === "slate" && "bg-slate-100 text-slate-600",
         tone === "white" && "bg-white/90 text-primary-800 backdrop-blur",

@@ -42,7 +42,7 @@ export default function AdmissionsPage() {
         <ul className="container-x flex gap-1 overflow-x-auto py-3">
           {quickLinks.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-primary-50 hover:text-primary-700">
+              <a href={l.href} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-primary-700">
                 {l.label}
               </a>
             </li>
@@ -55,7 +55,7 @@ export default function AdmissionsPage() {
         <SectionHeading eyebrow="How to apply" title="Six simple steps" intro="Apply online from anywhere. If you get stuck, our admissions team is one call away." />
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {applicationSteps.map((s, i) => (
-            <li key={s.title} className="relative rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-primary-200 hover:shadow-card">
+            <li key={s.title} className="relative rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-slate-300 hover:shadow-card">
               <span className="heading grid size-11 place-items-center rounded-full bg-primary-600 text-lg text-white">{i + 1}</span>
               <h3 className="mt-5 text-lg">{s.title}</h3>
               <p className="mt-2 text-slate-600">{s.text}</p>
@@ -74,7 +74,7 @@ export default function AdmissionsPage() {
               <ul className="mt-5 space-y-3">
                 {entryRequirements[level].map((r) => (
                   <li key={r} className="flex gap-3 text-slate-700">
-                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary-500" aria-hidden />
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
                     {r}
                   </li>
                 ))}
@@ -82,7 +82,7 @@ export default function AdmissionsPage() {
             </div>
           ))}
         </div>
-        <div className="mt-8 rounded-2xl border border-primary-100 bg-primary-50 p-6 sm:p-8">
+        <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
           <div className="flex items-center gap-3">
             <FileText className="size-6 text-primary-600" aria-hidden />
             <h3 className="text-lg">Documents to prepare</h3>
@@ -90,7 +90,7 @@ export default function AdmissionsPage() {
           <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
             {requiredDocuments.map((d) => (
               <li key={d} className="flex gap-2.5 text-slate-700">
-                <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary-500" aria-hidden />
+                <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary-600" aria-hidden />
                 {d}
               </li>
             ))}
@@ -154,7 +154,7 @@ export default function AdmissionsPage() {
                     {programmes
                       .filter((p) => p.school === school.slug)
                       .map((p) => (
-                        <tr key={p.slug} className="hover:bg-primary-50/50">
+                        <tr key={p.slug} className="hover:bg-slate-50">
                           <td className="px-5 py-3.5 sm:px-6">
                             <Link href={`/programmes/${p.slug}`} className="font-medium text-ink hover:text-primary-700">{p.title}</Link>
                           </td>
@@ -230,7 +230,7 @@ export default function AdmissionsPage() {
               <details key={f.q} className="group py-5">
                 <summary className="flex items-center justify-between gap-4">
                   <span className="text-lg font-semibold text-ink">{f.q}</span>
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary-50 text-primary-700 transition group-open:rotate-45 group-open:bg-primary-600 group-open:text-white">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-primary-700 transition group-open:rotate-45 group-open:bg-primary-600 group-open:text-white">
                     <Plus className="size-4" aria-hidden />
                   </span>
                 </summary>

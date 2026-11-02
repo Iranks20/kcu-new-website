@@ -87,7 +87,7 @@ export default function CampusLifePage() {
         <SectionHeading eyebrow="Clubs & sports" title="Get involved" intro="New clubs can register with the Student Guild at the start of each semester." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {clubs.map((c) => (
-            <div key={c.name} className="rounded-2xl border border-slate-200 p-6 transition hover:border-primary-200 hover:shadow-card">
+            <div key={c.name} className="rounded-2xl border border-slate-200 p-6 transition hover:border-slate-300 hover:shadow-card">
               <Badge tone={c.type === "Sport" ? "slate" : "green"}>{c.type}</Badge>
               <h3 className="mt-4 text-lg">{c.name}</h3>
               <p className="mt-2 text-slate-600">{c.text}</p>
@@ -118,7 +118,7 @@ export default function CampusLifePage() {
         <SectionHeading eyebrow="Accommodation" title="A place to call home" intro="KCU works with vetted private hostels within walking distance of campus. Indicative prices per semester." />
         <div className="grid gap-5 md:grid-cols-3">
           {accommodation.map((a, i) => (
-            <div key={a.name} className={i === 0 ? "rounded-2xl bg-primary-50 p-6 ring-2 ring-primary-500 sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
+            <div key={a.name} className={i === 0 ? "rounded-2xl bg-white p-6 ring-2 ring-primary-600 sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
               {i === 0 && <Badge className="mb-4">Most popular</Badge>}
               <h3 className="text-xl">{a.name}</h3>
               <p className="heading mt-3 text-2xl text-primary-700">{a.price}</p>

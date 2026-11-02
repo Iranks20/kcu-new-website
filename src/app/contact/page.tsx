@@ -27,9 +27,9 @@ export default function ContactPage() {
               key={c.title}
               href={c.href}
               {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="group rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:border-primary-200 hover:shadow-lift"
+              className="group rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-lift"
             >
-              <span className="grid size-12 place-items-center rounded-xl bg-primary-50 text-primary-600 transition group-hover:bg-primary-600 group-hover:text-white">
+              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-primary-600 transition group-hover:bg-primary-600 group-hover:text-white">
                 <c.icon className="size-5" aria-hidden />
               </span>
               <p className="mt-5 text-sm text-slate-500">{c.title}</p>

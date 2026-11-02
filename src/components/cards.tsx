@@ -22,7 +22,7 @@ export function NewsCard({ article, featured = false }: { article: NewsArticle; 
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="h-full bg-primary-100" />
+          <div className="h-full bg-slate-100" />
         )}
         <Badge tone="white" className="absolute left-4 top-4">{article.category}</Badge>
       </div>
@@ -46,7 +46,7 @@ export function EventCard({ event }: { event: UniEvent }) {
   const d = dateParts(event.date);
   return (
     <article className="group relative flex gap-5 rounded-2xl bg-white p-5 shadow-card ring-1 ring-slate-100 transition duration-300 hover:-translate-y-0.5 hover:shadow-lift">
-      <div className="flex size-18 shrink-0 flex-col items-center justify-center rounded-xl bg-primary-50 text-primary-700">
+      <div className="flex size-18 shrink-0 flex-col items-center justify-center rounded-xl bg-slate-50 text-primary-700">
         <span className="heading text-2xl">{d.day}</span>
         <span className="text-xs font-semibold uppercase tracking-wider">{d.month}</span>
       </div>
@@ -69,7 +69,7 @@ export function EventCard({ event }: { event: UniEvent }) {
 export function ProgrammeCard({ programme }: { programme: Programme }) {
   const school = schools.find((s) => s.slug === programme.school);
   return (
-    <article className="group relative flex h-full flex-col rounded-2xl bg-white p-6 shadow-card ring-1 ring-slate-100 transition duration-300 hover:-translate-y-1 hover:shadow-lift hover:ring-primary-200">
+    <article className="group relative flex h-full flex-col rounded-2xl bg-white p-6 shadow-card ring-1 ring-slate-100 transition duration-300 hover:-translate-y-1 hover:shadow-lift hover:ring-slate-300">
       <div className="flex items-center justify-between gap-3">
         <Badge tone={programme.level === "certificate" ? "slate" : "green"}>{levelLabels[programme.level]}</Badge>
         <span className="flex items-center gap-1 text-sm text-slate-500"><CalendarDays className="size-3.5" aria-hidden />{programme.duration}</span>
@@ -86,7 +86,7 @@ export function ProgrammeCard({ programme }: { programme: Programme }) {
           <p className="text-xs text-slate-500">Tuition per {programme.fees.per}</p>
           <p className="font-semibold text-ink">{programme.fees.local}</p>
         </div>
-        <span className="grid size-9 place-items-center rounded-full bg-primary-50 text-primary-700 transition group-hover:bg-primary-600 group-hover:text-white">
+        <span className="grid size-9 place-items-center rounded-full bg-slate-50 text-primary-700 transition group-hover:bg-primary-600 group-hover:text-white">
           <ArrowRight className="size-4" aria-hidden />
         </span>
       </div>
@@ -97,7 +97,7 @@ export function ProgrammeCard({ programme }: { programme: Programme }) {
 export function PersonCard({ person }: { person: Person }) {
   return (
     <figure className="group">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-gradient-to-br from-primary-100 to-primary-50">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50">
         {person.image ? (
           <Image
             src={asset(person.image)}

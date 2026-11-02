@@ -70,7 +70,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
               <ul className="mt-5 space-y-3">
                 {entryRequirements[programme.level].map((r) => (
                   <li key={r} className="flex gap-3">
-                    <CheckCircle2 className="mt-1 size-5 shrink-0 text-primary-500" aria-hidden />
+                    <CheckCircle2 className="mt-1 size-5 shrink-0 text-primary-600" aria-hidden />
                     <span>{r}</span>
                   </li>
                 ))}
@@ -81,7 +81,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {programme.careers.map((c) => (
                   <li key={c} className="flex items-center gap-3 rounded-xl bg-surface px-4 py-3.5">
-                    <Briefcase className="size-5 shrink-0 text-primary-500" aria-hidden />
+                    <Briefcase className="size-5 shrink-0 text-primary-600" aria-hidden />
                     <span className="font-medium text-ink">{c}</span>
                   </li>
                 ))}

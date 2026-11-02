@@ -28,7 +28,7 @@ export default function CareersPage() {
         <ul className="space-y-4">
           {vacancies.map((v) => (
             <li key={v.slug}>
-              <details className="group rounded-2xl border border-slate-200 bg-white transition open:shadow-card hover:border-primary-200">
+              <details className="group rounded-2xl border border-slate-200 bg-white transition open:shadow-card hover:border-slate-300">
                 <summary className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                   <div>
                     <h3 className="text-lg group-open:text-primary-700">{v.title}</h3>
@@ -45,7 +45,7 @@ export default function CareersPage() {
                 <div className="border-t border-slate-100 px-5 pb-6 pt-5 sm:px-6">
                   <p className="text-slate-700">{v.summary}</p>
                   <h4 className="mt-5 text-base">Key requirements</h4>
-                  <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600 marker:text-primary-500">
+                  <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600 marker:text-primary-600">
                     {v.requirements.map((r) => <li key={r}>{r}</li>)}
                   </ul>
                   {v.pdf && (

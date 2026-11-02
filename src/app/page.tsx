@@ -168,7 +168,7 @@ export default function HomePage() {
         <div className="grid gap-6 lg:grid-cols-3">
           {schools.map((school, i) => (
             <Reveal key={school.slug} delay={i * 100}>
-              <Link href={`/schools/${school.slug}`} className="group block h-full overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 transition hover:shadow-lift hover:ring-primary-200">
+              <Link href={`/schools/${school.slug}`} className="group block h-full overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 transition hover:shadow-lift hover:ring-slate-300">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image src={school.image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>

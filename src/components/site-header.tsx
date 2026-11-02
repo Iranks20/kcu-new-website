@@ -62,32 +62,32 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Utility bar */}
-      <div className="hidden bg-primary-900 text-[0.8125rem] text-white/75 lg:block">
+      {/* Utility bar — live site gold #ffc66b */}
+      <div className="hidden bg-[#ffc66b] text-[0.8125rem] text-black/80 lg:block">
         <div className="container-x flex h-9 items-center justify-between">
-          <a href={site.contact.phoneHref} className="flex items-center gap-1.5 transition-colors hover:text-white">
+          <a href={site.contact.phoneHref} className="flex items-center gap-1.5 font-medium transition-colors hover:text-black">
             <Phone className="size-3.5" aria-hidden /> {site.contact.phone}
           </a>
-          <ul className="flex items-center divide-x divide-white/15">
+          <ul className="flex items-center divide-x divide-black/15">
             {portals.slice(0, 3).map((p) => (
               <li key={p.href} className="px-4">
-                <a href={p.href} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
+                <a href={p.href} target="_blank" rel="noopener noreferrer" className="font-medium transition-colors hover:text-black">
                   {p.label.replace(" (Student Portal)", " Portal").replace(" (E-learning)", "")}
                 </a>
               </li>
             ))}
             <li className="px-4">
-              <Link href="/careers" className="transition-colors hover:text-white">Careers</Link>
+              <Link href="/careers" className="font-medium transition-colors hover:text-black">Careers</Link>
             </li>
             <li className="pl-4">
-              <Link href="/contact" className="transition-colors hover:text-white">Contact</Link>
+              <Link href="/contact" className="font-medium transition-colors hover:text-black">Contact</Link>
             </li>
           </ul>
         </div>
       </div>
 
       <header
-        className={cn("sticky top-0 z-50 border-b bg-white transition-shadow duration-300", scrolled ? "border-slate-200 shadow-[0_6px_24px_-12px_rgb(3_32_15/0.18)]" : "border-slate-100")}
+        className={cn("sticky top-0 z-50 border-b bg-white transition-shadow duration-300", scrolled ? "border-slate-200 shadow-[0_6px_24px_-12px_rgb(15_23_42/0.14)]" : "border-slate-100")}
         onMouseLeave={scheduleClose}
       >
         <div className="container-x flex h-[4.5rem] items-center justify-between gap-8 xl:h-20">
@@ -135,7 +135,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="grid size-11 place-items-center rounded-full text-ink hover:bg-primary-50 xl:hidden"
+              className="grid size-11 place-items-center rounded-full text-ink hover:bg-slate-50 xl:hidden"
               aria-label="Open menu"
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
@@ -172,7 +172,7 @@ export function SiteHeader() {
                     <ul className="mt-4 space-y-1">
                       {col.links.map((link) => (
                         <li key={link.href}>
-                          <NavAnchor href={link.href} onClick={closeAll} className="-mx-3 block rounded-lg px-3 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-primary-50 hover:text-primary-600">
+                          <NavAnchor href={link.href} onClick={closeAll} className="-mx-3 block rounded-lg px-3 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-primary-600">
                             {link.label}
                           </NavAnchor>
                         </li>
@@ -214,7 +214,7 @@ export function SiteHeader() {
       >
         <div className="flex h-[4.5rem] items-center justify-between border-b border-slate-100 px-4">
           <Image src="/brand/kcu-logo.png" alt="" width={560} height={211} className="h-10 w-auto" />
-          <button type="button" onClick={() => setMobileOpen(false)} className="grid size-11 place-items-center rounded-full hover:bg-primary-50" aria-label="Close menu">
+          <button type="button" onClick={() => setMobileOpen(false)} className="grid size-11 place-items-center rounded-full hover:bg-slate-50" aria-label="Close menu">
             <X className="size-6" />
           </button>
         </div>

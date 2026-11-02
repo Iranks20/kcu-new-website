@@ -7,7 +7,7 @@ import { SocialLinks } from "./social-icons";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-primary-950 text-white/70">
+    <footer className="bg-slate-950 text-slate-300">
       <div className="container-x grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-4">
           <Image src="/brand/kcu-logo-light.png" alt="King Ceasor University" width={560} height={210} className="h-14 w-auto" />
@@ -15,7 +15,7 @@ export function SiteFooter() {
             A chartered university on Bunga Hill, Kampala, preparing globally competitive professionals in health, law, business,
             computing and energy.
           </p>
-          <p className="mt-4 text-sm text-white/55">Chartered by the Government of Uganda · Accredited by the National Council for Higher Education</p>
+          <p className="mt-4 text-sm text-slate-400">Chartered by the Government of Uganda · Accredited by the National Council for Higher Education</p>
           <SocialLinks className="mt-6" />
         </div>
 
@@ -40,21 +40,21 @@ export function SiteFooter() {
           <h3 className="text-sm font-semibold uppercase tracking-wider text-white">Get in touch</h3>
           <ul className="mt-4 space-y-3.5 text-[0.9375rem]">
             <li className="flex gap-3">
-              <MapPin className="mt-1 size-4 shrink-0 text-gold-300" aria-hidden />
+              <MapPin className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden />
               <a href={site.contact.mapUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
                 {site.contact.address}
               </a>
             </li>
             <li className="flex gap-3">
-              <Phone className="mt-1 size-4 shrink-0 text-gold-300" aria-hidden />
+              <Phone className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden />
               <a href={site.contact.phoneHref} className="hover:text-white">{site.contact.phone}</a>
             </li>
             <li className="flex gap-3">
-              <Mail className="mt-1 size-4 shrink-0 text-gold-300" aria-hidden />
+              <Mail className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden />
               <a href={`mailto:${site.contact.email}`} className="hover:text-white">{site.contact.email}</a>
             </li>
             <li className="flex gap-3">
-              <Clock className="mt-1 size-4 shrink-0 text-gold-300" aria-hidden />
+              <Clock className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden />
               <span>{site.contact.hours}</span>
             </li>
           </ul>

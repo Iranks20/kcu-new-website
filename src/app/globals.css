@@ -4,29 +4,29 @@
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 
-  /* KCU green. primary-600 is the official brand colour #0b6232; the scale is built around it. */
-  --color-primary-50: #eef7f1;
-  --color-primary-100: #d6ecdd;
-  --color-primary-200: #afd8bd;
-  --color-primary-300: #7fbd96;
-  --color-primary-400: #4a9c6c;
-  --color-primary-500: #23804b;
+  /* KCU brand green only. Light steps stay near-neutral (no mint wash); 500+ lock to #0b6232. */
+  --color-primary-50: #f5f6f5;
+  --color-primary-100: #e8ebe9;
+  --color-primary-200: #c8d0cb;
+  --color-primary-300: #8f9c94;
+  --color-primary-400: #4d6b58;
+  --color-primary-500: #0b6232;
   --color-primary-600: #0b6232;
   --color-primary-700: #09532a;
   --color-primary-800: #084423;
   --color-primary-900: #06371c;
   --color-primary-950: #03200f;
 
-  /* Crest gold, muted for a premium feel. A sparing accent only: credentials, highlights on dark green,
-     the closing call to action. Use 600+ for icons on white; 300/400 on dark green. Never body text on white. */
-  --color-gold-50: #fbf7ec;
-  --color-gold-100: #f5ebcf;
-  --color-gold-200: #ecd8a0;
-  --color-gold-300: #e2c26e;
-  --color-gold-400: #d6a945;
-  --color-gold-500: #c18f2a;
-  --color-gold-600: #9c7020;
-  --color-gold-700: #7a571b;
+  /* Brand gold from kcu.ac.ug (#ffc66b). Sparing accent: credentials, highlights on dark green, gold CTAs.
+     Use 600+ for icons/text on white; 300/400 on dark green. Never body text on white. */
+  --color-gold-50: #fff8eb;
+  --color-gold-100: #ffefd1;
+  --color-gold-200: #ffdfa3;
+  --color-gold-300: #ffd48a;
+  --color-gold-400: #ffc66b;
+  --color-gold-500: #f4b850;
+  --color-gold-600: #d9962e;
+  --color-gold-700: #b07520;
 
   --color-ink: #0f1a15;
   /* Warm ivory for alternating sections, so the page isn't green on green. */
@@ -93,7 +93,7 @@
   }
   p { text-wrap: pretty; }
   ::selection { @apply bg-gold-200 text-ink; }
-  :focus-visible { @apply rounded-sm outline-2 outline-offset-2 outline-primary-500; }
+  :focus-visible { @apply rounded-sm outline-2 outline-offset-2 outline-primary-600; }
   [id] { scroll-margin-top: 6.5rem; }
   summary { cursor: pointer; list-style: none; }
   summary::-webkit-details-marker { display: none; }

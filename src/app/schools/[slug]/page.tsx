@@ -32,7 +32,7 @@ const sections = [
 
 function Avatar({ name, image, size = "lg" }: { name?: string; image?: string; size?: "lg" | "xl" }) {
   return (
-    <div className={`relative overflow-hidden bg-primary-50 ${size === "xl" ? "aspect-[4/5] w-full rounded-2xl" : "size-20 shrink-0 rounded-full"}`}>
+    <div className={`relative overflow-hidden bg-slate-100 ${size === "xl" ? "aspect-[4/5] w-full rounded-2xl" : "size-20 shrink-0 rounded-full"}`}>
       {image ? (
         <Image src={asset(image)} alt={name ? `Portrait of ${name}` : ""} fill sizes={size === "xl" ? "(min-width: 1024px) 30vw, 80vw" : "80px"} className="object-cover object-top" />
       ) : (
@@ -89,7 +89,7 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
         <ul className="container-x flex gap-1 overflow-x-auto py-3">
           {sections.map((s) => (
             <li key={s.id}>
-              <a href={`#${s.id}`} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-primary-50 hover:text-primary-700">
+              <a href={`#${s.id}`} className="block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-primary-700">
                 {s.label}
               </a>
             </li>
@@ -238,7 +238,7 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
               { icon: Clock, label: "Office hours", value: contact.hours },
             ].map((c) => (
               <div key={c.label} className="flex gap-4 bg-white p-6">
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary-50 text-primary-600">
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100 text-primary-600">
                   <c.icon className="size-5" aria-hidden />
                 </span>
                 <div>

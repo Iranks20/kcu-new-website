@@ -30,7 +30,7 @@ export function CourseSearch() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="What would you like to study?"
-            className="h-14 w-full rounded-full border border-slate-300 bg-white pl-13 pr-5 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-primary-500 focus:ring-4 focus:ring-primary-100"
+            className="h-14 w-full rounded-full border border-slate-300 bg-white pl-13 pr-5 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-primary-600 focus:ring-4 focus:ring-primary-600/15"
           />
         </label>
         <button type="submit" className="h-14 shrink-0 rounded-full bg-primary-600 px-8 font-semibold text-white transition hover:bg-primary-700">
@@ -43,7 +43,7 @@ export function CourseSearch() {
           <Link
             key={p}
             href={`/programmes?q=${encodeURIComponent(p)}`}
-            className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-slate-700 transition hover:border-primary-500 hover:text-primary-600"
+            className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-slate-700 transition hover:border-primary-600 hover:text-primary-600"
           >
             {p}
           </Link>

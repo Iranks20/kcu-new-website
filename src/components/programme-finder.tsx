@@ -59,7 +59,7 @@ function Finder({ initialLevel, initialSchool, initialQuery }: { initialLevel: L
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search e.g. nursing, law, cyber security…"
-              className="h-12 w-full rounded-full border border-slate-200 bg-surface pl-12 pr-4 text-base outline-none transition placeholder:text-slate-400 focus:border-primary-400 focus:bg-white focus:ring-4 focus:ring-primary-100"
+              className="h-12 w-full rounded-full border border-slate-200 bg-surface pl-12 pr-4 text-base outline-none transition placeholder:text-slate-400 focus:border-primary-600 focus:bg-white focus:ring-4 focus:ring-primary-600/15"
             />
           </label>
           <label className="relative lg:w-72">
@@ -68,7 +68,7 @@ function Finder({ initialLevel, initialSchool, initialQuery }: { initialLevel: L
             <select
               value={school}
               onChange={(e) => setSchool(e.target.value)}
-              className="h-12 w-full appearance-none rounded-full border border-slate-200 bg-surface pl-11 pr-4 text-[0.9375rem] outline-none focus:border-primary-400 focus:ring-4 focus:ring-primary-100"
+              className="h-12 w-full appearance-none rounded-full border border-slate-200 bg-surface pl-11 pr-4 text-[0.9375rem] outline-none focus:border-primary-600 focus:ring-4 focus:ring-primary-600/15"
             >
               <option value="all">All schools</option>
               {schools.map((s) => (
@@ -86,7 +86,7 @@ function Finder({ initialLevel, initialSchool, initialQuery }: { initialLevel: L
               aria-pressed={level === l.value}
               className={cn(
                 "h-9 shrink-0 rounded-full px-4 text-sm font-medium transition",
-                level === l.value ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-primary-50 hover:text-primary-700",
+                level === l.value ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-primary-700",
               )}
             >
               {l.label}

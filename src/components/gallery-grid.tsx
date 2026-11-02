@@ -42,7 +42,7 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
             onClick={() => setAlbum(a)}
             className={cn(
               "h-10 shrink-0 rounded-full px-5 text-sm font-medium transition",
-              album === a ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-primary-50 hover:text-primary-700",
+              album === a ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-primary-700",
             )}
           >
             {a}
