@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, ChevronDown, Menu, Phone, X } from "lucide-react";
 import { mainNav } from "@/content/navigation";
+import { SiteSearch } from "./site-search";
 import { portals, site } from "@/content/site";
 import { cn, isExternal } from "@/lib/utils";
 
@@ -108,7 +109,7 @@ export function SiteHeader() {
                       aria-expanded={open}
                       aria-controls={`mega-${item.label}`}
                       className={cn(
-                        "relative flex h-full items-center gap-1 px-3.5 text-[0.9375rem] font-medium transition-colors",
+                        "relative flex h-full items-center gap-1 whitespace-nowrap px-3.5 text-[0.9375rem] font-medium transition-colors",
                         open || isCurrent(item.href) ? "text-primary-600" : "text-slate-700 hover:text-primary-600",
                         "after:absolute after:inset-x-3.5 after:bottom-0 after:h-[3px] after:rounded-t-full after:bg-primary-600 after:transition-transform",
                         open || isCurrent(item.href) ? "after:scale-x-100" : "after:scale-x-0",
@@ -124,11 +125,12 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <SiteSearch />
             <a
               href={site.applyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden h-11 items-center rounded-full bg-primary-600 px-6 text-sm font-semibold text-white transition hover:bg-primary-700 sm:inline-flex"
+              className="hidden h-11 items-center whitespace-nowrap rounded-full bg-primary-600 px-6 text-sm font-semibold text-white transition hover:bg-primary-700 sm:inline-flex"
             >
               Apply now
             </a>

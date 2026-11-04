@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { BedDouble, HeartHandshake, Library, Users } from "lucide-react";
 import { Badge, Button, CtaBand, PageHero, Section, SectionHeading, TextLink } from "@/components/ui";
-import { NewsCard, PersonCard } from "@/components/cards";
+import { NewsCard, PersonCard, StoryCard } from "@/components/cards";
 import { accommodation, clubs, supportServices } from "@/content/campus";
 import { guildCabinet, guildLeaders } from "@/content/people";
 import { gallery } from "@/content/gallery";
 import { news } from "@/content/news";
 import { asset } from "@/lib/utils";
+import { stories as studentStories } from "@/content/stories";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/campus-life" },
   title: "Campus Life",
   description: "Student leadership, clubs, sport, accommodation and support services at King Ceasor University.",
 };
@@ -22,11 +24,11 @@ export default function CampusLifePage() {
 
   return (
     <>
-      <PageHero
+      <PageHero crumbs={[{ label: "Campus life" }]}
         eyebrow="Campus life"
         title="Life on Bunga Hill"
         intro="Lead, compete, serve and belong. Life at KCU is about much more than lectures."
-        image="/images/home/whatsapp-campus-group-hero.jpeg"
+        image="/images/home/campus-group.webp"
       />
 
       {/* Mosaic */}
@@ -92,6 +94,16 @@ export default function CampusLifePage() {
               <h3 className="mt-4 text-lg">{c.name}</h3>
               <p className="mt-2 text-slate-600">{c.text}</p>
             </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Student stories */}
+      <Section tone="surface" id="stories">
+        <SectionHeading eyebrow="Student stories" title="In our students' words" action={<TextLink href="/stories">All stories</TextLink>} />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {studentStories.slice(0, 3).map((st) => (
+            <StoryCard key={st.slug} story={st} />
           ))}
         </div>
       </Section>

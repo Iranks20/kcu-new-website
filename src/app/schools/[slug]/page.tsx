@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, CheckCircle2, Clock, Mail, MapPin, Phone, UserRound } from "lucide-react";
 import { Badge, Button, CtaBand, PageHero, Section, SectionHeading } from "@/components/ui";
-import { ProgrammeCard } from "@/components/cards";
+import { NewsCard, ProgrammeCard } from "@/components/cards";
+import { newsForSchool } from "@/content/school-news";
+import { staffSlug } from "@/content/staff";
+import { pageMeta } from "@/lib/seo";
 import { getSchool, schools } from "@/content/schools";
 import { schoolDetails, type StaffMember } from "@/content/school-details";
 import { levelLabels, programmesBySchool, type Level } from "@/content/programmes";
@@ -15,10 +17,10 @@ export function generateStaticParams() {
   return schools.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/schools/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/schools/[slug]">) {
   const { slug } = await params;
   const school = getSchool(slug);
-  return school ? { title: school.name, description: school.tagline } : {};
+  return school ? pageMeta({ title: school.name, description: school.tagline, path: `/schools/${school.slug}`, image: school.image }) : {};
 }
 
 const sections = [
@@ -27,6 +29,7 @@ const sections = [
   { id: "programmes", label: "Programmes" },
   { id: "departments", label: "Departments" },
   { id: "publications", label: "Publications" },
+  { id: "news", label: "News" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -46,10 +49,12 @@ function Avatar({ name, image, size = "lg" }: { name?: string; image?: string; s
 
 function StaffCard({ member }: { member: StaffMember }) {
   return (
-    <li className="flex items-center gap-5 rounded-2xl border border-slate-200 bg-white p-5">
+    <li className="relative flex items-center gap-5 rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-slate-300 hover:shadow-card">
       <Avatar name={member.name} image={member.image} />
       <div className="min-w-0">
-        <p className={member.name ? "font-semibold text-ink" : "font-medium text-slate-400"}>{member.name ?? "Name to be confirmed"}</p>
+        <p className={member.name ? "font-semibold text-ink" : "font-medium text-slate-400"}>
+          {member.name ? <Link href={`/about/staff/${staffSlug(member.name)}`} className="after:absolute after:inset-0 hover:underline hover:underline-offset-4">{member.name}</Link> : "Name to be confirmed"}
+        </p>
         <p className="mt-0.5 text-[0.9375rem] text-slate-700">{member.role}</p>
         {member.department && <p className="text-sm text-slate-500">{member.department}</p>}
       </div>
@@ -68,10 +73,12 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
     .map((level) => ({ level, items: list.filter((p) => p.level === level) }))
     .filter((g) => g.items.length > 0);
   const { dean, contact } = details;
+  const schoolNews = newsForSchool(school.slug);
 
   return (
     <>
       <PageHero
+        crumbs={[{ label: "Schools", href: "/schools" }, { label: school.shortName }]}
         eyebrow={school.founded ? `Founded ${school.founded}` : "School"}
         title={school.name}
         intro={school.description[0]}
@@ -215,6 +222,17 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
           ))}
         </ul>
       </Section>
+
+      {schoolNews.length > 0 && (
+        <Section id="news" className="border-t border-slate-100">
+          <SectionHeading eyebrow="News" title={`Latest from the School of ${school.shortName}`} action={<Link href="/news" className="font-semibold text-ink underline-offset-4 hover:underline">All news →</Link>} />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {schoolNews.map((a) => (
+              <NewsCard key={a.slug} article={a} />
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* 6. Contact details */}
       <Section id="contact" tone="surface">

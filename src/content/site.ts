@@ -18,6 +18,12 @@ export const site = {
     mapUrl: "https://maps.google.com/?q=King+Ceasor+University+Bunga+Kampala",
     hours: "Monday – Friday, 8:00 AM – 5:00 PM (EAT)",
   },
+  // PLACEHOLDER: confirm WhatsApp Business is active on the main line, or swap in the admissions WhatsApp number.
+  whatsapp: {
+    number: "256200911450",
+    display: "+256 200 911 450",
+    message: "Hello KCU, I would like to ask about admissions.",
+  },
   social: {
     x: "https://x.com/KingCeasorUni",
     facebook: "https://www.facebook.com/kcu.ac.ug",
@@ -36,3 +42,8 @@ export const portals = [
   { label: "Online Application", href: "https://apply.kcu.ac.ug/" },
 ];
 
+
+/** A wa.me link that opens a WhatsApp chat with the University, optionally with a pre-filled message. */
+export function whatsappLink(message: string = site.whatsapp.message) {
+  return `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(message)}`;
+}

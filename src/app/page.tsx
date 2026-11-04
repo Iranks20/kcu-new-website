@@ -2,11 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MessageCircle, Phone } from "lucide-react";
 import { Button, CtaBand, Section, SectionHeading, TextLink } from "@/components/ui";
-import { EventCard } from "@/components/cards";
+import { Avatar, EventCard, SampleLabel } from "@/components/cards";
+import { stories } from "@/content/stories";
 import { Reveal } from "@/components/reveal";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { CourseSearch } from "@/components/course-search";
 import { Credentials } from "@/components/credentials";
+import { CampusTour } from "@/components/campus-tour";
+import { CountUp } from "@/components/count-up";
+import { GraduateOutcomes, RecognitionStrip } from "@/components/outcomes";
 import { news } from "@/content/news";
 import { events } from "@/content/events";
 import { schools } from "@/content/schools";
@@ -16,6 +20,8 @@ import { council, trustees, viceChancellor } from "@/content/people";
 import { achievementSlugs, intakes, joinSteps, latestGraduation, stats, whyKcu } from "@/content/university";
 import { site } from "@/content/site";
 import { asset, formatDate } from "@/lib/utils";
+
+export const metadata = { alternates: { canonical: "/" } };
 
 const pathways = [
   { title: "Undergraduate degrees", text: "Medicine, nursing, law, business, forensics and more.", href: "/programmes?level=degree", levels: ["degree"] },
@@ -28,6 +34,7 @@ export default function HomePage() {
   const [lead, ...rest] = news.filter((n) => !achievementSlugs.includes(n.slug));
   const upcoming = events.slice(0, 3);
   const openIntake = intakes[0];
+  const featuredStory = stories[0];
   const leaders = [
     // Office confirmed by the 6th Graduation news story.
     { person: council[0], note: "Minister of Health" },
@@ -66,10 +73,10 @@ export default function HomePage() {
           },
           {
             id: "ai-quantum",
-            label: "AI & Quantum",
+            label: "AI & Computing",
             eyebrow: "School of Science, Computing & Engineering",
-            title: "Building Africa's AI & quantum future.",
-            text: "From artificial intelligence, data science and IoT to cyber security and digital forensics, we prepare innovators for a world shaped by AI and quantum technologies.",
+            title: "Build Africa's digital future.",
+            text: "Study artificial intelligence, data science, IoT, cyber security and digital forensics, with hands-on labs and national cyber security competitions.",
             image: "ai-quantum",
             imageAlt: "",
             primary: { label: "Explore computing & AI", href: "/schools/science-computing-engineering" },
@@ -124,7 +131,7 @@ export default function HomePage() {
       </Section>
 
       {/* Proof: graduates and scale */}
-      <section className="bg-slate-950 text-white">
+      <section className="bg-primary-900 text-white">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[18rem] lg:min-h-full">
             <Image src="/images/kcu-2026/graduates-celebrating.webp" alt="KCU graduates celebrating at the 6th Graduation Ceremony" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
@@ -142,7 +149,7 @@ export default function HomePage() {
               {[{ value: latestGraduation.graduates, label: "Graduates in 2026" }, { value: latestGraduation.doctors, label: "New medical doctors" }, ...stats.slice(1, 3)].map(
                 (s) => (
                   <div key={s.label}>
-                    <dd className="heading text-4xl text-gold-400 sm:text-5xl">{s.value}</dd>
+                    <dd className="heading text-4xl tabular-nums text-gold-400 sm:text-5xl"><CountUp value={s.value} /></dd>
                     <dt className="mt-1 text-white/65">{s.label}</dt>
                   </div>
                 ),
@@ -183,8 +190,36 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* Why KCU, with the aerial campus film */}
+      <Section tone="surface">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+          <Reveal className="lg:col-span-7">
+            <CampusTour />
+            <p className="mt-4 text-sm text-slate-500">
+              Planning a visit? <Link href="/visit" className="font-semibold text-ink underline-offset-4 hover:underline">See campus tours and open days</Link>
+            </p>
+          </Reveal>
+          <div className="lg:col-span-5">
+            <p className="eyebrow mb-3">Why KCU</p>
+            <h2 className="text-3xl sm:text-4xl">An education built around your future</h2>
+            <p className="mt-4 text-lg text-slate-600">Practical training and flexible study options, backed by a full University Charter and international recognition.</p>
+            <ol className="mt-10 space-y-7">
+              {whyKcu.map((w, i) => (
+                <li key={w.title} className="flex gap-5">
+                  <span className="heading w-8 shrink-0 pt-0.5 text-lg text-slate-400">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="border-l border-slate-200 pl-5">
+                    <h3 className="text-lg">{w.title}</h3>
+                    <p className="mt-1 text-slate-600">{w.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </Section>
+
       {/* How to join */}
-      <Section tone="surface" id="join">
+      <Section id="join">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <p className="eyebrow mb-3">Join KCU</p>
@@ -206,7 +241,7 @@ export default function HomePage() {
             <ol className="grid gap-4 sm:grid-cols-3">
               {joinSteps.map((step, i) => (
                 <li key={step.title} className="rounded-2xl bg-white p-6 ring-1 ring-slate-200">
-                  <span className="heading grid size-10 place-items-center rounded-full bg-ink text-white">{i + 1}</span>
+                  <span className="heading grid size-10 place-items-center rounded-full bg-primary-600 text-white">{i + 1}</span>
                   <h3 className="mt-5 text-lg">{step.title}</h3>
                   <p className="mt-2 text-[0.9375rem] text-slate-600">{step.text}</p>
                 </li>
@@ -236,53 +271,64 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Why KCU */}
-      <Section>
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[5/4] lg:aspect-[4/5]">
-              <Image src="/images/kcu-2026/clinical-skills-practice.webp" alt="Students practising clinical skills in the KCU laboratory" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+      <GraduateOutcomes className="border-t border-slate-100" />
+
+      {/* News and student achievements */}
+      <Section tone="surface">
+        <SectionHeading eyebrow="News" title="Latest from KCU" action={<TextLink href="/news">All news</TextLink>} />
+        <div className="grid gap-10 lg:grid-cols-12">
+          <Link href={`/news/${lead.slug}`} className="group lg:col-span-7">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-white">
+              {lead.image && <Image src={asset(lead.image)} alt={lead.imageAlt} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
             </div>
-          </Reveal>
-          <div>
-            <p className="eyebrow mb-3">Why KCU</p>
-            <h2 className="text-3xl sm:text-4xl">An education built around your future</h2>
-            <p className="mt-4 text-lg text-slate-600">Practical training and flexible study options, backed by a full University Charter and international recognition.</p>
-            <ol className="mt-10 space-y-7">
-              {whyKcu.map((w, i) => (
-                <li key={w.title} className="flex gap-5">
-                  <span className="heading w-8 shrink-0 pt-0.5 text-lg text-slate-400">{String(i + 1).padStart(2, "0")}</span>
-                  <div className="border-l border-slate-200 pl-5">
-                    <h3 className="text-lg">{w.title}</h3>
-                    <p className="mt-1 text-slate-600">{w.text}</p>
+            <p className="mt-5 text-sm text-slate-500">
+              <span className="font-semibold text-ink">{lead.category}</span> · {formatDate(lead.date)}
+            </p>
+            <h3 className="mt-2 text-2xl sm:text-3xl">{lead.title}</h3>
+            <p className="mt-3 line-clamp-2 text-slate-600">{lead.excerpt}</p>
+          </Link>
+          <ul className="divide-y divide-slate-200 lg:col-span-5">
+            {rest.slice(0, 4).map((a) => (
+              <li key={a.slug}>
+                <Link href={`/news/${a.slug}`} className="group flex gap-5 py-5">
+                  <div className="relative aspect-square w-24 shrink-0 overflow-hidden rounded-xl bg-white sm:w-28">
+                    {a.image && <Image src={asset(a.image)} alt="" fill sizes="112px" className="object-cover" />}
                   </div>
-                </li>
-              ))}
-            </ol>
+                  <div className="min-w-0">
+                    <p className="text-sm text-slate-500">
+                      <span className="font-semibold text-ink">{a.category}</span> · {formatDate(a.date, "short")}
+                    </p>
+                    <h3 className="mt-1.5 line-clamp-3 text-base leading-snug sm:text-lg">{a.title}</h3>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-16 border-t border-slate-200 pt-12">
+          <div className="mb-8">
+            <h3 className="text-2xl">Our students compete and win</h3>
+            <p className="mt-1 text-slate-600">Recent results from national and inter-university competitions.</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {achievements.map((a) => (
+              <Link key={a.slug} href={`/news/${a.slug}`} className="group overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 transition hover:shadow-lift">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  {a.image && <Image src={asset(a.image)} alt={a.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
+                </div>
+                <div className="p-6">
+                  <p className="text-sm text-slate-500">{formatDate(a.date)}</p>
+                  <h4 className="heading mt-2 text-lg leading-snug">{a.title}</h4>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </Section>
 
-      {/* Achievements */}
-      <Section tone="surface">
-        <SectionHeading eyebrow="Student achievements" title="Our students compete and win" intro="Recent results from national and inter-university competitions." />
-        <div className="grid gap-6 md:grid-cols-3">
-          {achievements.map((a) => (
-            <Link key={a.slug} href={`/news/${a.slug}`} className="group overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 transition hover:shadow-lift">
-              <div className="relative aspect-[16/10] overflow-hidden">
-                {a.image && <Image src={asset(a.image)} alt={a.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
-              </div>
-              <div className="p-6">
-                <p className="text-sm text-slate-500">{formatDate(a.date)}</p>
-                <h3 className="mt-2 text-lg leading-snug">{a.title}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </Section>
-
       {/* Leadership */}
-      <Section tone="surface">
+      <Section>
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl lg:col-span-4">
             <Image src={asset(viceChancellor.image)} alt={`Portrait of ${viceChancellor.name}`} fill sizes="(min-width: 1024px) 30vw, 80vw" className="object-cover object-top" />
@@ -326,40 +372,6 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* News */}
-      <Section>
-        <SectionHeading eyebrow="News" title="Latest from KCU" action={<TextLink href="/news">All news</TextLink>} />
-        <div className="grid gap-10 lg:grid-cols-12">
-          <Link href={`/news/${lead.slug}`} className="group lg:col-span-7">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-surface">
-              {lead.image && <Image src={asset(lead.image)} alt={lead.imageAlt} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
-            </div>
-            <p className="mt-5 text-sm text-slate-500">
-              <span className="font-semibold text-ink">{lead.category}</span> · {formatDate(lead.date)}
-            </p>
-            <h3 className="mt-2 text-2xl sm:text-3xl">{lead.title}</h3>
-            <p className="mt-3 line-clamp-2 text-slate-600">{lead.excerpt}</p>
-          </Link>
-          <ul className="divide-y divide-slate-200 lg:col-span-5">
-            {rest.slice(0, 4).map((a) => (
-              <li key={a.slug}>
-                <Link href={`/news/${a.slug}`} className="group flex gap-5 py-5">
-                  <div className="relative aspect-square w-24 shrink-0 overflow-hidden rounded-xl bg-surface sm:w-28">
-                    {a.image && <Image src={asset(a.image)} alt="" fill sizes="112px" className="object-cover" />}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm text-slate-500">
-                      <span className="font-semibold text-ink">{a.category}</span> · {formatDate(a.date, "short")}
-                    </p>
-                    <h3 className="mt-1.5 line-clamp-3 text-base leading-snug sm:text-lg">{a.title}</h3>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-
       {/* Events + campus life */}
       <Section tone="surface">
         <div className="grid gap-12 lg:grid-cols-12">
@@ -372,20 +384,35 @@ export default function HomePage() {
             </div>
           </div>
           <div className="lg:col-span-5">
-            <Link href="/campus-life" className="group relative block h-full min-h-[24rem] overflow-hidden rounded-2xl">
-              <Image src="/images/campus-life/student-activities.jpg" alt="KCU students performing a cultural dance at a campus gala" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                <h3 className="text-2xl text-white sm:text-3xl">More than a degree</h3>
-                <p className="mt-2 text-white/85">Football, moot court, Rotaract, culture and a Guild that gives every student a voice.</p>
-                <span className="mt-5 inline-flex items-center gap-2 font-semibold text-white">
-                  Explore campus life <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
-                </span>
+            <div className="group relative flex h-full min-h-[28rem] flex-col justify-end overflow-hidden rounded-2xl">
+              <Image src={asset(featuredStory.image)} alt={featuredStory.imageAlt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-950 via-primary-950/60 to-transparent" />
+              <div className="relative p-6 sm:p-8">
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="eyebrow text-gold-300">Student stories</p>
+                  {featuredStory.sample && <SampleLabel />}
+                </div>
+                <blockquote className="heading mt-3 text-2xl leading-snug text-white">“{featuredStory.quote}”</blockquote>
+                <div className="mt-5 flex items-center gap-3">
+                  <Avatar name={featuredStory.name} tone="gold" />
+                  <div>
+                    <p className="font-semibold text-white">
+                      <Link href={`/stories/${featuredStory.slug}`} className="after:absolute after:inset-0">{featuredStory.name}</Link>
+                    </p>
+                    <p className="text-sm text-white/70">{featuredStory.stage}</p>
+                  </div>
+                </div>
+                <p className="relative mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-white">
+                  <span className="inline-flex items-center gap-1.5">Read the story <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden /></span>
+                  <Link href="/campus-life" className="relative z-10 underline-offset-4 hover:underline">Explore campus life</Link>
+                </p>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       </Section>
+
+      <RecognitionStrip />
 
       {/* Partners */}
       <section className="py-14 sm:py-16">

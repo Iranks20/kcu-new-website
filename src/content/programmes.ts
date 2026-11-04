@@ -22,6 +22,12 @@ export type Programme = {
   intakes: string[];
   overview: string;
   careers: string[];
+  /** Subject requirements on top of the general entry requirements for the level. */
+  subjects?: string[];
+  /** Year-by-year outline of the programme. */
+  structure?: { stage: string; text: string }[];
+  /** Professional council graduates register with. */
+  registration?: string;
 };
 
 type Seed = [code: string, title: string, duration: string, local: string, international: string];
@@ -34,31 +40,62 @@ const slugify = (s: string) =>
   s.toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 // PLACEHOLDER overviews and careers, written from public programme descriptions.
-const details: Record<string, { overview: string; careers: string[] }> = {
+// Subject requirements, structures and registration bodies are PLACEHOLDER too: confirm with the Academic Registrar.
+type Details = Pick<Programme, "overview" | "careers" | "subjects" | "structure" | "registration">;
+
+const details: Record<string, Details> = {
   "Bachelor of Medicine and Bachelor of Surgery": {
     overview:
       "A five-year professional medical degree combining biomedical sciences, clinical rotations and community health. Students train in KCU's anatomy and clinical skills laboratories and complete supervised rotations at partner referral hospitals. The programme is recognised through ECFMG pathways, opening international routes for graduates.",
     careers: ["Medical officer", "Surgeon (after specialisation)", "Public health practitioner", "Clinical researcher", "Health policy advisor"],
+    subjects: [
+      "UACE principal passes in Biology and Chemistry, plus a principal or subsidiary pass in Physics or Mathematics.",
+      "UCE passes in English, Mathematics, Biology, Chemistry and Physics.",
+    ],
+    structure: [
+      { stage: "Year 1", text: "Anatomy, physiology and biochemistry, with an introduction to clinical skills and professionalism." },
+      { stage: "Year 2", text: "Pathology, microbiology, pharmacology and community health, linking the basic sciences to disease." },
+      { stage: "Year 3", text: "Introduction to clinical medicine: history taking, examination and junior hospital rotations." },
+      { stage: "Years 4–5", text: "Senior clerkships in internal medicine, surgery, paediatrics, obstetrics and gynaecology, psychiatry and community medicine at partner referral hospitals." },
+    ],
+    registration: "Graduates complete a one-year internship and register with the Uganda Medical and Dental Practitioners Council (UMDPC).",
   },
   "Bachelor of Nursing Science - Direct": {
     overview:
       "A four-year degree for school leavers that builds strong foundations in nursing science, patient care, community health and leadership, with extensive clinical placements.",
     careers: ["Registered nurse", "Nurse educator", "Community health nurse", "Nursing manager"],
+    subjects: ["UACE principal passes in Biology and Chemistry.", "UCE passes in English, Mathematics, Biology, Chemistry and Physics."],
+    structure: [
+      { stage: "Year 1", text: "Foundations of nursing, anatomy, physiology and communication in care." },
+      { stage: "Year 2", text: "Medical and surgical nursing, pharmacology and supervised ward placements." },
+      { stage: "Year 3", text: "Maternal and child health, mental health nursing and community placements." },
+      { stage: "Year 4", text: "Leadership, health-service management, a research project and extended clinical practice." },
+    ],
+    registration: "Graduates register with the Uganda Nurses and Midwives Council (UNMC).",
   },
   "Bachelor of Nursing Science - Completion": {
     overview:
       "A three-year completion pathway for diploma-holding nurses who want to upgrade to a degree, deepening clinical expertise, research skills and health-service leadership.",
     careers: ["Senior nursing officer", "Nurse educator", "Clinical nurse specialist", "Health services manager"],
+    subjects: ["A Diploma in Nursing or Midwifery from a recognised institution.", "Current registration with the Uganda Nurses and Midwives Council."],
+    registration: "Graduates upgrade their registration with the Uganda Nurses and Midwives Council (UNMC).",
   },
   "Diploma in Clinical Medicine and Community Health": {
     overview:
       "A practical three-year diploma preparing clinical officers to diagnose and manage common conditions and to lead community health programmes, especially in underserved areas.",
     careers: ["Clinical officer", "Community health officer", "Health centre in-charge", "NGO health programme officer"],
+    subjects: [
+      "UCE passes in Biology, Chemistry and Physics or Mathematics, plus English.",
+      "UACE with at least one principal pass in Biology or Chemistry.",
+    ],
+    registration: "Graduates register with the Allied Health Professionals Council (AHPC).",
   },
   "Diploma in Medical Laboratory Technology": {
     overview:
       "Students learn to collect, process and analyse medical specimens, supporting accurate diagnosis and disease surveillance in hospitals, laboratories and research centres.",
     careers: ["Medical laboratory technologist", "Research laboratory assistant", "Blood transfusion technician", "Quality control officer"],
+    subjects: ["UCE passes in Biology, Chemistry and Physics or Mathematics, plus English.", "UACE with at least one principal pass in Biology or Chemistry."],
+    registration: "Graduates register with the Allied Health Professionals Council (AHPC).",
   },
   "Bachelor of Laws": {
     overview:
@@ -124,6 +161,9 @@ function make(level: Level, school: string, per: "semester" | "course", [code, t
         ? hecOverview
         : `A focused, practical ${duration.toLowerCase()} course that builds job-ready skills in ${title.replace(/^Certificate in /, "").toLowerCase()}. Taught by KCU faculty and industry practitioners, it suits school leavers, graduates and working professionals.`),
     careers: d?.careers ?? (level === "hec" ? ["Progression to a KCU degree or diploma"] : ["Upskilling in your current role", "Entry-level roles in the field", "Self-employment"]),
+    subjects: d?.subjects,
+    structure: d?.structure,
+    registration: d?.registration,
   };
 }
 

@@ -8,6 +8,7 @@ import { news } from "@/content/news";
 import { asset, formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/news" },
   title: "News",
   description: "The latest stories from King Ceasor University: students, research, partnerships and community.",
 };

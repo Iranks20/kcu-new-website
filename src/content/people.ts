@@ -86,3 +86,24 @@ export const qaTeam: Person[] = [
   { name: "Ms. Sayuuni Mercy", role: "Quality Assurance Monitoring Assistant", image: "/Mercy.jpeg" },
   { name: "Ms. Viola Kintu", role: "Quality Assurance Officer", image: "/Viola.jpg" },
 ];
+
+export type DirectoryEntry = Person & { unit: string; department?: string };
+
+/** Strips titles so "Mr. X" and "Dr. X" are recognised as the same person. */
+export const bareName = (name: string) => name.replace(/^((Rt\.|Hon\.|HE\.|Dr\.|Prof\.|Assoc\.|Mr\.|Mrs\.|Ms\.|Eng\.)\s*)+/g, "").replace(/\s*\(.*\)$/, "").trim().toLowerCase();
+
+/** Everyone with a confirmed name, grouped by unit, for the staff directory. */
+export function staffDirectory(academic: { unit: string; people: { name?: string; role: string; department?: string; image?: string }[] }[]): DirectoryEntry[] {
+  const seen = new Set<string>();
+  const entries: DirectoryEntry[] = [];
+  const add = (e: DirectoryEntry) => {
+    const key = bareName(e.name);
+    if (seen.has(key)) return;
+    seen.add(key);
+    entries.push(e);
+  };
+  management.forEach((p) => add({ ...p, unit: "University Management" }));
+  qaTeam.forEach((p) => add({ ...p, unit: "Quality Assurance" }));
+  academic.forEach(({ unit, people }) => people.forEach((p) => p.name && add({ name: p.name, role: p.role, image: p.image, department: p.department, unit })));
+  return entries;
+}

@@ -4,6 +4,7 @@ import { GalleryGrid } from "@/components/gallery-grid";
 import { gallery } from "@/content/gallery";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/gallery" },
   title: "Gallery",
   description: "Photos from graduation, outreach, sport and student life at King Ceasor University.",
 };
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <>
-      <PageHero
+      <PageHero crumbs={[{ label: "Campus life", href: "/campus-life" }, { label: "Gallery" }]}
         eyebrow="Campus life"
         title="Gallery"
         intro="Graduations, outreach, sport and everyday life on Bunga Hill."

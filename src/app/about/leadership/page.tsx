@@ -4,6 +4,7 @@ import { PersonCard } from "@/components/cards";
 import { council, management, trustees } from "@/content/people";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about/leadership" },
   title: "Leadership & Governance",
   description: "The Board of Trustees, University Council and management team of King Ceasor University.",
 };
@@ -17,7 +18,7 @@ const groups = [
 export default function LeadershipPage() {
   return (
     <>
-      <PageHero
+      <PageHero crumbs={[{ label: "About", href: "/about" }, { label: "Leadership & governance" }]}
         eyebrow="About KCU"
         title="Leadership & governance"
         intro="Experienced leaders in education, health, law and public service, guiding KCU's growth as a chartered university."

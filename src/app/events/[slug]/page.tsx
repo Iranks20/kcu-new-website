@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 import { Button, PageHero, Section } from "@/components/ui";
@@ -6,15 +5,20 @@ import { EventCard } from "@/components/cards";
 import { events, getEvent } from "@/content/events";
 import { site } from "@/content/site";
 import { formatDate } from "@/lib/utils";
+import { JsonLd } from "@/components/json-ld";
+import { AddToCalendar } from "@/components/add-to-calendar";
+import { ShareButtons } from "@/components/share-buttons";
+import { pageMeta } from "@/lib/seo";
+import { eventJsonLd } from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return events.map((e) => ({ slug: e.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/events/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/events/[slug]">) {
   const { slug } = await params;
   const e = getEvent(slug);
-  return e ? { title: e.title, description: e.summary } : {};
+  return e ? pageMeta({ title: e.title, description: e.summary, path: `/events/${e.slug}`, image: e.image }) : {};
 }
 
 export default async function EventPage({ params }: PageProps<"/events/[slug]">) {
@@ -25,7 +29,8 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
 
   return (
     <>
-      <PageHero eyebrow={event.category} title={event.title} intro={event.summary} image={event.image} />
+      <JsonLd data={eventJsonLd(event)} />
+      <PageHero crumbs={[{ label: "Events", href: "/events" }, { label: event.title }]} eyebrow={event.category} title={event.title} intro={event.summary} image={event.image} />
       <Section>
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
@@ -34,6 +39,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
                 <p key={p}>{p}</p>
               ))}
             </div>
+            <ShareButtons path={`/events/${event.slug}`} title={event.title} className="mt-10 border-t border-slate-100 pt-6" />
           </div>
           <aside className="lg:col-span-4">
             <div className="rounded-2xl bg-surface p-6 sm:p-8 lg:sticky lg:top-28">
@@ -55,6 +61,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
               <Button href={`mailto:${site.contact.email}?subject=${encodeURIComponent(`Registration: ${event.title}`)}`} className="mt-8 w-full">
                 Register interest
               </Button>
+              <AddToCalendar className="mt-3" entry={{ title: event.title, date: event.date, time: event.time, location: `${event.location}, King Ceasor University`, description: event.summary }} />
             </div>
           </aside>
         </div>

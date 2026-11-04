@@ -7,8 +7,10 @@ import { coreValues, history, mission, stats, vision } from "@/content/universit
 import { viceChancellor } from "@/content/people";
 import { partners } from "@/content/partners";
 import { asset } from "@/lib/utils";
+import { CountUp } from "@/components/count-up";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About KCU",
   description: "The story, mission, values and leadership of King Ceasor University, a chartered university in Kampala, Uganda.",
 };
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHero
+      <PageHero crumbs={[{ label: "About" }]}
         eyebrow="About KCU"
         title="An innovation-driven university"
         intro="From an idea in 2009 to a fully chartered university in 2025, King Ceasor University has grown into a home for more than 2,000 students from across Africa."
@@ -25,7 +27,7 @@ export default function AboutPage() {
 
       <Section>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl bg-slate-950 p-8 text-white sm:p-10">
+          <div className="rounded-2xl bg-primary-900 p-8 text-white sm:p-10">
             <Compass className="size-9 text-gold-400" aria-hidden />
             <h2 className="mt-6 text-2xl text-white">Our mission</h2>
             <p className="mt-3 text-lg text-white/85">{mission}</p>
@@ -41,7 +43,7 @@ export default function AboutPage() {
           {stats.map((s) => (
             <div key={s.label} className="border-l-2 border-slate-300 pl-5">
               <dt className="text-sm text-slate-500">{s.label}</dt>
-              <dd className="heading mt-1 text-3xl text-ink sm:text-4xl">{s.value}</dd>
+              <dd className="heading mt-1 text-3xl tabular-nums text-ink sm:text-4xl"><CountUp value={s.value} /></dd>
             </div>
           ))}
         </dl>
@@ -68,7 +70,7 @@ export default function AboutPage() {
           <div className="absolute left-[1.375rem] top-0 h-full w-px bg-slate-200 md:left-0 md:top-[1.375rem] md:h-px md:w-full" aria-hidden />
           {history.map((h) => (
             <li key={h.year} className="relative flex gap-5 md:block">
-              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-4 border-white bg-ink shadow-card ring-1 ring-slate-200">
+              <span className="relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-4 border-white bg-primary-600 shadow-card ring-1 ring-slate-200">
                 <span className="size-2 rounded-full bg-white" />
               </span>
               <div className="md:mt-6">

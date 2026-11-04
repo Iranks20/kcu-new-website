@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { asset, cn, isExternal } from "@/lib/utils";
+import { Breadcrumbs, type Crumb } from "./breadcrumbs";
 
 type ButtonProps = {
   href: string;
@@ -56,7 +57,7 @@ export function Section({ children, className, id, tone = "white" }: { children:
       className={cn(
         "py-16 sm:py-20 lg:py-24",
         tone === "surface" && "bg-surface",
-        tone === "dark" && "bg-slate-950 text-white",
+        tone === "dark" && "bg-primary-900 text-white",
         className,
       )}
     >
@@ -104,6 +105,7 @@ export function PageHero({
   image,
   children,
   imagePosition = "center",
+  crumbs,
 }: {
   eyebrow?: string;
   title: string;
@@ -111,11 +113,14 @@ export function PageHero({
   image?: string;
   children?: React.ReactNode;
   imagePosition?: string;
+  /** Trail after "Home"; the last item is the current page. */
+  crumbs?: Crumb[];
 }) {
   return (
     <section className="border-b border-slate-100 bg-surface">
       <div className={cn("container-x grid items-center gap-10 py-12 sm:py-16", image && "lg:grid-cols-12 lg:gap-14 lg:py-16")}>
         <div className={cn("animate-fade-up", image ? "lg:col-span-6" : "max-w-3xl")}>
+          {crumbs && <Breadcrumbs items={crumbs} />}
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
           <h1 className="text-4xl sm:text-5xl">{title}</h1>
           {intro && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">{intro}</p>}

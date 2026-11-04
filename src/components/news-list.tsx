@@ -27,7 +27,7 @@ export function NewsList({ articles }: { articles: NewsArticle[] }) {
             }}
             className={cn(
               "h-10 shrink-0 rounded-full px-5 text-sm font-medium transition",
-              category === c ? "bg-ink text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-ink",
+              category === c ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-ink",
             )}
           >
             {c}

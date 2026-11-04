@@ -1,18 +1,23 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, CheckCircle2, FileText, Globe2, Plus } from "lucide-react";
 import { Badge, Button, CtaBand, PageHero, Section, SectionHeading } from "@/components/ui";
 import { Credentials } from "@/components/credentials";
+import { FeesCalculator } from "@/components/fees-calculator";
 import { entryRequirements, levelLabels, programmes, type Level } from "@/content/programmes";
 import { schools } from "@/content/schools";
 import { admissionFaqs, applicationSteps, funding, intakes, requiredDocuments } from "@/content/university";
 import { site } from "@/content/site";
+import { CurrencyToggle, FeeAmount } from "@/components/fee-amount";
+import { GraduateOutcomes } from "@/components/outcomes";
+import { AskAssistantButton } from "@/components/assistant/ask-button";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Admissions",
   description: "How to apply to King Ceasor University: entry requirements, fees, funding, intakes and answers to common questions.",
-};
+  path: "/admissions",
+});
 
 const quickLinks = [
   { label: "How to apply", href: "#apply" },
@@ -28,13 +33,15 @@ export default function AdmissionsPage() {
   return (
     <>
       <PageHero
+        crumbs={[{ label: "Admissions" }]}
         eyebrow={`${site.currentIntake.name} · ${site.currentIntake.status}`}
         title="Your journey to KCU starts here"
         intro="Everything you need to apply: requirements, fees, funding and key dates. Most applicants hear back within two weeks."
-        image="/images/home/whatsapp-campus-welcome-hero.jpeg"
+        image="/images/home/campus-welcome.webp"
       >
         <Button href={site.applyUrl} size="lg">Apply online</Button>
         <Button href="/programmes" variant="outline" size="lg" icon={false}>Find a programme</Button>
+        <AskAssistantButton question="Help me apply" size="lg">Help me apply</AskAssistantButton>
       </PageHero>
       <Credentials />
 
@@ -56,7 +63,7 @@ export default function AdmissionsPage() {
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {applicationSteps.map((s, i) => (
             <li key={s.title} className="relative rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-slate-300 hover:shadow-card">
-              <span className="heading grid size-11 place-items-center rounded-full bg-ink text-lg text-white">{i + 1}</span>
+              <span className="heading grid size-11 place-items-center rounded-full bg-primary-600 text-lg text-white">{i + 1}</span>
               <h3 className="mt-5 text-lg">{s.title}</h3>
               <p className="mt-2 text-slate-600">{s.text}</p>
             </li>
@@ -100,10 +107,10 @@ export default function AdmissionsPage() {
 
       {/* Intakes */}
       <Section id="intakes">
-        <SectionHeading eyebrow="Intakes & key dates" title="When you can start" intro="We admit students three times a year. Dates are indicative and confirmed by the Academic Registrar." />
+        <SectionHeading eyebrow="Intakes & key dates" title="When you can start" intro="We admit students three times a year. Dates are indicative and confirmed by the Academic Registrar." action={<Link href="/academic-calendar" className="font-semibold text-ink underline-offset-4 hover:underline">Full academic calendar →</Link>} />
         <div className="grid gap-5 lg:grid-cols-3">
           {intakes.map((intake, i) => (
-            <div key={intake.name} className={i === 0 ? "rounded-2xl bg-slate-950 p-6 text-white shadow-lift sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
+            <div key={intake.name} className={i === 0 ? "rounded-2xl bg-primary-900 p-6 text-white shadow-lift sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
               <div className="flex items-center justify-between gap-3">
                 <CalendarDays className={i === 0 ? "size-6 text-gold-400" : "size-6 text-slate-500"} aria-hidden />
                 <Badge tone={i === 0 ? "gold" : "slate"}>{intake.status}</Badge>
@@ -133,6 +140,16 @@ export default function AdmissionsPage() {
           title="Clear, affordable tuition"
           intro="Tuition per semester for degrees, diplomas and bridging courses, and per course for short courses. Functional fees may apply."
         />
+        <div id="calculator" className="mb-12 scroll-mt-40">
+          <FeesCalculator
+            programmes={programmes.map(({ slug, title, school, duration, fees, level }) => ({ slug, title, school, duration, fees, level }))}
+            schools={schools.map(({ slug, name }) => ({ slug, name }))}
+          />
+        </div>
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+          <h3 className="text-xl">Full fees by school</h3>
+          <CurrencyToggle />
+        </div>
         <div className="space-y-6">
           {schools.map((school) => (
             <details key={school.slug} className="group overflow-hidden rounded-2xl bg-white shadow-card" open={school.slug === schools[0].slug}>
@@ -159,7 +176,7 @@ export default function AdmissionsPage() {
                             <Link href={`/programmes/${p.slug}`} className="font-medium text-ink underline-offset-4 hover:underline">{p.title}</Link>
                           </td>
                           <td className="whitespace-nowrap px-4 py-3.5 text-slate-600">{p.duration}</td>
-                          <td className="whitespace-nowrap px-4 py-3.5 font-semibold text-ink">{p.fees.local}</td>
+                          <td className="whitespace-nowrap px-4 py-3.5 font-semibold text-ink"><FeeAmount fee={p.fees.local} /></td>
                           <td className="whitespace-nowrap px-5 py-3.5 text-slate-600 sm:px-6">{p.fees.international}</td>
                         </tr>
                       ))}
@@ -171,9 +188,11 @@ export default function AdmissionsPage() {
         </div>
       </Section>
 
+      <GraduateOutcomes className="border-b border-slate-100" />
+
       {/* Funding */}
       <Section id="funding">
-        <SectionHeading eyebrow="Funding" title="Ways to fund your studies" />
+        <SectionHeading eyebrow="Funding" title="Ways to fund your studies" action={<Link href="/scholarships" className="font-semibold text-ink underline-offset-4 hover:underline">All scholarships →</Link>} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {funding.map((f) => (
             <div key={f.title} className="flex flex-col rounded-2xl border border-slate-200 p-6">
@@ -190,7 +209,7 @@ export default function AdmissionsPage() {
       </Section>
 
       {/* International */}
-      <section id="international" className="bg-slate-950 text-white">
+      <section id="international" className="bg-primary-900 text-white">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[20rem]">
             <Image src="/images/kcu-2026/graduates-welcome-group.webp" alt="KCU students from across Africa" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
@@ -208,7 +227,7 @@ export default function AdmissionsPage() {
               ))}
             </ul>
             <div className="mt-8">
-              <Button href={`mailto:${site.contact.admissionsEmail}`} variant="white">Email admissions</Button>
+              <Button href="/international" variant="white">International student guide</Button>
             </div>
           </div>
         </div>
@@ -230,7 +249,7 @@ export default function AdmissionsPage() {
               <details key={f.q} className="group py-5">
                 <summary className="flex items-center justify-between gap-4">
                   <span className="text-lg font-semibold text-ink">{f.q}</span>
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:rotate-45 group-open:bg-ink group-open:text-white">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:rotate-45 group-open:bg-primary-600 group-open:text-white">
                     <Plus className="size-4" aria-hidden />
                   </span>
                 </summary>

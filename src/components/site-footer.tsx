@@ -4,19 +4,29 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { footerNav } from "@/content/navigation";
 import { portals, site } from "@/content/site";
 import { SocialLinks } from "./social-icons";
+import { NewsletterForm } from "./newsletter-form";
+
+const legalLinks = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Accessibility", href: "/accessibility" },
+];
 
 export function SiteFooter() {
   return (
-    <footer className="bg-slate-950 text-slate-300">
-      <div className="container-x grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
+    <footer className="bg-primary-950 text-primary-100">
+      <div className="container-x grid grid-cols-1 gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-4">
           <Image src="/brand/kcu-logo-light.png" alt="King Ceasor University" width={560} height={210} className="h-14 w-auto" />
           <p className="mt-6 max-w-sm">
             A chartered university on Bunga Hill, Kampala, preparing globally competitive professionals in health, law, business,
             computing and energy.
           </p>
-          <p className="mt-4 text-sm text-slate-400">Chartered by the Government of Uganda · Accredited by the National Council for Higher Education</p>
+          <p className="mt-4 text-sm text-primary-300">Chartered by the Government of Uganda · Accredited by the National Council for Higher Education</p>
           <SocialLinks className="mt-6" />
+          <div className="mt-10 max-w-sm border-t border-white/10 pt-8">
+            <NewsletterForm />
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
@@ -63,7 +73,16 @@ export function SiteFooter() {
 
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-4 pb-24 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between lg:pb-6">
-          <p>© {new Date().getFullYear()} King Ceasor University. All rights reserved.</p>
+          <div className="flex flex-col gap-2 sm:flex-row sm:gap-5">
+            <p>© {new Date().getFullYear()} King Ceasor University. All rights reserved.</p>
+            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+              {legalLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-white">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {portals.map((p) => (
               <li key={p.href}>

@@ -35,3 +35,15 @@ export const supportServices = [
   { title: "Library & e-learning", text: "A modern library, online catalogue and the K-Class e-learning platform for blended study." },
   { title: "Career guidance", text: "Internship placements, CV clinics and an annual career and internship fair." },
 ];
+
+export const campusTour = {
+  title: "Fly over the KCU campus",
+  caption: "Bunga Hill, Kampala, overlooking Lake Victoria",
+  /** Compressed 720p copy first; the original MP4 is the fallback for browsers without WebM. */
+  sources: [
+    { src: "/media/video/kcu-campus-720.webm", type: "video/webm" },
+    { src: "/media/video/kcu-360.mp4", type: "video/mp4" },
+  ],
+  poster: "/media/video/kcu-campus-aerial.webp",
+  duration: "1:16",
+};

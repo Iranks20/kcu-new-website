@@ -42,32 +42,6 @@ export const intakes = [
   { name: "August 2027 Intake", status: "Opening soon", opens: "1 March 2027", closes: "16 July 2027", starts: "9 August 2027" },
 ];
 
-// PLACEHOLDER: sample academic calendar for 2026/2027.
-export const academicCalendar = [
-  {
-    term: "Semester I · 2026/2027",
-    items: [
-      { date: "10 Aug 2026", event: "Semester begins; continuing students report" },
-      { date: "10 – 14 Aug 2026", event: "Orientation for August intake" },
-      { date: "28 Aug 2026", event: "Deadline for course registration" },
-      { date: "5 – 9 Oct 2026", event: "Mid-semester assessments" },
-      { date: "23 Nov – 11 Dec 2026", event: "End of semester examinations" },
-      { date: "14 Dec 2026 – 8 Jan 2027", event: "Christmas break" },
-    ],
-  },
-  {
-    term: "Semester II · 2026/2027",
-    items: [
-      { date: "11 Jan 2027", event: "Semester begins; January intake reports" },
-      { date: "11 – 15 Jan 2027", event: "Orientation for January intake" },
-      { date: "29 Jan 2027", event: "Deadline for course registration" },
-      { date: "8 – 12 Mar 2027", event: "Mid-semester assessments" },
-      { date: "26 Apr – 14 May 2027", event: "End of semester examinations" },
-      { date: "17 May – 6 Aug 2027", event: "Recess term and industrial training" },
-    ],
-  },
-];
-
 export const applicationSteps = [
   { title: "Choose your programme", text: "Use the programme finder to compare courses, entry requirements and fees." },
   { title: "Prepare your documents", text: "Scan your academic certificates and transcripts, national ID or passport, and a passport photo." },

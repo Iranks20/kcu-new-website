@@ -41,3 +41,8 @@ export function initials(name: string) {
     .join("")
     .toUpperCase();
 }
+
+/** Joins number ranges and scores ("2–0", "2026–27") with word joiners so they never wrap mid-range. */
+export function keepNumberRangesTogether(text: string) {
+  return text.replace(/(\d)\s?([–-])\s?(\d)/g, "$1\u2060$2\u2060$3");
+}

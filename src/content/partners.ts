@@ -53,7 +53,7 @@ export const partners: Partner[] = [
   {
     "name": "Makerere University",
     "country": "Uganda",
-    "logo": "/images/partners/makerere.svg"
+    "logo": "/images/partners/makerere.webp"
   },
   {
     "name": "RENU",

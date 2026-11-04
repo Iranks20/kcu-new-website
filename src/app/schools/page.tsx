@@ -8,6 +8,7 @@ import { schools } from "@/content/schools";
 import { programmes } from "@/content/programmes";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/schools" },
   title: "Our Schools",
   description: "King Ceasor University's three schools: Medicine, Health & Life Sciences; Law & Management Sciences; Science, Computing & Engineering.",
 };
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function SchoolsPage() {
   return (
     <>
-      <PageHero
+      <PageHero crumbs={[{ label: "Schools" }]}
         eyebrow="Academics"
         title="Our schools"
         intro="Three schools that combine academic depth with practical training, clinical and industry partners, and a strong sense of community."

@@ -1,25 +1,32 @@
-import type { Metadata } from "next";
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { PageHero, Section } from "@/components/ui";
 import { ContactForm } from "@/components/contact-form";
-import { site } from "@/content/site";
+import { site, whatsappLink } from "@/content/site";
+import { BrandIcon } from "@/components/social-icons";
+import { AskAssistantButton } from "@/components/assistant/ask-button";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Contact Us",
-  description: "Contact King Ceasor University on Bunga Hill, Kampala: phone, email, directions and enquiry form.",
-};
+  description: "Contact King Ceasor University on Bunga Hill, Kampala: phone, WhatsApp, email, directions and enquiry form.",
+  path: "/contact",
+});
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return <BrandIcon name="whatsapp" className={className} />;
+}
 
 export default function ContactPage() {
   const channels = [
     { icon: Phone, title: "Call us", value: site.contact.phone, href: site.contact.phoneHref },
+    { icon: WhatsAppIcon, title: "WhatsApp", value: site.whatsapp.display, href: whatsappLink() },
     { icon: Mail, title: "General enquiries", value: site.contact.email, href: `mailto:${site.contact.email}` },
     { icon: Mail, title: "Admissions", value: site.contact.admissionsEmail, href: `mailto:${site.contact.admissionsEmail}` },
-    { icon: MessageCircle, title: "Live chat", value: "Chat with an advisor", href: site.chatUrl },
   ];
 
   return (
     <>
-      <PageHero eyebrow="Contact" title="We'd love to hear from you" intro="Questions about programmes, fees or visiting campus? Our team is happy to help." image="/images/home/whatsapp-campus-welcome-hero.jpeg" />
+      <PageHero crumbs={[{ label: "Contact" }]} eyebrow="Contact" title="We'd love to hear from you" intro="Questions about programmes, fees or visiting campus? Our team is happy to help." image="/images/home/campus-welcome.webp" />
       <Section>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {channels.map((c) => (
@@ -29,13 +36,24 @@ export default function ContactPage() {
               {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="group rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-lift"
             >
-              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-slate-600 transition group-hover:bg-ink group-hover:text-white">
+              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-slate-600 transition group-hover:bg-primary-600 group-hover:text-white">
                 <c.icon className="size-5" aria-hidden />
               </span>
               <p className="mt-5 text-sm text-slate-500">{c.title}</p>
               <p className="mt-0.5 break-words font-semibold text-ink">{c.value}</p>
             </a>
           ))}
+        </div>
+
+        <div className="mt-6 flex flex-col gap-4 rounded-2xl bg-primary-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div className="flex gap-4">
+            <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-gold-400 text-ink"><Sparkles className="size-6" aria-hidden /></span>
+            <div>
+              <p className="text-lg font-semibold">Get an answer right now</p>
+              <p className="mt-1 text-white/75">The KCU Assistant answers questions about programmes, fees, requirements and intakes, day or night.</p>
+            </div>
+          </div>
+          <AskAssistantButton variant="light" className="shrink-0">Ask the KCU Assistant</AskAssistantButton>
         </div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-12">

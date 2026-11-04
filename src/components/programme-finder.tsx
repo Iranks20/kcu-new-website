@@ -86,7 +86,7 @@ function Finder({ initialLevel, initialSchool, initialQuery }: { initialLevel: L
               aria-pressed={level === l.value}
               className={cn(
                 "h-9 shrink-0 rounded-full px-4 text-sm font-medium transition",
-                level === l.value ? "bg-ink text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-ink",
+                level === l.value ? "bg-primary-600 text-white" : "bg-surface text-slate-600 hover:bg-slate-100 hover:text-ink",
               )}
             >
               {l.label}

@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { ViewTransition } from "react";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileApplyBar } from "@/components/mobile-apply-bar";
+import { ChatAssistant } from "@/components/assistant/chat-assistant";
 import { site } from "@/content/site";
+import { JsonLd } from "@/components/json-ld";
+import { universityJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
 const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -30,13 +34,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${body.variable} ${heading.variable}`}>
       <body>
+        <JsonLd data={universityJsonLd()} />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:shadow-lift">
           Skip to content
         </a>
         <SiteHeader />
-        <main id="main">{children}</main>
+        <main id="main">
+          {/* Route changes update this boundary, so React crossfades the page content while the header stays put. */}
+          <ViewTransition>{children}</ViewTransition>
+        </main>
         <SiteFooter />
         <MobileApplyBar />
+        <ChatAssistant />
       </body>
     </html>
   );

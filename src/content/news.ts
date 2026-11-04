@@ -1,5 +1,7 @@
 // Generated from the previous site's content. Edit freely; the backend will replace this file later.
 
+import { keepNumberRangesTogether } from "@/lib/utils";
+
 export type NewsArticle = {
   slug: string;
   title: string;
@@ -15,7 +17,7 @@ export type NewsArticle = {
   externalUrl?: string;
 };
 
-export const news: NewsArticle[] = [
+const articles: NewsArticle[] = [
   {
     "slug": "king-ceasor-university-secures-2-0-victory-over-soroti-university-in-pepsi",
     "title": "King Ceasor University Secures 2–0 Victory Over Soroti University in Pepsi University Football League",
@@ -2102,6 +2104,9 @@ export const news: NewsArticle[] = [
     "externalUrl": "https://kcu.ac.ug/kcu-cmf-chapter-hosts-inter-university-worship-experience/"
   }
 ];
+
+// Word joiners stop a score such as "2–0" from breaking across lines in headlines.
+export const news: NewsArticle[] = articles.map((a) => ({ ...a, title: keepNumberRangesTogether(a.title) }));
 
 export const newsCategories = Array.from(new Set(news.map((n) => n.category))).sort();
 

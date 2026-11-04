@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Pause, Play } from "lucide-react";
 import { Button } from "./ui";
 import { AiQuantumArt } from "./ai-quantum-art";
 import { cn } from "@/lib/utils";
@@ -22,16 +23,18 @@ export type HeroSlide = {
   note?: string;
 };
 
-const INTERVAL = 5000;
+const INTERVAL = 7000;
 
 export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
   const [hovering, setHovering] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  // An explicit pause the visitor controls (WCAG 2.2.2), on top of the automatic pause on hover and focus.
+  const [paused, setPaused] = useState(false);
   const touchX = useRef<number | null>(null);
 
   const go = useCallback((i: number) => setIndex((i + slides.length) % slides.length), [slides.length]);
-  const running = !hovering && !reducedMotion;
+  const running = !hovering && !reducedMotion && !paused;
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -49,7 +52,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
 
   return (
     <section
-      className="relative isolate overflow-hidden bg-ink"
+      className="relative isolate overflow-hidden bg-primary-950"
       aria-roledescription="carousel"
       aria-label="Highlights"
       onMouseEnter={() => setHovering(true)}
@@ -68,7 +71,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         touchX.current = null;
       }}
     >
-      <div className="relative min-h-[40rem] sm:min-h-[42rem] lg:min-h-[min(calc(100svh-7.5rem),52rem)]">
+      <div aria-live={running ? "off" : "polite"} className="relative min-h-[40rem] sm:min-h-[42rem] lg:min-h-[min(calc(100svh-7.5rem),52rem)]">
         {slides.map((slide, i) => {
           const active = i === index;
           return (
@@ -125,33 +128,45 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       {/* Slide indicators */}
       <div className="absolute inset-x-0 bottom-0 z-20">
         <div className="container-x pb-6 sm:pb-8">
-          <div className="-ml-1.5 flex items-center" role="tablist" aria-label="Choose a slide">
-            {slides.map((slide, i) => (
+          <div className="-ml-1.5 flex items-center">
+            {!reducedMotion && (
               <button
-                key={slide.id}
                 type="button"
-                role="tab"
-                aria-selected={i === index}
-                aria-label={`Slide ${i + 1} of ${slides.length}: ${slide.label}`}
-                onClick={() => go(i)}
-                className="group grid h-8 place-items-center px-1.5"
+                onClick={() => setPaused((p) => !p)}
+                aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+                className="mr-2 grid size-8 place-items-center rounded-full border border-white/30 text-white transition hover:bg-white/10"
               >
-                <span
-                  className={cn(
-                    "block h-1.5 overflow-hidden rounded-full transition-all duration-500",
-                    i === index ? "w-8 bg-white/35" : "w-1.5 bg-white/45 group-hover:bg-white/80",
-                  )}
-                >
-                  {i === index && (
-                    <span
-                      key={`${index}-${running}`}
-                      className="block h-full rounded-full bg-gold-400"
-                      style={running ? { animation: `carousel-progress ${INTERVAL}ms linear forwards` } : { width: "100%" }}
-                    />
-                  )}
-                </span>
+                {paused ? <Play className="size-3.5 fill-current" aria-hidden /> : <Pause className="size-3.5 fill-current" aria-hidden />}
               </button>
-            ))}
+            )}
+            <div className="flex items-center" role="tablist" aria-label="Choose a slide">
+              {slides.map((slide, i) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === index}
+                  aria-label={`Slide ${i + 1} of ${slides.length}: ${slide.label}`}
+                  onClick={() => go(i)}
+                  className="group grid h-8 place-items-center px-1.5"
+                >
+                  <span
+                    className={cn(
+                      "block h-1.5 overflow-hidden rounded-full transition-all duration-500",
+                      i === index ? "w-8 bg-white/35" : "w-1.5 bg-white/45 group-hover:bg-white/80",
+                    )}
+                  >
+                    {i === index && (
+                      <span
+                        key={`${index}-${running}`}
+                        className="block h-full rounded-full bg-gold-400"
+                        style={running ? { animation: `carousel-progress ${INTERVAL}ms linear forwards` } : { width: "100%" }}
+                      />
+                    )}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

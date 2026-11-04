@@ -7,6 +7,7 @@ import { events } from "@/content/events";
 import { dateParts } from "@/lib/utils";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/events" },
   title: "Events",
   description: "Open days, public lectures, competitions and ceremonies at King Ceasor University.",
 };
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function EventsPage() {
   return (
     <>
-      <PageHero
+      <PageHero crumbs={[{ label: "Events" }]}
         eyebrow="What's on"
         title="Events at KCU"
         intro="Open days, public lectures, competitions and ceremonies. Everyone is welcome on Bunga Hill."

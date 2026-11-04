@@ -5,6 +5,7 @@ import { ProgrammeFinder } from "@/components/programme-finder";
 import { programmes } from "@/content/programmes";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/programmes" },
   title: "Find a Programme",
   description: "Search and compare degrees, diplomas and short courses at King Ceasor University.",
 };
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function ProgrammesPage() {
   return (
     <>
-      <PageHero
+      <PageHero crumbs={[{ label: "Programmes" }]}
         eyebrow="Study at KCU"
         title="Find your programme"
         intro={`Explore ${programmes.length} degrees, diplomas and professional courses across our three schools. Compare duration, fees and entry requirements in one place.`}

@@ -1,21 +1,29 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BadgeCheck, Briefcase, CalendarDays, CheckCircle2, Clock, GraduationCap, MapPin, Wallet } from "lucide-react";
+import { ArrowRight, BadgeCheck, Briefcase, CalendarDays, CheckCircle2, Clock, GraduationCap, MapPin, Wallet } from "lucide-react";
 import { Button, CtaBand, PageHero, Section, SectionHeading } from "@/components/ui";
-import { ProgrammeCard } from "@/components/cards";
+import { Avatar, ProgrammeCard, SampleLabel } from "@/components/cards";
+import { stories } from "@/content/stories";
 import { entryRequirements, getProgramme, levelLabels, programmes } from "@/content/programmes";
 import { getSchool } from "@/content/schools";
-import { site } from "@/content/site";
+import { site, whatsappLink } from "@/content/site";
+import { CurrencyToggle, FeeAmount } from "@/components/fee-amount";
+import { ShareButtons } from "@/components/share-buttons";
+import { AskAssistantButton } from "@/components/assistant/ask-button";
+import { BrandIcon } from "@/components/social-icons";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+import { courseJsonLd } from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return programmes.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/programmes/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/programmes/[slug]">) {
   const { slug } = await params;
   const programme = getProgramme(slug);
-  return programme ? { title: programme.title, description: programme.overview } : {};
+  if (!programme) return {};
+  return pageMeta({ title: programme.title, description: programme.overview, path: `/programmes/${programme.slug}`, image: getSchool(programme.school)?.image });
 }
 
 export default async function ProgrammePage({ params }: PageProps<"/programmes/[slug]">) {
@@ -23,6 +31,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
   const programme = getProgramme(slug);
   if (!programme) notFound();
   const school = getSchool(programme.school)!;
+  const story = stories.find((st) => st.programme === programme.slug);
   const related = programmes.filter((p) => p.school === programme.school && p.slug !== programme.slug && p.level === programme.level).slice(0, 3);
 
   const facts = [
@@ -34,14 +43,16 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
 
   return (
     <>
+      <JsonLd data={courseJsonLd(programme)} />
       <PageHero
+        crumbs={[{ label: "Programmes", href: "/programmes" }, { label: school.shortName, href: `/schools/${school.slug}` }, { label: programme.title }]}
         eyebrow={levelLabels[programme.level]}
         title={programme.title}
         intro={school.name}
         image={school.image}
       >
         <Button href={site.applyUrl} size="lg">Apply now</Button>
-        <Button href="/contact" variant="outline" size="lg" icon={false}>Ask a question</Button>
+        <Button href={`/programmes/compare?p=${programme.slug}`} variant="outline" size="lg" icon={false}>Compare</Button>
       </PageHero>
 
       <div className="border-b border-slate-100 bg-white">
@@ -67,7 +78,21 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
             </div>
             <div>
               <h2 className="text-2xl sm:text-3xl">Entry requirements</h2>
-              <ul className="mt-5 space-y-3">
+              {programme.subjects && (
+                <div className="mt-5 rounded-2xl bg-primary-50 p-5 ring-1 ring-primary-100 sm:p-6">
+                  <h3 className="text-base">Subject requirements for this programme</h3>
+                  <ul className="mt-3 space-y-2.5">
+                    {programme.subjects.map((r) => (
+                      <li key={r} className="flex gap-3">
+                        <BadgeCheck className="mt-1 size-5 shrink-0 text-primary-600" aria-hidden />
+                        <span className="text-ink">{r}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {programme.subjects && <p className="mt-6 font-semibold text-ink">And the general requirements for this level:</p>}
+              <ul className={programme.subjects ? "mt-3 space-y-3" : "mt-5 space-y-3"}>
                 {entryRequirements[programme.level].map((r) => (
                   <li key={r} className="flex gap-3">
                     <CheckCircle2 className="mt-1 size-5 shrink-0 text-slate-400" aria-hidden />
@@ -76,6 +101,29 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
                 ))}
               </ul>
             </div>
+            {programme.structure && (
+              <div>
+                <h2 className="text-2xl sm:text-3xl">What you will study</h2>
+                <ol className="mt-6 space-y-0">
+                  {programme.structure.map((step, i) => (
+                    <li key={step.stage} className="relative flex gap-5 pb-8 last:pb-0">
+                      {i < programme.structure!.length - 1 && <span className="absolute left-[1.0625rem] top-10 bottom-0 w-px bg-slate-200" aria-hidden />}
+                      <span className="heading grid size-9 shrink-0 place-items-center rounded-full bg-primary-600 text-sm text-white">{i + 1}</span>
+                      <div className="pt-1">
+                        <h3 className="text-lg">{step.stage}</h3>
+                        <p className="mt-1 text-slate-600">{step.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+            {programme.registration && (
+              <p className="flex gap-3 rounded-2xl border border-gold-200 bg-gold-50 p-5 text-ink">
+                <GraduationCap className="mt-0.5 size-5 shrink-0 text-gold-700" aria-hidden />
+                <span><strong className="font-semibold">After you graduate:</strong> {programme.registration}</span>
+              </p>
+            )}
             <div>
               <h2 className="text-2xl sm:text-3xl">Career opportunities</h2>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -87,19 +135,40 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
                 ))}
               </ul>
             </div>
+            <ShareButtons path={`/programmes/${programme.slug}`} title={`${programme.title} at King Ceasor University`} className="border-t border-slate-100 pt-6" />
           </div>
+
+          {story && (
+            <Link href={`/stories/${story.slug}`} className="group flex flex-col gap-5 rounded-2xl bg-primary-900 p-6 text-white transition hover:bg-primary-950 sm:flex-row sm:items-center sm:p-8 lg:order-last lg:col-span-8">
+              <Avatar name={story.name} tone="gold" className="size-16 text-xl" />
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="eyebrow text-gold-300">Hear from a student</p>
+                  {story.sample && <SampleLabel />}
+                </div>
+                <blockquote className="heading mt-2 text-xl leading-snug text-white sm:text-2xl">“{story.quote}”</blockquote>
+                <p className="mt-3 text-white/70">
+                  {story.name} · {story.stage}
+                </p>
+              </div>
+              <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-white">
+                Read {story.name.split(" ")[0]}&apos;s story <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+              </span>
+            </Link>
+          )}
 
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
-            <div className="rounded-2xl bg-slate-950 p-6 text-white sm:p-8">
+            <div className="rounded-2xl bg-primary-900 p-6 text-white sm:p-8">
               <div className="flex items-center gap-3">
                 <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-gold-400"><Wallet className="size-5" aria-hidden /></span>
                 <h2 className="text-xl text-white">Tuition fees</h2>
               </div>
+              <CurrencyToggle dark className="mt-5" />
               <dl className="mt-6 space-y-4">
                 <div className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-4">
                   <dt className="text-white/70">East African students</dt>
-                  <dd className="heading text-xl text-white">{programme.fees.local}</dd>
+                  <dd className="heading text-xl text-white"><FeeAmount fee={programme.fees.local} /></dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-4">
                   <dt className="text-white/70">International students</dt>
@@ -119,6 +188,12 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
                 <li><a href={site.contact.phoneHref} className="font-medium text-ink underline-offset-4 hover:underline">{site.contact.phone}</a></li>
                 <li><a href={`mailto:${site.contact.admissionsEmail}`} className="font-medium text-ink underline-offset-4 hover:underline">{site.contact.admissionsEmail}</a></li>
               </ul>
+              <div className="mt-5 grid gap-2">
+                <a href={whatsappLink(`Hello KCU, I have a question about the ${programme.title}.`)} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#25d366] px-5 text-sm font-semibold text-white transition hover:bg-[#1ebe5b]">
+                  <BrandIcon name="whatsapp" className="size-4" /> Ask on WhatsApp
+                </a>
+                <AskAssistantButton question={`Entry requirements for ${programme.title}`}>Ask the KCU Assistant</AskAssistantButton>
+              </div>
               <p className="mt-4 flex items-start gap-2 border-t border-slate-100 pt-4 text-sm text-slate-600">
                 <BadgeCheck className="mt-0.5 size-4 shrink-0 text-slate-500" aria-hidden />
                 Accredited by the National Council for Higher Education (NCHE).

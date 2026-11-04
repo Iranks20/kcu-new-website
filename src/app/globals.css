@@ -109,8 +109,13 @@
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
 .reveal.is-visible { opacity: 1; transform: none; }
 
+/* Page-to-page crossfade (React <ViewTransition> in the root layout) */
+::view-transition-old(*),
+::view-transition-new(*) { animation-duration: 220ms; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
   .reveal { opacity: 1; transform: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

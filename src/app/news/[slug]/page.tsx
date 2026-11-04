@@ -1,21 +1,23 @@
-import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import { Badge, Section, SectionHeading } from "@/components/ui";
 import { NewsCard } from "@/components/cards";
 import { getArticle, news } from "@/content/news";
 import { asset, formatDate } from "@/lib/utils";
+import { JsonLd } from "@/components/json-ld";
+import { articleJsonLd } from "@/lib/structured-data";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { ShareButtons } from "@/components/share-buttons";
+import { pageMeta } from "@/lib/seo";
 
 export function generateStaticParams() {
   return news.map((n) => ({ slug: n.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/news/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/news/[slug]">) {
   const { slug } = await params;
   const a = getArticle(slug);
-  return a ? { title: a.title, description: a.excerpt, openGraph: a.image ? { images: [asset(a.image)] } : undefined } : {};
+  return a ? pageMeta({ title: a.title, description: a.excerpt, path: `/news/${a.slug}`, image: a.image }) : {};
 }
 
 export default async function ArticlePage({ params }: PageProps<"/news/[slug]">) {
@@ -26,12 +28,11 @@ export default async function ArticlePage({ params }: PageProps<"/news/[slug]">)
 
   return (
     <>
+      <JsonLd data={articleJsonLd(article)} />
       <article>
         <header className="container-x max-w-4xl pt-10 sm:pt-14">
-          <Link href="/news" className="inline-flex items-center gap-2 text-sm font-semibold text-ink underline-offset-4 hover:underline">
-            <ArrowLeft className="size-4" aria-hidden /> All news
-          </Link>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Breadcrumbs items={[{ label: "News", href: "/news" }, { label: article.category }]} />
+          <div className="mt-2 flex flex-wrap items-center gap-3">
             <Badge>{article.category}</Badge>
             <time dateTime={article.date} className="text-sm text-slate-500">{formatDate(article.date)}</time>
           </div>
@@ -57,6 +58,7 @@ export default async function ArticlePage({ params }: PageProps<"/news/[slug]">)
                 <a href={article.externalUrl} target="_blank" rel="noopener noreferrer">Read more ↗</a>
               </p>
             )}
+            <ShareButtons path={`/news/${article.slug}`} title={article.title} className="not-prose mt-10 border-t border-slate-100 pt-6" />
           </div>
           {article.highlights && article.highlights.length > 0 && (
             <aside className="lg:col-span-4">

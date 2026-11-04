@@ -6,7 +6,8 @@ import type { UniEvent } from "@/content/events";
 import type { Person } from "@/content/people";
 import { levelLabels, type Programme } from "@/content/programmes";
 import { schools } from "@/content/schools";
-import { asset, dateParts, formatDate, initials } from "@/lib/utils";
+import type { StudentStory } from "@/content/stories";
+import { asset, cn, dateParts, formatDate, initials } from "@/lib/utils";
 import { Badge } from "./ui";
 
 export function NewsCard({ article, featured = false }: { article: NewsArticle; featured?: boolean }) {
@@ -86,7 +87,7 @@ export function ProgrammeCard({ programme }: { programme: Programme }) {
           <p className="text-xs text-slate-500">Tuition per {programme.fees.per}</p>
           <p className="font-semibold text-ink">{programme.fees.local}</p>
         </div>
-        <span className="grid size-9 place-items-center rounded-full bg-slate-50 text-ink transition group-hover:bg-ink group-hover:text-white">
+        <span className="grid size-9 place-items-center rounded-full bg-slate-50 text-ink transition group-hover:bg-primary-600 group-hover:text-white">
           <ArrowRight className="size-4" aria-hidden />
         </span>
       </div>
@@ -117,5 +118,51 @@ export function PersonCard({ person }: { person: Person }) {
         <p className="mt-1 text-sm text-slate-500">{person.role}</p>
       </figcaption>
     </figure>
+  );
+}
+
+/** Initials in a brand-green circle, for people without a photo (and for illustrative profiles). */
+export function Avatar({ name, tone = "green", className }: { name: string; tone?: "green" | "gold"; className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "heading grid size-12 shrink-0 place-items-center rounded-full text-base ring-4",
+        tone === "green" ? "bg-primary-600 text-white ring-white" : "bg-gold-400 text-ink ring-white/20",
+        className,
+      )}
+    >
+      {initials(name)}
+    </span>
+  );
+}
+
+/** Marks placeholder people and stories so they are never mistaken for real testimonials. */
+export function SampleLabel({ className }: { className?: string }) {
+  return (
+    <span className={cn("inline-flex items-center rounded-full bg-gold-100 px-2.5 py-0.5 text-xs font-semibold text-gold-700", className)} title="An illustrative profile, to be replaced with a real student story">
+      Illustrative profile
+    </span>
+  );
+}
+
+export function StoryCard({ story }: { story: StudentStory }) {
+  return (
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-lift">
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <Image src={asset(story.image)} alt={story.imageAlt} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+        {story.sample && <SampleLabel className="absolute left-4 top-4" />}
+      </div>
+      <div className="relative flex flex-1 flex-col p-6">
+        <Avatar name={story.name} className="-mt-12" />
+        <blockquote className="heading mt-4 flex-1 text-lg leading-snug text-ink">“{story.quote}”</blockquote>
+        <div className="mt-5 border-t border-slate-100 pt-4">
+          <h3 className="text-base">
+            <Link href={`/stories/${story.slug}`} className="after:absolute after:inset-0">{story.name}</Link>
+          </h3>
+          <p className="text-sm text-slate-500">{story.stage} · {story.from}</p>
+        </div>
+      </div>
+    </article>
   );
 }
