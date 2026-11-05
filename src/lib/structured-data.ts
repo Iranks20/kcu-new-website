@@ -22,6 +22,7 @@ export function universityJsonLd() {
     description: site.description,
     email: site.contact.email,
     telephone: site.contact.phone.replace(/\s/g, ""),
+    contactPoint: [site.contact.phone, site.contact.phone2].map((t) => ({ "@type": "ContactPoint", telephone: t.replace(/\s/g, ""), contactType: "customer service", areaServed: "UG" })),
     address: {
       "@type": "PostalAddress",
       streetAddress: "Plot 32 Ggaba Road, Bunga Hill",

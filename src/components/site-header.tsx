@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, ChevronDown, Menu, Phone, X } from "lucide-react";
-import { mainNav } from "@/content/navigation";
+import { ArrowRight, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import { audienceLinks, mainNav } from "@/content/navigation";
 import { SiteSearch } from "./site-search";
 import { portals, site } from "@/content/site";
 import { cn, isExternal } from "@/lib/utils";
@@ -63,12 +63,16 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Utility bar — live site gold #ffc66b */}
-      <div className="hidden bg-[#ffc66b] text-[0.8125rem] text-black/80 lg:block">
+      {/* Utility bar: pale KCU gold with a gold rule, so the brand shows without shouting. */}
+      <div className="hidden border-b border-gold-200 bg-gold-50 print:!hidden text-[0.8125rem] text-ink/80 lg:block">
         <div className="container-x flex h-9 items-center justify-between">
-          <a href={site.contact.phoneHref} className="flex items-center gap-1.5 font-medium transition-colors hover:text-black">
-            <Phone className="size-3.5" aria-hidden /> {site.contact.phone}
-          </a>
+          <ul className="flex items-center gap-5" aria-label="Information for">
+            {audienceLinks.map((a) => (
+              <li key={a.href}>
+                <Link href={a.href} className="font-medium transition-colors hover:text-black">{a.label}</Link>
+              </li>
+            ))}
+          </ul>
           <ul className="flex items-center divide-x divide-black/15">
             {portals.slice(0, 3).map((p) => (
               <li key={p.href} className="px-4">
@@ -88,7 +92,7 @@ export function SiteHeader() {
       </div>
 
       <header
-        className={cn("sticky top-0 z-50 border-b bg-white transition-shadow duration-300", scrolled ? "border-slate-200 shadow-[0_6px_24px_-12px_rgb(15_23_42/0.14)]" : "border-slate-100")}
+        className={cn("sticky top-0 z-50 border-b bg-white print:hidden transition-shadow duration-300", scrolled ? "border-slate-200 shadow-[0_6px_24px_-12px_rgb(15_23_42/0.14)]" : "border-slate-100")}
         onMouseLeave={scheduleClose}
       >
         <div className="container-x flex h-[4.5rem] items-center justify-between gap-8 xl:h-20">
@@ -167,7 +171,7 @@ export function SiteHeader() {
                   Explore {item.label.toLowerCase()} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
                 </Link>
               </div>
-              <div className={cn("grid gap-10", item.feature ? "col-span-5 grid-cols-2" : "col-span-9 grid-cols-3")}>
+              <div className={cn("grid gap-10", item.feature ? (item.columns.length > 2 ? "col-span-6 grid-cols-3 gap-8" : "col-span-5 grid-cols-2") : "col-span-9 grid-cols-3")}>
                 {item.columns.map((col) => (
                   <div key={col.title}>
                     <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">{col.title}</p>
@@ -184,7 +188,7 @@ export function SiteHeader() {
                 ))}
               </div>
               {item.feature && (
-                <Link href={item.feature.href} onClick={closeAll} className="group col-span-4 block">
+                <Link href={item.feature.href} onClick={closeAll} className={cn("group block", item.columns.length > 2 ? "col-span-3" : "col-span-4")}>
                   <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-surface">
                     <Image src={item.feature.image} alt="" fill sizes="400px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
@@ -254,7 +258,15 @@ export function SiteHeader() {
             ))}
           </ul>
           <div className="mt-6 border-t border-slate-100 pt-6">
-            <p className="px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Portals</p>
+            <p className="px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Information for</p>
+            <ul className="mt-3 grid grid-cols-2 gap-2">
+              {audienceLinks.map((a) => (
+                <li key={a.href}>
+                  <Link href={a.href} onClick={closeAll} className="block rounded-lg bg-surface px-3 py-3 text-sm font-medium text-slate-700">{a.label}</Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Portals</p>
             <ul className="mt-3 grid grid-cols-2 gap-2">
               {portals.map((p) => (
                 <li key={p.href}>

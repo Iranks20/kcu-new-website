@@ -12,6 +12,8 @@ import { ShareButtons } from "@/components/share-buttons";
 import { AskAssistantButton } from "@/components/assistant/ask-button";
 import { BrandIcon } from "@/components/social-icons";
 import { pageMeta } from "@/lib/seo";
+import { SimpleForm } from "@/components/simple-form";
+import { intakes } from "@/content/university";
 import { JsonLd } from "@/components/json-ld";
 import { courseJsonLd } from "@/lib/structured-data";
 
@@ -53,6 +55,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
       >
         <Button href={site.applyUrl} size="lg">Apply now</Button>
         <Button href={`/programmes/compare?p=${programme.slug}`} variant="outline" size="lg" icon={false}>Compare</Button>
+        <Button href={`/programmes/${programme.slug}/brochure`} variant="outline" size="lg" icon={false}>Brochure (PDF)</Button>
       </PageHero>
 
       <div className="border-b border-slate-100 bg-white">
@@ -139,19 +142,19 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
           </div>
 
           {story && (
-            <Link href={`/stories/${story.slug}`} className="group flex flex-col gap-5 rounded-2xl bg-primary-900 p-6 text-white transition hover:bg-primary-950 sm:flex-row sm:items-center sm:p-8 lg:order-last lg:col-span-8">
+            <Link href={`/stories/${story.slug}`} className="group flex flex-col gap-5 rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink transition hover:bg-brand-100 sm:flex-row sm:items-center sm:p-8 lg:order-last lg:col-span-8">
               <Avatar name={story.name} tone="gold" className="size-16 text-xl" />
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="eyebrow text-gold-300">Hear from a student</p>
+                  <p className="eyebrow">Hear from a student</p>
                   {story.sample && <SampleLabel />}
                 </div>
-                <blockquote className="heading mt-2 text-xl leading-snug text-white sm:text-2xl">“{story.quote}”</blockquote>
-                <p className="mt-3 text-white/70">
+                <blockquote className="heading mt-2 text-xl leading-snug text-ink sm:text-2xl">“{story.quote}”</blockquote>
+                <p className="mt-3 text-slate-600">
                   {story.name} · {story.stage}
                 </p>
               </div>
-              <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-white">
+              <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-ink">
                 Read {story.name.split(" ")[0]}&apos;s story <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
               </span>
             </Link>
@@ -159,26 +162,26 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
 
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
-            <div className="rounded-2xl bg-primary-900 p-6 text-white sm:p-8">
+            <div className="rounded-2xl border border-slate-200 border-t-4 border-t-primary-600 bg-white p-6 shadow-card sm:p-8">
               <div className="flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-gold-400"><Wallet className="size-5" aria-hidden /></span>
-                <h2 className="text-xl text-white">Tuition fees</h2>
+                <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-primary-600"><Wallet className="size-5" aria-hidden /></span>
+                <h2 className="text-xl text-ink">Tuition fees</h2>
               </div>
-              <CurrencyToggle dark className="mt-5" />
+              <CurrencyToggle className="mt-5" />
               <dl className="mt-6 space-y-4">
-                <div className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-4">
-                  <dt className="text-white/70">East African students</dt>
-                  <dd className="heading text-xl text-white"><FeeAmount fee={programme.fees.local} /></dd>
+                <div className="flex items-baseline justify-between gap-4 border-b border-brand-100 pb-4">
+                  <dt className="text-slate-600">East African students</dt>
+                  <dd className="heading whitespace-nowrap text-xl text-ink"><FeeAmount fee={programme.fees.local} /></dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-4">
-                  <dt className="text-white/70">International students</dt>
-                  <dd className="heading text-xl text-white">{programme.fees.international}</dd>
+                <div className="flex items-baseline justify-between gap-4 border-b border-brand-100 pb-4">
+                  <dt className="text-slate-600">International students</dt>
+                  <dd className="heading whitespace-nowrap text-xl text-ink">{programme.fees.international}</dd>
                 </div>
               </dl>
-              <p className="mt-4 text-sm text-white/60">Per {programme.fees.per}. Instalment plans and HESFB student loans available.</p>
+              <p className="mt-4 text-sm text-slate-600">Per {programme.fees.per}. Instalment plans and HESFB student loans available.</p>
               <div className="mt-6 grid gap-3">
-                <Button href={site.applyUrl} variant="white" className="w-full">Start your application</Button>
-                <Link href="/admissions#fees" className="text-center text-sm font-semibold text-white/80 hover:text-white">See full fees & funding</Link>
+                <Button href={site.applyUrl} className="w-full">Start your application</Button>
+                <Link href="/admissions#fees" className="text-center text-sm font-semibold text-slate-600 hover:text-ink">See full fees & funding</Link>
               </div>
             </div>
             <div className="mt-4 rounded-2xl border border-slate-200 p-6">
@@ -186,6 +189,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
               <p className="mt-1 text-sm text-slate-600">Get help choosing, applying or paying fees. {site.contact.hours}.</p>
               <ul className="mt-4 space-y-2 text-[0.9375rem]">
                 <li><a href={site.contact.phoneHref} className="font-medium text-ink underline-offset-4 hover:underline">{site.contact.phone}</a></li>
+                <li><a href={site.contact.phone2Href} className="font-medium text-ink underline-offset-4 hover:underline">{site.contact.phone2}</a></li>
                 <li><a href={`mailto:${site.contact.admissionsEmail}`} className="font-medium text-ink underline-offset-4 hover:underline">{site.contact.admissionsEmail}</a></li>
               </ul>
               <div className="mt-5 grid gap-2">
@@ -204,8 +208,36 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
         </div>
       </Section>
 
+      <Section tone="surface" id="request-info">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <p className="eyebrow mb-3">Request information</p>
+            <h2 className="text-3xl sm:text-4xl">Get the details by email</h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Leave your details and an admissions adviser will send you the full programme information, fees and next intake dates for the {programme.title}.
+            </p>
+            <p className="mt-4 text-slate-600">Prefer a printed copy? <Link href={`/programmes/${programme.slug}/brochure`} className="font-semibold text-ink underline underline-offset-4">Download the brochure</Link>.</p>
+          </div>
+          <div className="lg:col-span-7">
+            <SimpleForm
+              submitLabel="Send me information"
+              successTitle="Thank you"
+              successText={`An admissions adviser will email you about the ${programme.title} within one working day.`}
+              fields={[
+                { name: "name", label: "Full name", required: true, autoComplete: "name" },
+                { name: "email", label: "Email address", type: "email", required: true, autoComplete: "email" },
+                { name: "phone", label: "Phone or WhatsApp", type: "tel", autoComplete: "tel" },
+                { name: "country", label: "Country", autoComplete: "country-name" },
+                { name: "intake", label: "Preferred intake", type: "select", options: intakes.map((i) => i.name), required: true, full: true },
+                { name: "message", label: "Questions (optional)", type: "textarea" },
+              ]}
+            />
+          </div>
+        </div>
+      </Section>
+
       {related.length > 0 && (
-        <Section tone="surface">
+        <Section>
           <SectionHeading title="Related programmes" />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((p) => (

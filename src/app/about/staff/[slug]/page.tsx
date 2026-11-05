@@ -119,25 +119,25 @@ export default async function StaffProfilePage({ params }: PageProps<"/about/sta
           </div>
 
           <aside className="lg:col-span-4">
-            <div className="rounded-2xl bg-primary-900 p-6 text-white sm:p-7 lg:sticky lg:top-28">
-              <h2 className="text-xl text-white">Contact</h2>
+            <div className="rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink sm:p-7 lg:sticky lg:top-28">
+              <h2 className="text-xl text-ink">Contact</h2>
               <ul className="mt-5 space-y-4 text-[0.9375rem]">
                 <li className="flex gap-3">
-                  <Building2 className="mt-0.5 size-5 shrink-0 text-gold-400" aria-hidden />
-                  <span className="text-white/85">{details?.contact.office ?? `${person.unit}, Main Campus, Bunga Hill`}</span>
+                  <Building2 className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
+                  <span className="text-slate-600">{details?.contact.office ?? `${person.unit}, Main Campus, Bunga Hill`}</span>
                 </li>
                 <li className="flex gap-3">
-                  <Mail className="mt-0.5 size-5 shrink-0 text-gold-400" aria-hidden />
+                  <Mail className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
                   <a href={`mailto:${details?.contact.email ?? site.contact.email}?subject=${encodeURIComponent(`For the attention of ${person.name}`)}`} className="font-semibold underline-offset-4 hover:underline">
                     {details?.contact.email ?? site.contact.email}
                   </a>
                 </li>
                 <li className="flex gap-3">
-                  <Phone className="mt-0.5 size-5 shrink-0 text-gold-400" aria-hidden />
+                  <Phone className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />
                   <a href={site.contact.phoneHref} className="font-semibold underline-offset-4 hover:underline">{site.contact.phone}</a>
                 </li>
               </ul>
-              <p className="mt-5 border-t border-white/10 pt-4 text-sm text-white/60">Write &ldquo;For the attention of {person.name}&rdquo; and the office will forward your message.</p>
+              <p className="mt-5 border-t border-brand-100 pt-4 text-sm text-slate-600">Write &ldquo;For the attention of {person.name}&rdquo; and the office will forward your message.</p>
             </div>
           </aside>
         </div>

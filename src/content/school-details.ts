@@ -33,7 +33,7 @@ export type SchoolDetails = {
 };
 
 const contactBase = {
-  phone: "+256 200 911 450",
+  phone: "+256 200 911 450 · +256 394 716 326",
   phoneHref: "tel:+256200911450",
   hours: "Monday – Friday, 8:00 AM – 5:00 PM",
 };

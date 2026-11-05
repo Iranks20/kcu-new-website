@@ -76,10 +76,10 @@ export const funding = [
 ];
 
 export const newsletters = [
-  { title: "September 2026 Journal · Issue 08", file: "/newsletter/SEPTEMBER Journal Issue 08.pdf", date: "September 2026" },
-  { title: "Weekly Newsletter · Issue 7", file: "/newsletter/WEEKLY NEWSLETTER 7 ISSUE.pdf", date: "August 2026" },
-  { title: "July 2026 Journal", file: "/newsletter/JULY Journal 4 v-2.pdf", date: "July 2026" },
-  { title: "June 2026 Journal", file: "/newsletter/JUNE Journal 4 v-6.pdf", date: "June 2026" },
+  { title: "September 2026 Journal · Issue 08", file: "/newsletter/SEPTEMBER Journal Issue 08.pdf", size: "26 MB", date: "September 2026" },
+  { title: "Weekly Newsletter · Issue 7", file: "/newsletter/WEEKLY NEWSLETTER 7 ISSUE.pdf", size: "2 MB", date: "August 2026" },
+  { title: "July 2026 Journal", file: "/newsletter/JULY Journal 4 v-2.pdf", size: "25 MB", date: "July 2026" },
+  { title: "June 2026 Journal", file: "/newsletter/JUNE Journal 4 v-6.pdf", size: "10 MB", date: "June 2026" },
 ];
 
 /** Credentials shown wherever applicants decide whether to trust us. */

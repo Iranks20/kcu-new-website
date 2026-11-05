@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { ViewTransition } from "react";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
+import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileApplyBar } from "@/components/mobile-apply-bar";
 import { ChatAssistant } from "@/components/assistant/chat-assistant";
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:shadow-lift">
           Skip to content
         </a>
+        <AnnouncementBar />
         <SiteHeader />
         <main id="main">
           {/* Route changes update this boundary, so React crossfades the page content while the header stays put. */}

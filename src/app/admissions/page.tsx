@@ -110,12 +110,12 @@ export default function AdmissionsPage() {
         <SectionHeading eyebrow="Intakes & key dates" title="When you can start" intro="We admit students three times a year. Dates are indicative and confirmed by the Academic Registrar." action={<Link href="/academic-calendar" className="font-semibold text-ink underline-offset-4 hover:underline">Full academic calendar →</Link>} />
         <div className="grid gap-5 lg:grid-cols-3">
           {intakes.map((intake, i) => (
-            <div key={intake.name} className={i === 0 ? "rounded-2xl bg-primary-900 p-6 text-white shadow-lift sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
+            <div key={intake.name} className={i === 0 ? "rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink shadow-lift sm:p-8" : "rounded-2xl border border-slate-200 p-6 sm:p-8"}>
               <div className="flex items-center justify-between gap-3">
-                <CalendarDays className={i === 0 ? "size-6 text-gold-400" : "size-6 text-slate-500"} aria-hidden />
+                <CalendarDays className={i === 0 ? "size-6 text-primary-600" : "size-6 text-slate-500"} aria-hidden />
                 <Badge tone={i === 0 ? "gold" : "slate"}>{intake.status}</Badge>
               </div>
-              <h3 className={i === 0 ? "mt-5 text-xl text-white" : "mt-5 text-xl"}>{intake.name}</h3>
+              <h3 className={i === 0 ? "mt-5 text-xl text-ink" : "mt-5 text-xl"}>{intake.name}</h3>
               <dl className="mt-5 space-y-2.5 text-[0.9375rem]">
                 {[
                   ["Applications open", intake.opens],
@@ -123,7 +123,7 @@ export default function AdmissionsPage() {
                   ["Classes begin", intake.starts],
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-4">
-                    <dt className={i === 0 ? "text-white/70" : "text-slate-500"}>{k}</dt>
+                    <dt className={i === 0 ? "text-slate-600" : "text-slate-500"}>{k}</dt>
                     <dd className="font-semibold">{v}</dd>
                   </div>
                 ))}
@@ -209,21 +209,21 @@ export default function AdmissionsPage() {
       </Section>
 
       {/* International */}
-      <section id="international" className="bg-primary-900 text-white">
+      <section id="international" className="bg-brand-50">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[20rem]">
             <Image src="/images/kcu-2026/graduates-welcome-group.webp" alt="KCU students from across Africa" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>
           <div className="px-4 py-16 sm:px-12 lg:px-16 lg:py-24">
-            <Globe2 className="size-10 text-gold-400" aria-hidden />
-            <h2 className="mt-5 text-3xl text-white sm:text-4xl">International students</h2>
-            <p className="mt-4 text-lg text-white/75">
+            <Globe2 className="size-10 text-primary-600" aria-hidden />
+            <h2 className="mt-5 text-3xl text-ink sm:text-4xl">International students</h2>
+            <p className="mt-4 text-lg text-slate-600">
               KCU welcomes students from across Africa and beyond. International fees are charged in US dollars, foreign qualifications are
               equated through UNEB and NCHE, and the Office of the Dean of Students supports you with immigration, accommodation and settling in.
             </p>
-            <ul className="mt-6 space-y-2.5 text-white/85">
+            <ul className="mt-6 space-y-2.5 text-slate-600">
               {["Equated results from UNEB / NCHE", "Valid passport and student pass guidance", "Evidence of English proficiency where needed"].map((t) => (
-                <li key={t} className="flex gap-3"><CheckCircle2 className="mt-0.5 size-5 shrink-0 text-gold-400" aria-hidden />{t}</li>
+                <li key={t} className="flex gap-3"><CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary-600" aria-hidden />{t}</li>
               ))}
             </ul>
             <div className="mt-8">

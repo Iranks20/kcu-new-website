@@ -7,6 +7,14 @@ export type NavItem = {
   feature?: { title: string; text: string; href: string; image: string };
 };
 
+/** Audience shortcuts in the top bar and mobile menu. Each link lives in one place in the main menus below. */
+export const audienceLinks: NavLink[] = [
+  { label: "Current students", href: "/students" },
+  { label: "Parents & sponsors", href: "/parents" },
+  { label: "Alumni", href: "/alumni" },
+  { label: "Staff", href: "/about/staff" },
+];
+
 export const mainNav: NavItem[] = [
   {
     label: "Study",
@@ -22,7 +30,6 @@ export const mainNav: NavItem[] = [
           { label: "Bridging certificates", href: "/programmes?level=hec" },
           { label: "Short courses", href: "/programmes?level=certificate" },
           { label: "Compare programmes", href: "/programmes/compare" },
-          { label: "Postgraduate (coming soon)", href: "/postgraduate" },
         ],
       },
       {
@@ -50,11 +57,11 @@ export const mainNav: NavItem[] = [
       {
         title: "Apply",
         links: [
+          { label: "January 2027 intake", href: "/intake" },
           { label: "How to apply", href: "/admissions#apply" },
           { label: "Entry requirements", href: "/admissions#requirements" },
           { label: "Intakes & key dates", href: "/admissions#intakes" },
-          { label: "Academic calendar", href: "/academic-calendar" },
-          { label: "Visit campus", href: "/visit" },
+          { label: "Track my application", href: "/admissions/track" },
           { label: "Apply online", href: "https://apply.kcu.ac.ug/" },
         ],
       },
@@ -65,14 +72,22 @@ export const mainNav: NavItem[] = [
           { label: "Fees calculator", href: "/admissions#calculator" },
           { label: "Scholarships & funding", href: "/scholarships" },
           { label: "International students", href: "/international" },
-          { label: "Admissions FAQs", href: "/admissions#faqs" },
+          { label: "Parents & sponsors", href: "/parents" },
+        ],
+      },
+      {
+        title: "Visit",
+        links: [
+          { label: "Visit campus", href: "/visit" },
+          { label: "Virtual tour", href: "/visit/virtual-tour" },
+          { label: "Campus map", href: "/visit/campus-map" },
         ],
       },
     ],
     feature: {
       title: "January 2027 intake",
       text: "Applications close 18 December 2026.",
-      href: "/admissions#intakes",
+      href: "/intake",
       image: "/images/kcu-2026/graduates-best-of-best.webp",
     },
   },
@@ -85,13 +100,9 @@ export const mainNav: NavItem[] = [
         title: "Research & innovation",
         links: [
           { label: "Research at KCU", href: "/research" },
-          { label: "Focus areas", href: "/research#areas" },
-          { label: "Research groups", href: "/research#centres" },
-          { label: "Projects & awards", href: "/research#projects" },
+          { label: "Research groups & projects", href: "/research#centres" },
           { label: "Publications", href: "/research#publications" },
-          { label: "Partnerships", href: "/research#partners" },
-          { label: "Collaborate with us", href: "/research#collaborate" },
-          { label: "Library", href: "https://library.kcu.ac.ug/" },
+          { label: "Partner with us", href: "/research#collaborate" },
         ],
       },
     ],
@@ -111,20 +122,18 @@ export const mainNav: NavItem[] = [
         title: "Student life",
         links: [
           { label: "Life at KCU", href: "/campus-life" },
-          { label: "Visit & campus tour", href: "/visit" },
-          { label: "Virtual tour", href: "/visit/virtual-tour" },
           { label: "Student stories", href: "/stories" },
           { label: "Student Guild", href: "/campus-life#guild" },
           { label: "Clubs & sports", href: "/campus-life#clubs" },
-          { label: "Gallery", href: "/gallery" },
         ],
       },
       {
         title: "Support",
         links: [
+          { label: "Current students", href: "/students" },
           { label: "Student support", href: "/campus-life#support" },
           { label: "Accommodation", href: "/campus-life#accommodation" },
-          { label: "K-Class e-learning", href: "https://vclass.kcu.ac.ug/" },
+          { label: "Library", href: "/library" },
         ],
       },
     ],
@@ -140,7 +149,6 @@ export const mainNav: NavItem[] = [
           { label: "Latest news", href: "/news" },
           { label: "Upcoming events", href: "/events" },
           { label: "Academic calendar", href: "/academic-calendar" },
-          { label: "Gallery", href: "/gallery" },
           { label: "Press & media", href: "/press" },
         ],
       },
@@ -156,14 +164,15 @@ export const mainNav: NavItem[] = [
         links: [
           { label: "About KCU", href: "/about" },
           { label: "Vice Chancellor's message", href: "/about#vice-chancellor" },
-          { label: "Charter & accreditation", href: "/about#accreditation" },
+          { label: "Facts & figures", href: "/about/facts" },
           { label: "Leadership & governance", href: "/about/leadership" },
-          { label: "Staff directory", href: "/about/staff" },
+          { label: "Policies & strategic plan", href: "/about/facts#policies" },
         ],
       },
       {
         title: "Connect",
         links: [
+          { label: "Staff directory", href: "/about/staff" },
           { label: "Alumni", href: "/alumni" },
           { label: "Careers at KCU", href: "/careers" },
           { label: "Contact us", href: "/contact" },
@@ -179,23 +188,23 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "Find a programme", href: "/programmes" },
       { label: "Compare programmes", href: "/programmes/compare" },
+      { label: "Postgraduate study", href: "/postgraduate" },
       { label: "How to apply", href: "/admissions#apply" },
-      { label: "Entry requirements", href: "/admissions#requirements" },
       { label: "Fees & funding", href: "/admissions#fees" },
       { label: "Scholarships", href: "/scholarships" },
-      { label: "Academic calendar", href: "/academic-calendar" },
       { label: "International students", href: "/international" },
+      { label: "Parents & sponsors", href: "/parents" },
     ],
   },
   {
     title: "University",
     links: [
       { label: "About KCU", href: "/about" },
+      { label: "Facts & figures", href: "/about/facts" },
       { label: "Our schools", href: "/schools" },
       { label: "Research", href: "/research" },
       { label: "Leadership", href: "/about/leadership" },
       { label: "Staff directory", href: "/about/staff" },
-      { label: "Alumni", href: "/alumni" },
       { label: "Careers", href: "/careers" },
       { label: "Press & media", href: "/press" },
     ],
@@ -203,14 +212,14 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
   {
     title: "Community",
     links: [
+      { label: "Current students", href: "/students" },
+      { label: "Academic calendar", href: "/academic-calendar" },
+      { label: "Library", href: "/library" },
       { label: "Campus life", href: "/campus-life" },
-      { label: "Visit campus", href: "/visit" },
-      { label: "Virtual tour", href: "/visit/virtual-tour" },
-      { label: "Student stories", href: "/stories" },
-      { label: "News", href: "/news" },
-      { label: "Events", href: "/events" },
+      { label: "Visit & campus map", href: "/visit" },
+      { label: "Alumni", href: "/alumni" },
+      { label: "News & events", href: "/news" },
       { label: "Gallery", href: "/gallery" },
-      { label: "Contact", href: "/contact" },
     ],
   },
 ];

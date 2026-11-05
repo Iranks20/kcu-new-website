@@ -72,16 +72,16 @@ export default function AcademicCalendarPage() {
 
           <aside className="lg:col-span-4">
             <div className="space-y-4 lg:sticky lg:top-28">
-              <div className="rounded-2xl bg-primary-900 p-6 text-white sm:p-7">
+              <div className="rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink sm:p-7">
                 <div className="flex items-center gap-3">
-                  <span className="grid size-10 place-items-center rounded-xl bg-white/10 text-gold-400"><CalendarDays className="size-5" aria-hidden /></span>
-                  <h2 className="text-xl text-white">Intakes</h2>
+                  <span className="grid size-10 place-items-center rounded-xl bg-white text-primary-600"><CalendarDays className="size-5" aria-hidden /></span>
+                  <h2 className="text-xl text-ink">Intakes</h2>
                 </div>
                 <ul className="mt-5 space-y-4">
                   {intakes.map((i) => (
-                    <li key={i.name} className="border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                    <li key={i.name} className="border-b border-brand-100 pb-4 last:border-0 last:pb-0">
                       <p className="font-semibold">{i.name}</p>
-                      <p className="mt-1 text-sm text-white/70">Applications close {i.closes} · Starts {i.starts}</p>
+                      <p className="mt-1 text-sm text-slate-600">Applications close {i.closes} · Starts {i.starts}</p>
                     </li>
                   ))}
                 </ul>

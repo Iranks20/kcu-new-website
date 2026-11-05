@@ -19,8 +19,10 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export default function ContactPage() {
   const channels = [
     { icon: Phone, title: "Call us", value: site.contact.phone, href: site.contact.phoneHref },
+    { icon: Phone, title: "Call us (second line)", value: site.contact.phone2, href: site.contact.phone2Href },
     { icon: WhatsAppIcon, title: "WhatsApp", value: site.whatsapp.display, href: whatsappLink() },
     { icon: Mail, title: "General enquiries", value: site.contact.email, href: `mailto:${site.contact.email}` },
+    { icon: Mail, title: "Information", value: site.contact.email2, href: `mailto:${site.contact.email2}` },
     { icon: Mail, title: "Admissions", value: site.contact.admissionsEmail, href: `mailto:${site.contact.admissionsEmail}` },
   ];
 
@@ -28,7 +30,7 @@ export default function ContactPage() {
     <>
       <PageHero crumbs={[{ label: "Contact" }]} eyebrow="Contact" title="We'd love to hear from you" intro="Questions about programmes, fees or visiting campus? Our team is happy to help." image="/images/home/campus-welcome.webp" />
       <Section>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {channels.map((c) => (
             <a
               key={c.title}
@@ -45,15 +47,15 @@ export default function ContactPage() {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-col gap-4 rounded-2xl bg-primary-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div className="mt-6 flex flex-col gap-4 rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div className="flex gap-4">
             <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-gold-400 text-ink"><Sparkles className="size-6" aria-hidden /></span>
             <div>
               <p className="text-lg font-semibold">Get an answer right now</p>
-              <p className="mt-1 text-white/75">The KCU Assistant answers questions about programmes, fees, requirements and intakes, day or night.</p>
+              <p className="mt-1 text-slate-600">The KCU Assistant answers questions about programmes, fees, requirements and intakes, day or night.</p>
             </div>
           </div>
-          <AskAssistantButton variant="light" className="shrink-0">Ask the KCU Assistant</AskAssistantButton>
+          <AskAssistantButton variant="outline" className="shrink-0">Ask the KCU Assistant</AskAssistantButton>
         </div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-12">

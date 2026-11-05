@@ -14,7 +14,7 @@ const legalLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-primary-950 text-primary-100">
+    <footer className="bg-primary-950 text-primary-100 print:hidden">
       <div className="container-x grid grid-cols-1 gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-4">
           <Image src="/brand/kcu-logo-light.png" alt="King Ceasor University" width={560} height={210} className="h-14 w-auto" />
@@ -57,11 +57,17 @@ export function SiteFooter() {
             </li>
             <li className="flex gap-3">
               <Phone className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden />
-              <a href={site.contact.phoneHref} className="hover:text-white">{site.contact.phone}</a>
+              <span>
+                <a href={site.contact.phoneHref} className="hover:text-white">{site.contact.phone}</a>,{" "}
+                <a href={site.contact.phone2Href} className="hover:text-white">{site.contact.phone2}</a>
+              </span>
             </li>
             <li className="flex gap-3">
               <Mail className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden />
-              <a href={`mailto:${site.contact.email}`} className="hover:text-white">{site.contact.email}</a>
+              <span>
+                <a href={`mailto:${site.contact.email}`} className="hover:text-white">{site.contact.email}</a>,{" "}
+                <a href={`mailto:${site.contact.email2}`} className="hover:text-white">{site.contact.email2}</a>
+              </span>
             </li>
             <li className="flex gap-3">
               <Clock className="mt-1 size-4 shrink-0 text-gold-400" aria-hidden />

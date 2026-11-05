@@ -1,103 +1,113 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, Briefcase, GraduationCap, Globe2, Handshake, School, Users } from "lucide-react";
 import { Button, CtaBand, Section, SectionHeading, TextLink } from "@/components/ui";
 import { Avatar, EventCard, SampleLabel } from "@/components/cards";
-import { stories } from "@/content/stories";
 import { Reveal } from "@/components/reveal";
-import { HeroCarousel } from "@/components/hero-carousel";
 import { CourseSearch } from "@/components/course-search";
 import { Credentials } from "@/components/credentials";
 import { CampusTour } from "@/components/campus-tour";
-import { CountUp } from "@/components/count-up";
-import { GraduateOutcomes, RecognitionStrip } from "@/components/outcomes";
+import { stories } from "@/content/stories";
 import { news } from "@/content/news";
 import { events } from "@/content/events";
 import { schools } from "@/content/schools";
 import { partners } from "@/content/partners";
 import { programmes } from "@/content/programmes";
-import { council, trustees, viceChancellor } from "@/content/people";
-import { achievementSlugs, intakes, joinSteps, latestGraduation, stats, whyKcu } from "@/content/university";
+import { outcomeStats, outcomesNote } from "@/content/outcomes";
+import { intakes, latestGraduation, whyKcu } from "@/content/university";
 import { site } from "@/content/site";
 import { asset, formatDate } from "@/lib/utils";
 
 export const metadata = { alternates: { canonical: "/" } };
 
-const pathways = [
+/** "I am a…" routes, so each audience reaches its own information in one click. */
+const audiences = [
+  { icon: GraduationCap, title: "Prospective students", text: "Programmes, fees and how to apply", href: "/admissions" },
+  { icon: Globe2, title: "International students", text: "USD fees, student pass and arrival", href: "/international" },
+  { icon: Users, title: "Parents & sponsors", text: "Paying fees, safety and support", href: "/parents" },
+  { icon: School, title: "Current students", text: "Portals, timetables and services", href: "/students" },
+  { icon: Briefcase, title: "Alumni", text: "Stay connected with KCU", href: "/alumni" },
+  { icon: Handshake, title: "Partners & employers", text: "Research, placements and hiring", href: "/research#collaborate" },
+];
+
+const levels = [
   { title: "Undergraduate degrees", text: "Medicine, nursing, law, business, forensics and more.", href: "/programmes?level=degree", levels: ["degree"] },
   { title: "Diplomas & bridging", text: "Practical diplomas and one-year Higher Education Certificates.", href: "/programmes?level=diploma", levels: ["diploma", "hec"] },
   { title: "Short courses", text: "Professional certificates from two weeks to three months.", href: "/programmes?level=certificate", levels: ["certificate"] },
 ];
 
+/** Each school's headline, from the former homepage slides. */
+const schoolHeadlines: Record<string, string> = {
+  "medicine-health-life-sciences": "Train to save lives.",
+  "law-management-sciences": "Lead with justice and vision.",
+  "science-computing-engineering": "Build Africa's digital future.",
+};
+
 export default function HomePage() {
-  const achievements = achievementSlugs.map((slug) => news.find((n) => n.slug === slug)).filter((n) => n !== undefined);
-  const [lead, ...rest] = news.filter((n) => !achievementSlugs.includes(n.slug));
+  const [lead, ...rest] = news;
   const upcoming = events.slice(0, 3);
   const openIntake = intakes[0];
   const featuredStory = stories[0];
-  const leaders = [
-    // Office confirmed by the 6th Graduation news story.
-    { person: council[0], note: "Minister of Health" },
-    { person: trustees[0], note: "" },
+  const proof = [
+    { value: latestGraduation.graduates, label: "Graduates in 2026" },
+    { value: latestGraduation.doctors, label: "New medical doctors" },
+    ...outcomeStats.slice(0, 1),
+    outcomeStats[2],
   ];
 
   return (
     <>
-      <h1 className="sr-only">King Ceasor University, Kampala: {site.motto}</h1>
-      <HeroCarousel
-        slides={[
-          {
-            id: "intake",
-            label: "Admissions open",
-            eyebrow: `Admissions open · ${openIntake.name}`,
-            note: `Applications close on ${openIntake.closes}.`,
-            title: "Ignite your future.",
-            text: "A chartered university in Kampala, offering internationally recognised medicine and career-focused degrees in health, law, business, computing and energy.",
-            image: "/images/kcu-2026/graduates-best-of-best.webp",
-            imageAlt: "KCU graduates celebrating outside the main campus",
-            imagePosition: "center 70%",
-            primary: { label: "Find your programme", href: "/programmes" },
-            secondary: { label: "Apply online", href: site.applyUrl },
-          },
-          {
-            id: "medicine",
-            label: "Medicine & Surgery",
-            eyebrow: "School of Medicine, Health & Life Sciences",
-            title: "Train to save lives.",
-            text: "Our MBChB is recognised through ECFMG pathways. Learn in clinical skills labs and operating theatres, with rotations at Mulago and Kiruddu National Referral Hospitals.",
-            image: "/images/community-outreach/clinical-training-theatre.jpeg",
-            imageAlt: "Surgeons operating during clinical training in a theatre",
-            imagePosition: "70% center",
-            primary: { label: "Explore Medicine & Surgery", href: "/programmes/bachelor-of-medicine-and-bachelor-of-surgery" },
-            secondary: { label: "Health programmes", href: "/schools/medicine-health-life-sciences" },
-          },
-          {
-            id: "ai-quantum",
-            label: "AI & Computing",
-            eyebrow: "School of Science, Computing & Engineering",
-            title: "Build Africa's digital future.",
-            text: "Study artificial intelligence, data science, IoT, cyber security and digital forensics, with hands-on labs and national cyber security competitions.",
-            image: "ai-quantum",
-            imageAlt: "",
-            primary: { label: "Explore computing & AI", href: "/schools/science-computing-engineering" },
-            secondary: { label: "Research at KCU", href: "/research" },
-          },
-          {
-            id: "law",
-            label: "Law & Leadership",
-            eyebrow: "School of Law & Management Sciences",
-            title: "Lead with justice and vision.",
-            text: "Sharpen your advocacy in our Moot Court Room, or build business and leadership skills with weekend classes designed for working professionals.",
-            image: "/media/news-images-moot-court.webp",
-            imageAlt: "Law students during a moot court session at KCU",
-            imagePosition: "center 40%",
-            primary: { label: "Explore law & business", href: "/schools/law-management-sciences" },
-            secondary: { label: "Campus life", href: "/campus-life" },
-          },
-        ]}
-      />
+      {/* One clear message instead of a rotating slideshow */}
+      <section className="relative isolate overflow-hidden bg-slate-900">
+        <Image
+          src="/images/kcu-2026/graduates-best-of-best.webp"
+          alt="KCU graduates celebrating outside the main campus"
+          fill
+          priority
+          sizes="100vw"
+          className="-z-10 object-cover"
+          style={{ objectPosition: "center 70%" }}
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-black/25 lg:hidden" />
+        <div className="container-x flex min-h-[34rem] items-center py-16 sm:min-h-[38rem] lg:min-h-[42rem]">
+          <div className="max-w-2xl animate-fade-up">
+            <p className="eyebrow text-gold-300">Admissions open · {openIntake.name}</p>
+            <h1 className="mt-5 text-[2.5rem] leading-[1.05] text-white sm:text-6xl lg:text-7xl">Ignite your future.</h1>
+            <p className="mt-6 max-w-xl text-lg text-white/90 sm:text-xl">
+              A chartered university in Kampala, offering internationally recognised medicine and career-focused degrees in health, law, business, computing and energy.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button href="/programmes" variant="white" size="lg">Find your programme</Button>
+              <Button href={site.applyUrl} variant="ghost-light" size="lg">Apply online</Button>
+            </div>
+            <p className="mt-6 text-sm text-white/85">
+              Applications close on {openIntake.closes}.{" "}
+              <Link href="/intake" className="font-semibold text-white underline underline-offset-4 hover:text-gold-300">See featured programmes</Link>
+            </p>
+          </div>
+        </div>
+      </section>
 
       <Credentials />
+
+      {/* Audience pathways */}
+      <section aria-labelledby="audiences" className="border-b border-slate-100 bg-white">
+        <div className="container-x py-10 sm:py-12">
+          <h2 id="audiences" className="text-xl sm:text-2xl">I am…</h2>
+          <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            {audiences.map((a) => (
+              <li key={a.title}>
+                <Link href={a.href} className="group flex h-full flex-col rounded-2xl border border-slate-200 p-4 transition hover:border-primary-600 hover:bg-brand-50 sm:p-5">
+                  <a.icon className="size-6 text-primary-600" aria-hidden />
+                  <span className="mt-3 font-semibold leading-snug text-ink">{a.title}</span>
+                  <span className="mt-1 text-sm text-slate-500">{a.text}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* Find a programme */}
       <Section tone="surface">
@@ -112,7 +122,7 @@ export default function HomePage() {
           <CourseSearch />
         </div>
         <ul className="mt-12 grid gap-4 md:grid-cols-3">
-          {pathways.map((p) => {
+          {levels.map((p) => {
             const count = programmes.filter((x) => p.levels.includes(x.level)).length;
             return (
               <li key={p.title}>
@@ -130,40 +140,6 @@ export default function HomePage() {
         </ul>
       </Section>
 
-      {/* Proof: graduates and scale */}
-      <section className="bg-primary-900 text-white">
-        <div className="grid lg:grid-cols-2">
-          <div className="relative min-h-[18rem] lg:min-h-full">
-            <Image src="/images/kcu-2026/graduates-celebrating.webp" alt="KCU graduates celebrating at the 6th Graduation Ceremony" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-          </div>
-          <div className="px-4 py-14 sm:px-12 lg:px-16 lg:py-20">
-            <p className="eyebrow text-gold-400">
-              {latestGraduation.name} · {latestGraduation.date}
-            </p>
-            <h2 className="mt-3 text-3xl text-white sm:text-4xl">Graduates ready for the world</h2>
-            <p className="mt-4 text-lg text-white/75">
-              This year we awarded {latestGraduation.graduates} degrees, including {latestGraduation.doctors} new medical doctors, to graduates from{" "}
-              {latestGraduation.countries.slice(0, -1).join(", ")} and {latestGraduation.countries.at(-1)}.
-            </p>
-            <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-white/15 pt-8">
-              {[{ value: latestGraduation.graduates, label: "Graduates in 2026" }, { value: latestGraduation.doctors, label: "New medical doctors" }, ...stats.slice(1, 3)].map(
-                (s) => (
-                  <div key={s.label}>
-                    <dd className="heading text-4xl tabular-nums text-gold-400 sm:text-5xl"><CountUp value={s.value} /></dd>
-                    <dt className="mt-1 text-white/65">{s.label}</dt>
-                  </div>
-                ),
-              )}
-            </dl>
-            <div className="mt-10">
-              <Button href={`/news/${latestGraduation.slug}`} variant="ghost-light">
-                Read about graduation
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Schools */}
       <Section>
         <SectionHeading
@@ -180,8 +156,10 @@ export default function HomePage() {
                   <Image src={school.image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="p-6 sm:p-7">
-                  <p className="text-sm font-medium text-slate-500">{programmes.filter((p) => p.school === school.slug).length} programmes</p>
-                  <h3 className="mt-2 text-xl sm:text-2xl">{school.shortName}</h3>
+                  <p className="text-sm font-medium text-slate-500">
+                    {school.shortName} · {programmes.filter((p) => p.school === school.slug).length} programmes
+                  </p>
+                  <h3 className="mt-2 text-xl sm:text-2xl">{schoolHeadlines[school.slug] ?? school.shortName}</h3>
                   <p className="mt-2 text-slate-600">{school.tagline}</p>
                 </div>
               </Link>
@@ -190,203 +168,46 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Why KCU, with the aerial campus film */}
+      {/* Why KCU, with the proof that backs it */}
       <Section tone="surface">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
-          <Reveal className="lg:col-span-7">
-            <CampusTour />
-            <p className="mt-4 text-sm text-slate-500">
-              Planning a visit? <Link href="/visit" className="font-semibold text-ink underline-offset-4 hover:underline">See campus tours and open days</Link>
-            </p>
-          </Reveal>
-          <div className="lg:col-span-5">
-            <p className="eyebrow mb-3">Why KCU</p>
-            <h2 className="text-3xl sm:text-4xl">An education built around your future</h2>
-            <p className="mt-4 text-lg text-slate-600">Practical training and flexible study options, backed by a full University Charter and international recognition.</p>
-            <ol className="mt-10 space-y-7">
-              {whyKcu.map((w, i) => (
-                <li key={w.title} className="flex gap-5">
-                  <span className="heading w-8 shrink-0 pt-0.5 text-lg text-slate-400">{String(i + 1).padStart(2, "0")}</span>
-                  <div className="border-l border-slate-200 pl-5">
-                    <h3 className="text-lg">{w.title}</h3>
-                    <p className="mt-1 text-slate-600">{w.text}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </Section>
-
-      {/* How to join */}
-      <Section id="join">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
-            <p className="eyebrow mb-3">Join KCU</p>
-            <h2 className="text-3xl sm:text-4xl">Apply in three simple steps</h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Applications for the {openIntake.name} are open until <strong className="font-semibold text-ink">{openIntake.closes}</strong>. Classes begin on{" "}
-              {openIntake.starts}.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={site.applyUrl} size="lg">
-                Start your application
-              </Button>
-              <Button href="/admissions#fees" variant="outline" size="lg" icon={false}>
-                See fees
-              </Button>
-            </div>
-          </div>
-          <div className="lg:col-span-7">
-            <ol className="grid gap-4 sm:grid-cols-3">
-              {joinSteps.map((step, i) => (
-                <li key={step.title} className="rounded-2xl bg-white p-6 ring-1 ring-slate-200">
-                  <span className="heading grid size-10 place-items-center rounded-full bg-primary-600 text-white">{i + 1}</span>
-                  <h3 className="mt-5 text-lg">{step.title}</h3>
-                  <p className="mt-2 text-[0.9375rem] text-slate-600">{step.text}</p>
-                </li>
-              ))}
-            </ol>
-            <div className="mt-4 rounded-2xl bg-white p-6 ring-1 ring-slate-200">
-              <p className="font-semibold text-ink">Questions? Our admissions team will help you.</p>
-              <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem]">
-                <li>
-                  <a href={site.contact.phoneHref} className="inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
-                    <Phone className="size-4 text-slate-500" aria-hidden /> {site.contact.phone}
-                  </a>
-                </li>
-                <li>
-                  <a href={`mailto:${site.contact.admissionsEmail}`} className="inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
-                    <Mail className="size-4 text-slate-500" aria-hidden /> {site.contact.admissionsEmail}
-                  </a>
-                </li>
-                <li>
-                  <a href={site.chatUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
-                    <MessageCircle className="size-4 text-slate-500" aria-hidden /> Live chat
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <GraduateOutcomes className="border-t border-slate-100" />
-
-      {/* News and student achievements */}
-      <Section tone="surface">
-        <SectionHeading eyebrow="News" title="Latest from KCU" action={<TextLink href="/news">All news</TextLink>} />
-        <div className="grid gap-10 lg:grid-cols-12">
-          <Link href={`/news/${lead.slug}`} className="group lg:col-span-7">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-white">
-              {lead.image && <Image src={asset(lead.image)} alt={lead.imageAlt} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
-            </div>
-            <p className="mt-5 text-sm text-slate-500">
-              <span className="font-semibold text-ink">{lead.category}</span> · {formatDate(lead.date)}
-            </p>
-            <h3 className="mt-2 text-2xl sm:text-3xl">{lead.title}</h3>
-            <p className="mt-3 line-clamp-2 text-slate-600">{lead.excerpt}</p>
-          </Link>
-          <ul className="divide-y divide-slate-200 lg:col-span-5">
-            {rest.slice(0, 4).map((a) => (
-              <li key={a.slug}>
-                <Link href={`/news/${a.slug}`} className="group flex gap-5 py-5">
-                  <div className="relative aspect-square w-24 shrink-0 overflow-hidden rounded-xl bg-white sm:w-28">
-                    {a.image && <Image src={asset(a.image)} alt="" fill sizes="112px" className="object-cover" />}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm text-slate-500">
-                      <span className="font-semibold text-ink">{a.category}</span> · {formatDate(a.date, "short")}
-                    </p>
-                    <h3 className="mt-1.5 line-clamp-3 text-base leading-snug sm:text-lg">{a.title}</h3>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mt-16 border-t border-slate-200 pt-12">
-          <div className="mb-8">
-            <h3 className="text-2xl">Our students compete and win</h3>
-            <p className="mt-1 text-slate-600">Recent results from national and inter-university competitions.</p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {achievements.map((a) => (
-              <Link key={a.slug} href={`/news/${a.slug}`} className="group overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 transition hover:shadow-lift">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  {a.image && <Image src={asset(a.image)} alt={a.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
-                </div>
-                <div className="p-6">
-                  <p className="text-sm text-slate-500">{formatDate(a.date)}</p>
-                  <h4 className="heading mt-2 text-lg leading-snug">{a.title}</h4>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Leadership */}
-      <Section>
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl lg:col-span-4">
-            <Image src={asset(viceChancellor.image)} alt={`Portrait of ${viceChancellor.name}`} fill sizes="(min-width: 1024px) 30vw, 80vw" className="object-cover object-top" />
-          </div>
-          <div className="lg:col-span-8">
-            <p className="eyebrow mb-3">From the Vice Chancellor</p>
-            <blockquote className="heading text-2xl font-semibold leading-snug text-ink sm:text-3xl lg:text-[2.125rem]">
-              “Education is transformative. I invite you to join KCU as we transform lives, advance knowledge, and prepare globally competitive
-              professionals and leaders for the future.”
-            </blockquote>
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-6 border-t border-slate-200 pt-6">
-              <div>
-                <p className="text-lg font-semibold text-ink">{viceChancellor.name}</p>
-                <p className="text-slate-500">{viceChancellor.role}</p>
-              </div>
-              <Button href="/about#vice-chancellor" variant="outline">
-                Read the full message
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div className="mt-14 grid gap-8 border-t border-slate-200 pt-10 sm:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <p className="text-slate-600">KCU is governed by a Board of Trustees and a University Council of leaders in health, law, education and public service.</p>
-            <Link href="/about/leadership" className="group mt-3 inline-flex items-center gap-1.5 font-semibold text-ink">
-              Meet our leadership <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
-            </Link>
-          </div>
-          {leaders.map(({ person, note }) => (
-            <div key={person.name} className="flex items-center gap-4">
-              <div className="relative size-16 shrink-0 overflow-hidden rounded-full bg-slate-100">
-                {person.image && <Image src={asset(person.image)} alt="" fill sizes="64px" className="object-cover object-top" />}
-              </div>
-              <div>
-                <p className="font-semibold text-ink">{person.name}</p>
-                <p className="text-sm text-slate-500">{person.role}</p>
-                {note && <p className="text-sm text-slate-400">{note}</p>}
-              </div>
+        <SectionHeading
+          eyebrow="Why KCU"
+          title="An education built around your future"
+          intro="Practical training and flexible study options, backed by a full University Charter, international recognition and graduates in demand."
+          action={<TextLink href="/admissions#outcomes">Graduate outcomes</TextLink>}
+        />
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {whyKcu.map((w) => (
+            <li key={w.title} className="rounded-2xl bg-white p-6 ring-1 ring-slate-200">
+              <h3 className="text-lg">{w.title}</h3>
+              <p className="mt-2 text-[0.9375rem] text-slate-600">{w.text}</p>
+            </li>
+          ))}
+        </ul>
+        <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-slate-200 ring-1 ring-slate-200 lg:grid-cols-4">
+          {proof.map((s) => (
+            <div key={s.label} className="flex flex-col-reverse bg-white p-6 sm:p-8">
+              <dt className="mt-2 text-sm text-slate-600 sm:text-base">{s.label}</dt>
+              <dd className="heading text-4xl tabular-nums text-primary-600 sm:text-5xl">{s.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
+        <p className="mt-4 text-sm text-slate-500">
+          From the {latestGraduation.name}, {latestGraduation.date}. {outcomesNote}
+        </p>
       </Section>
 
-      {/* Events + campus life */}
-      <Section tone="surface">
-        <div className="grid gap-12 lg:grid-cols-12">
+      {/* Campus film and a student's story */}
+      <Section>
+        <SectionHeading eyebrow="Life at KCU" title="See Bunga Hill, hear from our students" action={<TextLink href="/visit">Visit campus</TextLink>} />
+        <div className="grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <SectionHeading eyebrow="Events" title="Visit us on campus" action={<TextLink href="/events">All events</TextLink>} />
-            <div className="space-y-4">
-              {upcoming.map((e) => (
-                <EventCard key={e.slug} event={e} />
-              ))}
-            </div>
+            <CampusTour className="h-full min-h-[18rem]" />
           </div>
           <div className="lg:col-span-5">
-            <div className="group relative flex h-full min-h-[28rem] flex-col justify-end overflow-hidden rounded-2xl">
+            <div className="group relative flex h-full min-h-[24rem] flex-col justify-end overflow-hidden rounded-2xl">
               <Image src={asset(featuredStory.image)} alt={featuredStory.imageAlt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-950 via-primary-950/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
               <div className="relative p-6 sm:p-8">
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="eyebrow text-gold-300">Student stories</p>
@@ -399,20 +220,53 @@ export default function HomePage() {
                     <p className="font-semibold text-white">
                       <Link href={`/stories/${featuredStory.slug}`} className="after:absolute after:inset-0">{featuredStory.name}</Link>
                     </p>
-                    <p className="text-sm text-white/70">{featuredStory.stage}</p>
+                    <p className="text-sm text-white/75">{featuredStory.stage}</p>
                   </div>
                 </div>
-                <p className="relative mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-white">
-                  <span className="inline-flex items-center gap-1.5">Read the story <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden /></span>
-                  <Link href="/campus-life" className="relative z-10 underline-offset-4 hover:underline">Explore campus life</Link>
-                </p>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
+                  Read the story <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                </span>
               </div>
             </div>
           </div>
         </div>
       </Section>
 
-      <RecognitionStrip />
+      {/* News and events together */}
+      <Section tone="surface">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <SectionHeading eyebrow="News" title="Latest from KCU" action={<TextLink href="/news">All news</TextLink>} />
+            <Link href={`/news/${lead.slug}`} className="group block">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-white">
+                {lead.image && <Image src={asset(lead.image)} alt={lead.imageAlt} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />}
+              </div>
+              <p className="mt-5 text-sm text-slate-500">
+                <span className="font-semibold text-ink">{lead.category}</span> · {formatDate(lead.date)}
+              </p>
+              <h3 className="mt-2 text-2xl group-hover:underline group-hover:underline-offset-4">{lead.title}</h3>
+            </Link>
+            <ul className="mt-6 divide-y divide-slate-200 border-t border-slate-200">
+              {rest.slice(0, 3).map((a) => (
+                <li key={a.slug}>
+                  <Link href={`/news/${a.slug}`} className="group flex items-baseline justify-between gap-6 py-4">
+                    <span className="font-semibold leading-snug text-ink group-hover:underline group-hover:underline-offset-4">{a.title}</span>
+                    <span className="shrink-0 text-sm text-slate-500">{formatDate(a.date, "short")}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="lg:col-span-5">
+            <SectionHeading eyebrow="Events" title="Coming up" action={<TextLink href="/events">All events</TextLink>} />
+            <div className="space-y-4">
+              {upcoming.map((e) => (
+                <EventCard key={e.slug} event={e} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
 
       {/* Partners */}
       <section className="py-14 sm:py-16">

@@ -28,9 +28,13 @@
   --color-gold-600: #d9962e;
   --color-gold-700: #b07520;
 
+  /* True pale greens for light brand panels (primary-50 is a neutral grey). */
+  --color-brand-50: #eef6f1;
+  --color-brand-100: #d9ebe0;
+
   --color-ink: #0f1a15;
-  /* Warm ivory for alternating sections, so the page isn't green on green. */
-  --color-surface: #f7f6f2;
+  /* Cool neutral grey for alternating sections: keeps the section rhythm while the site reads crisp and white. */
+  --color-surface: #f6f8f7;
 
   --shadow-card: 0 1px 2px rgb(15 26 21 / 0.04), 0 8px 24px -8px rgb(15 26 21 / 0.08);
   --shadow-lift: 0 2px 4px rgb(15 26 21 / 0.04), 0 24px 48px -16px rgb(15 26 21 / 0.18);

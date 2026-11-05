@@ -109,16 +109,16 @@ export default function CampusLifePage() {
       </Section>
 
       {/* Support */}
-      <Section tone="dark" id="support">
-        <SectionHeading eyebrow="Support" title="Here for you, every step" dark />
+      <Section id="support">
+        <SectionHeading eyebrow="Support" title="Here for you, every step" />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {supportServices.map((s, i) => {
             const Icon = supportIcons[i];
             return (
-              <div key={s.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-                <Icon className="size-8 text-gold-400" aria-hidden />
-                <h3 className="mt-5 text-lg text-white">{s.title}</h3>
-                <p className="mt-2 text-white/70">{s.text}</p>
+              <div key={s.title} className="rounded-2xl bg-brand-50 p-6 ring-1 ring-brand-100">
+                <Icon className="size-8 text-primary-600" aria-hidden />
+                <h3 className="mt-5 text-lg text-ink">{s.title}</h3>
+                <p className="mt-2 text-slate-600">{s.text}</p>
               </div>
             );
           })}
@@ -126,7 +126,7 @@ export default function CampusLifePage() {
       </Section>
 
       {/* Accommodation */}
-      <Section id="accommodation">
+      <Section tone="surface" id="accommodation">
         <SectionHeading eyebrow="Accommodation" title="A place to call home" intro="KCU works with vetted private hostels within walking distance of campus. Indicative prices per semester." />
         <div className="grid gap-5 md:grid-cols-3">
           {accommodation.map((a, i) => (
@@ -141,7 +141,7 @@ export default function CampusLifePage() {
       </Section>
 
       {stories.length > 0 && (
-        <Section tone="surface">
+        <Section>
           <SectionHeading eyebrow="Student news" title="Recent highlights" action={<TextLink href="/news">All news</TextLink>} />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {stories.map((a) => (

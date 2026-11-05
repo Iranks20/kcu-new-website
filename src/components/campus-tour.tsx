@@ -15,7 +15,7 @@ export function CampusTour({ className }: { className?: string }) {
   const video = useRef<HTMLVideoElement>(null);
 
   return (
-    <div className={cn("relative aspect-video overflow-hidden rounded-2xl bg-primary-950 shadow-lift", className)}>
+    <div className={cn("relative aspect-video overflow-hidden rounded-2xl bg-slate-900 shadow-lift", className)}>
       <video
         ref={video}
         poster={campusTour.poster}
@@ -40,7 +40,7 @@ export function CampusTour({ className }: { className?: string }) {
           className="group absolute inset-0 grid place-items-center text-left"
         >
           <Image src={campusTour.poster} alt="" fill sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-          <span className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-950/20 to-transparent" />
+          <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
           <span className="relative grid size-20 place-items-center rounded-full bg-gold-400 text-ink shadow-lift ring-8 ring-white/20 transition group-hover:scale-110 group-hover:bg-gold-300 sm:size-24">
             <Play className="ml-1 size-8 fill-current sm:size-9" aria-hidden />
           </span>

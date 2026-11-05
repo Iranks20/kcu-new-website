@@ -160,22 +160,22 @@ export function CtaBand({
 }: {
   title?: string;
   text?: string;
-  /** brand = green conversion band; quiet = slate strip for non-conversion pages */
+  /** brand = pale green conversion panel; quiet = light grey strip for non-conversion pages */
   tone?: "brand" | "quiet";
 }) {
   const quiet = tone === "quiet";
   return (
-    <section className={quiet ? "border-t border-slate-200 bg-slate-50" : "bg-primary-600"}>
+    <section className={quiet ? "border-t border-slate-200 bg-surface" : "border-t border-brand-100 bg-brand-50"}>
       <div className="container-x flex flex-col gap-8 py-14 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
-          <h2 className={cn("text-3xl sm:text-4xl", quiet ? "text-ink" : "text-white")}>{title}</h2>
-          <p className={cn("mt-3 text-lg", quiet ? "text-slate-600" : "text-white/80")}>{text}</p>
+          <h2 className="text-3xl sm:text-4xl">{title}</h2>
+          <p className="mt-3 text-lg text-slate-600">{text}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button href="https://apply.kcu.ac.ug/" variant={quiet ? "primary" : "gold"} size="lg">
+          <Button href="https://apply.kcu.ac.ug/" size="lg">
             Apply now
           </Button>
-          <Button href="/contact" variant={quiet ? "outline" : "ghost-light"} size="lg" icon={false}>
+          <Button href="/contact" variant="outline" size="lg" icon={false}>
             Talk to admissions
           </Button>
         </div>

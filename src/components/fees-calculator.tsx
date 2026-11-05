@@ -100,25 +100,25 @@ export function FeesCalculator({ programmes, schools }: { programmes: Option[]; 
         </p>
       </div>
 
-      <div className="bg-primary-900 p-6 text-white sm:p-8 lg:col-span-5" aria-live="polite">
-        <p className="text-sm text-white/70">{programme.title}</p>
+      <div className="bg-brand-50 p-6 sm:p-8 lg:col-span-5" aria-live="polite">
+        <p className="text-sm text-slate-600">{programme.title}</p>
         <dl className="mt-6 space-y-5">
           <div>
-            <dt className="text-sm text-white/70">Per {programme.fees.per}</dt>
-            <dd className="heading mt-1 text-3xl tabular-nums text-white sm:text-4xl">{money(result.currency, result.perPeriod)}</dd>
+            <dt className="text-sm text-slate-600">Per {programme.fees.per}</dt>
+            <dd className="heading mt-1 text-3xl tabular-nums text-ink sm:text-4xl">{money(result.currency, result.perPeriod)}</dd>
           </div>
           {result.perYear !== null && (
-            <div className="border-t border-white/10 pt-5">
-              <dt className="text-sm text-white/70">Per year (2 semesters)</dt>
-              <dd className="heading mt-1 text-2xl tabular-nums text-white">{money(result.currency, result.perYear)}</dd>
+            <div className="border-t border-brand-100 pt-5">
+              <dt className="text-sm text-slate-600">Per year (2 semesters)</dt>
+              <dd className="heading mt-1 text-2xl tabular-nums text-ink">{money(result.currency, result.perYear)}</dd>
             </div>
           )}
           {result.total !== null && (
-            <div className="border-t border-white/10 pt-5">
-              <dt className="text-sm text-white/70">
+            <div className="border-t border-brand-100 pt-5">
+              <dt className="text-sm text-slate-600">
                 Whole programme ({programme.duration.toLowerCase()}, {result.count} semesters)
               </dt>
-              <dd className="heading mt-1 text-2xl tabular-nums text-gold-400">{money(result.currency, result.total)}</dd>
+              <dd className="heading mt-1 text-2xl tabular-nums text-primary-600">{money(result.currency, result.total)}</dd>
             </div>
           )}
         </dl>
@@ -126,7 +126,7 @@ export function FeesCalculator({ programmes, schools }: { programmes: Option[]; 
           href={site.applyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 inline-flex h-11 items-center rounded-full bg-white px-5 text-sm font-semibold text-ink transition hover:bg-slate-50"
+          className="mt-8 inline-flex h-11 items-center rounded-full bg-primary-600 px-5 text-sm font-semibold text-ink transition hover:bg-primary-700"
         >
           Apply for this programme ↗
         </a>

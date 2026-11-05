@@ -62,7 +62,7 @@ const aliases: [RegExp, string][] = [
   [/\b(law|llb|lawyer|advocate)\b/, "bachelor-of-laws"],
   [/\b(bba|business administration|business)\b/, "bachelor-of-business-administration"],
   [/\b(economics)\b/, "bachelor-of-applied-economics"],
-  [/\b(oil|gas|energy)\b/, "bachelor-of-oil-gas-and-energy-management"],
+  [/\b(bog|oil|gas|energy)\b/, "bachelor-of-oil-and-gas-management"],
   [/\b(petroleum|geoscience|geology)\b/, "bachelor-of-science-in-petroleum-geoscience"],
   [/\b(forensics?|criminal investigations?|cyber ?crime)\b/, "bachelor-of-computer-forensics-and-criminal-investigations"],
   [/\b(agric|agriculture|farming)\b/, "bachelor-of-agriculture"],
@@ -360,7 +360,7 @@ export function respond(input: string, flow: Flow | null, ctx: Context): { reply
 
   if (has(q, /\b(contact|phone|call|email|talk to (a )?(person|human|someone)|whatsapp|agent|speak)\b/))
     return reply({
-      text: `Our admissions team is available ${site.contact.hours}.\n- Phone: **${site.contact.phone}**\n- Email: **${site.contact.admissionsEmail}**\n- WhatsApp: **${site.whatsapp.display}**`,
+      text: `Our admissions team is available ${site.contact.hours}.\n- Phone: **${site.contact.phone}** or **${site.contact.phone2}**\n- Email: **${site.contact.admissionsEmail}**\n- WhatsApp: **${site.whatsapp.display}**`,
       links: [{ label: "Chat on WhatsApp", href: whatsappLink() }, { label: "Contact page", href: "/contact" }],
     });
 

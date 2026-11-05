@@ -7,7 +7,7 @@ import { coreValues, history, mission, stats, vision } from "@/content/universit
 import { viceChancellor } from "@/content/people";
 import { partners } from "@/content/partners";
 import { asset } from "@/lib/utils";
-import { CountUp } from "@/components/count-up";
+import { RecognitionStrip } from "@/components/outcomes";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
@@ -27,10 +27,10 @@ export default function AboutPage() {
 
       <Section>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl bg-primary-900 p-8 text-white sm:p-10">
-            <Compass className="size-9 text-gold-400" aria-hidden />
-            <h2 className="mt-6 text-2xl text-white">Our mission</h2>
-            <p className="mt-3 text-lg text-white/85">{mission}</p>
+          <div className="rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-8 text-ink sm:p-10">
+            <Compass className="size-9 text-primary-600" aria-hidden />
+            <h2 className="mt-6 text-2xl text-ink">Our mission</h2>
+            <p className="mt-3 text-lg text-slate-600">{mission}</p>
           </div>
           <div className="rounded-2xl bg-gold-50 p-8 ring-1 ring-gold-100 sm:p-10">
             <Eye className="size-9 text-gold-600" aria-hidden />
@@ -43,7 +43,7 @@ export default function AboutPage() {
           {stats.map((s) => (
             <div key={s.label} className="border-l-2 border-slate-300 pl-5">
               <dt className="text-sm text-slate-500">{s.label}</dt>
-              <dd className="heading mt-1 text-3xl tabular-nums text-ink sm:text-4xl"><CountUp value={s.value} /></dd>
+              <dd className="heading mt-1 text-3xl tabular-nums text-ink sm:text-4xl">{s.value}</dd>
             </div>
           ))}
         </dl>
@@ -130,6 +130,8 @@ export default function AboutPage() {
           </div>
         </div>
       </Section>
+
+      <RecognitionStrip />
 
       <CtaBand tone="quiet" />
     </>

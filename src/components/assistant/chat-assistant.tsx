@@ -14,15 +14,12 @@ type Message = { id: number; from: "bot" | "user"; reply: Reply };
 /** Fire this from anywhere (e.g. an "Ask the assistant" button) to open the chat, optionally with a question. */
 export const OPEN_EVENT = "kcu:open-assistant";
 
-const TEASER_KEY = "kcu-assistant-teaser";
-
 /**
- * Floating WhatsApp and KCU Assistant buttons. The assistant answers from the website's content and can walk
+ * The one floating "Ask KCU" button (WhatsApp is offered inside the panel). The assistant answers from the website's content and can walk
  * an applicant through choosing a programme and preparing an application.
  */
 export function ChatAssistant() {
   const [open, setOpen] = useState(false);
-  const [teaser, setTeaser] = useState(false);
   const [messages, setMessages] = useState<Message[]>([{ id: 0, from: "bot", reply: welcome }]);
   const [flow, setFlow] = useState<Flow | null>(null);
   const [typing, setTyping] = useState(false);
@@ -63,21 +60,9 @@ export function ChatAssistant() {
     sendRef.current = send;
   });
 
-  // A one-time nudge per visit, a few seconds after the first page loads.
-  useEffect(() => {
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem(TEASER_KEY) === "1";
-    } catch {}
-    if (seen) return;
-    const t = window.setTimeout(() => setTeaser(true), 9000);
-    return () => window.clearTimeout(t);
-  }, []);
-
   useEffect(() => {
     const onOpen = (e: Event) => {
       setOpen(true);
-      setTeaser(false);
       loadIndex();
       const q = (e as CustomEvent<string | undefined>).detail;
       if (q) window.setTimeout(() => sendRef.current(q), 250);
@@ -98,16 +83,8 @@ export function ChatAssistant() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const dismissTeaser = () => {
-    setTeaser(false);
-    try {
-      sessionStorage.setItem(TEASER_KEY, "1");
-    } catch {}
-  };
-
   const toggle = () => {
     setOpen((o) => !o);
-    dismissTeaser();
     loadIndex();
   };
 
@@ -119,7 +96,7 @@ export function ChatAssistant() {
   const lastBot = [...messages].reverse().find((m) => m.from === "bot");
 
   return (
-    <div className="pointer-events-none fixed bottom-24 right-4 z-50 flex flex-col items-end gap-3 sm:right-6 lg:bottom-6">
+    <div className="pointer-events-none fixed bottom-24 right-4 z-50 print:hidden flex flex-col items-end gap-3 sm:right-6 lg:bottom-6">
       {open && (
         <section
           role="dialog"
@@ -220,30 +197,7 @@ export function ChatAssistant() {
         </section>
       )}
 
-      {teaser && !open && (
-        <div className="pointer-events-auto relative hidden max-w-64 sm:block animate-fade-up rounded-2xl rounded-br-md bg-white p-4 pr-9 text-sm shadow-lift ring-1 ring-slate-200">
-          <button type="button" onClick={dismissTeaser} className="absolute right-2 top-2 grid size-6 place-items-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-ink" aria-label="Dismiss">
-            <X className="size-3.5" aria-hidden />
-          </button>
-          <button type="button" onClick={toggle} className="text-left">
-            <span className="block font-semibold text-ink">Need help choosing a course? 👋</span>
-            <span className="mt-1 block text-slate-600">Ask me about fees, entry requirements or how to apply.</span>
-          </button>
-        </div>
-      )}
-
       <div className={cn("pointer-events-auto flex items-center gap-3", open && "max-sm:hidden")}>
-        {!open && (
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat with KCU admissions on WhatsApp"
-            className="grid size-12 place-items-center rounded-full bg-[#25d366] text-white shadow-lift transition hover:scale-105 hover:bg-[#1ebe5b] sm:size-14"
-          >
-            <BrandIcon name="whatsapp" className="size-6 sm:size-7" />
-          </a>
-        )}
         <button
           type="button"
           onClick={toggle}

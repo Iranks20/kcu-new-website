@@ -39,30 +39,35 @@ export default function PressPage() {
             </dl>
           </div>
           <aside className="lg:col-span-5">
-            <div className="rounded-2xl bg-primary-900 p-6 text-white sm:p-8">
-              <p className="eyebrow text-gold-300">Media contact</p>
+            <div className="rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink sm:p-8">
+              <p className="eyebrow">Media contact</p>
               <div className="mt-5 flex items-center gap-4">
-                <div className="relative size-16 shrink-0 overflow-hidden rounded-full bg-white/10">
+                <div className="relative size-16 shrink-0 overflow-hidden rounded-full bg-white">
                   <Image src={asset(pressContact.image)} alt="" fill sizes="64px" className="object-cover object-top" />
                 </div>
                 <div>
                   <p className="text-lg font-semibold">{pressContact.name}</p>
-                  <p className="text-white/70">{pressContact.role}</p>
+                  <p className="text-slate-600">{pressContact.role}</p>
                 </div>
               </div>
               <ul className="mt-6 space-y-3">
                 <li>
                   <a href={`mailto:${pressContact.email}`} className="flex items-center gap-3 font-semibold underline-offset-4 hover:underline">
-                    <Mail className="size-5 text-gold-400" aria-hidden /> {pressContact.email}
+                    <Mail className="size-5 text-primary-600" aria-hidden /> {pressContact.email}
                   </a>
                 </li>
                 <li>
                   <a href={site.contact.phoneHref} className="flex items-center gap-3 font-semibold underline-offset-4 hover:underline">
-                    <Phone className="size-5 text-gold-400" aria-hidden /> {site.contact.phone}
+                    <Phone className="size-5 text-primary-600" aria-hidden /> {site.contact.phone}
+                  </a>
+                </li>
+                <li>
+                  <a href={site.contact.phone2Href} className="flex items-center gap-3 font-semibold underline-offset-4 hover:underline">
+                    <Phone className="size-5 text-primary-600" aria-hidden /> {site.contact.phone2}
                   </a>
                 </li>
               </ul>
-              <p className="mt-6 border-t border-white/10 pt-4 text-sm text-white/65">We aim to respond to media enquiries within one working day. For urgent deadlines, call and ask for the Public Relations office.</p>
+              <p className="mt-6 border-t border-brand-100 pt-4 text-sm text-slate-600">We aim to respond to media enquiries within one working day. For urgent deadlines, call and ask for the Public Relations office.</p>
             </div>
           </aside>
         </div>
@@ -105,14 +110,14 @@ export default function PressPage() {
       </Section>
 
       <Section tone="surface">
-        <SectionHeading eyebrow="Publications" title="KCU journals and newsletters" />
+        <SectionHeading eyebrow="Publications" title="KCU journals and newsletters" intro="Every story in our journals is also published online as a news article, which is quicker to read on a phone. The full issues are large PDF downloads." action={<TextLink href="/news">Read the stories online</TextLink>} />
         <ul className="grid gap-4 sm:grid-cols-2">
           {newsletters.map((n) => (
             <li key={n.file}>
               <a href={asset(n.file)} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between gap-4 rounded-2xl bg-white p-5 shadow-card ring-1 ring-slate-100 transition hover:shadow-lift">
                 <span>
                   <span className="block font-semibold text-ink">{n.title}</span>
-                  <span className="block text-sm text-slate-500">{n.date} · PDF</span>
+                  <span className="block text-sm text-slate-500">{n.date} · PDF, {n.size}</span>
                 </span>
                 <Download className="size-5 shrink-0 text-slate-500" aria-hidden />
               </a>

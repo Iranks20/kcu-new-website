@@ -57,8 +57,8 @@ export default function ResearchPage() {
         <SectionHeading eyebrow="Focus areas" title="Where we focus" />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {researchAreas.map((r) => (
-            <div key={r.title} className="group rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-lift sm:p-8">
-              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-slate-600 transition group-hover:bg-primary-600 group-hover:text-white">
+            <div key={r.title} className="rounded-2xl border border-slate-200 p-6 sm:p-8">
+              <span className="grid size-12 place-items-center rounded-xl bg-brand-50 text-primary-600">
                 <FlaskConical className="size-6" aria-hidden />
               </span>
               <h3 className="mt-5 text-xl">{r.title}</h3>
@@ -68,19 +68,19 @@ export default function ResearchPage() {
         </div>
       </Section>
 
-      <Section id="centres" tone="dark">
-        <SectionHeading dark eyebrow="Research groups" title="Centres and labs" intro="Each group brings staff and students together around a question that matters to Uganda and the region." />
+      <Section id="centres" tone="surface">
+        <SectionHeading eyebrow="Research groups" title="Centres and labs" intro="Each group brings staff and students together around a question that matters to Uganda and the region." />
         <div className="grid gap-5 md:grid-cols-2">
           {researchCentres.map((c) => {
             const school = getSchool(c.school);
             return (
-              <article key={c.name} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8">
-                <p className="text-sm font-medium text-gold-300">{school?.name}</p>
-                <h3 className="mt-2 text-2xl text-white">{c.name}</h3>
-                <p className="mt-3 text-white/75">{c.focus}</p>
+              <article key={c.name} className="rounded-2xl bg-white p-6 shadow-card ring-1 ring-slate-100 sm:p-8">
+                <p className="text-sm font-medium text-primary-600">{school?.name}</p>
+                <h3 className="mt-2 text-2xl text-ink">{c.name}</h3>
+                <p className="mt-3 text-slate-600">{c.focus}</p>
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {c.themes.map((t) => (
-                    <li key={t} className="rounded-full bg-white/10 px-3 py-1 text-sm text-white">{t}</li>
+                    <li key={t} className="rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-primary-700">{t}</li>
                   ))}
                 </ul>
               </article>

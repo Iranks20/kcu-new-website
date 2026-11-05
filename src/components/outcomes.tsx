@@ -1,6 +1,5 @@
 import { BadgeCheck, Briefcase } from "lucide-react";
 import { destinations, outcomesNote, outcomeStats, recognition } from "@/content/outcomes";
-import { CountUp } from "./count-up";
 import { Section, SectionHeading } from "./ui";
 
 /** "Where do KCU graduates go?" — headline outcomes and typical first roles by school. */
@@ -13,7 +12,7 @@ export function GraduateOutcomes({ tone = "white", className }: { tone?: "white"
           <div key={s.label} className="flex flex-col-reverse bg-white p-6 sm:p-8">
             <dt className="mt-2 text-sm text-slate-600 sm:text-base">{s.label}</dt>
             <dd className="heading text-4xl text-primary-600 sm:text-5xl">
-              <CountUp value={s.value} />
+              {s.value}
             </dd>
           </div>
         ))}
@@ -47,7 +46,7 @@ export function RecognitionStrip() {
         <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
           {recognition.map((r) => (
             <li key={r.name} className="flex items-center gap-3" title={`${r.name}: ${r.text}`}>
-              <span className="heading grid h-10 min-w-10 shrink-0 place-items-center rounded-lg bg-primary-600 px-2 text-[0.6875rem] tracking-wide text-white">{r.short === "Chartered" ? <BadgeCheck className="size-5" aria-hidden /> : r.short}</span>
+              <span className="heading grid h-10 min-w-10 shrink-0 place-items-center rounded-lg bg-brand-50 px-2 text-[0.6875rem] tracking-wide text-primary-700 ring-1 ring-brand-100">{r.short === "Chartered" ? <BadgeCheck className="size-5" aria-hidden /> : r.short}</span>
               <span className="min-w-0 text-sm leading-snug text-slate-600">
                 <span className="block font-semibold text-ink">{r.name}</span>
                 {r.text}

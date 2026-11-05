@@ -21,6 +21,13 @@ export type SearchItem = {
 const pages: SearchItem[] = [
   { kind: "Page", title: "Admissions", meta: "How to apply, requirements and key dates", href: "/admissions", keywords: "apply application intake deadline" },
   { kind: "Page", title: "Tuition fees", meta: "Fees for every programme", href: "/admissions#fees", keywords: "cost price tuition ugx usd" },
+  { kind: "Page", title: "January 2027 intake", meta: "Applications open: featured programmes and key dates", href: "/intake", keywords: "intake january 2027 admissions open apply deadline flyer" },
+  { kind: "Page", title: "Current students", meta: "Portals, key dates, fee payment and support", href: "/students", keywords: "academia portal timetable results registration exams pay fees student number" },
+  { kind: "Page", title: "Parents & sponsors", meta: "Fees, safety, accommodation and contacts", href: "/parents", keywords: "parent guardian sponsor employer pay fees" },
+  { kind: "Page", title: "Library", meta: "Opening hours, e-resources and research help", href: "/library", keywords: "books journals catalogue study space" },
+  { kind: "Page", title: "Facts & figures", meta: "KCU at a glance, strategy and policies", href: "/about/facts", keywords: "statistics numbers strategic plan policies regulations" },
+  { kind: "Page", title: "Campus map", meta: "Find buildings, labs and parking", href: "/visit/campus-map", keywords: "map directions building block parking" },
+  { kind: "Page", title: "Track my application", meta: "Check your application status", href: "/admissions/track", keywords: "status admission letter offer" },
   { kind: "Page", title: "Compare programmes", meta: "Fees, duration and requirements side by side", href: "/programmes/compare", keywords: "compare versus vs difference" },
   { kind: "Page", title: "Academic calendar", meta: "Semester dates, exams, holidays and graduation", href: "/academic-calendar", keywords: "calendar semester exams holiday term dates recess orientation graduation" },
   { kind: "Page", title: "Virtual campus tour", meta: "Walk through ten campus stops online", href: "/visit/virtual-tour", keywords: "virtual tour 360 campus photos facilities" },

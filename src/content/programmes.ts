@@ -107,7 +107,7 @@ const details: Record<string, Details> = {
       "A three-year degree covering management, accounting and finance, marketing, and banking and insurance, with practical case studies and an internship that connects students to industry.",
     careers: ["Business manager", "Accountant", "Marketing officer", "Bank officer", "Entrepreneur"],
   },
-  "Bachelor of Oil, Gas, and Energy Management": {
+  "Bachelor of Oil and Gas Management": {
     overview:
       "Prepares managers for Uganda's growing energy sector, covering petroleum economics, project management, regulation, local content and sustainability.",
     careers: ["Energy project manager", "Local content officer", "Petroleum economist", "Regulatory analyst"],
@@ -191,7 +191,7 @@ export const programmes: Programme[] = [
     [
       ["08", "Bachelor of Laws", "4 Years", "UGX 2,025,000", "$650"],
       ["09", "Bachelor of Business Administration", "3 Years", "UGX 1,468,000", "$500"],
-      ["10", "Bachelor of Oil, Gas, and Energy Management", "3 Years", "UGX 1,127,500", "$400"],
+      ["10", "Bachelor of Oil and Gas Management", "3 Years", "UGX 1,127,500", "$400"],
       ["11", "Bachelor of Applied Economics", "3 Years", "UGX 1,468,000", "$500"],
     ] as Seed[]
   ).map((s) => make("degree", LAW, "semester", s)),

@@ -30,9 +30,9 @@ export default async function StoryPage({ params }: PageProps<"/stories/[slug]">
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-primary-950 text-white">
-        <Image src={asset(story.image)} alt={story.imageAlt} fill priority sizes="100vw" className="-z-10 object-cover opacity-35" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-950 via-primary-950/80 to-primary-950/30" />
+      <section className="relative isolate overflow-hidden bg-slate-900 text-white">
+        <Image src={asset(story.image)} alt={story.imageAlt} fill priority sizes="100vw" className="-z-10 object-cover" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/55 to-black/15" />
         <div className="container-x py-12 sm:py-16 lg:py-24">
           <Breadcrumbs dark items={[{ label: "Student stories", href: "/stories" }, { label: story.name }]} className="mb-8" />
           <div className="max-w-3xl animate-fade-up">

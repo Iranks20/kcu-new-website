@@ -8,9 +8,13 @@ export const site = {
   applyUrl: "https://apply.kcu.ac.ug/",
   chatUrl: "https://tawk.to/chat/6374a39bb0d6371309cf4a30/1ghvpu6kh",
   contact: {
+    // Both lines and both addresses as printed on the official January 2027 intake flyers.
     phone: "+256 200 911 450",
     phoneHref: "tel:+256200911450",
-    email: "info@kcu.ac.ug",
+    phone2: "+256 394 716 326",
+    phone2Href: "tel:+256394716326",
+    email: "contact@kcu.ac.ug",
+    email2: "info@kcu.ac.ug",
     admissionsEmail: "admissions@kcu.ac.ug",
     careersEmail: "careers@kcu.ac.ug",
     alumniEmail: "alumni@kcu.ac.ug",

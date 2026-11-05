@@ -39,20 +39,20 @@ export default function VisitPage() {
 
   return (
     <>
-      <section className="bg-primary-950 text-white">
+      <section className="border-b border-slate-100 bg-surface">
         <div className="container-x grid items-center gap-10 py-14 sm:py-16 lg:grid-cols-12 lg:gap-14 lg:py-20">
           <div className="animate-fade-up lg:col-span-5">
-            <Breadcrumbs dark items={[{ label: "Visit" }]} />
-            <p className="eyebrow text-gold-300">Visit KCU</p>
-            <h1 className="mt-4 text-4xl text-white sm:text-5xl">See Bunga Hill for yourself</h1>
-            <p className="mt-5 text-lg text-white/75">
+            <Breadcrumbs items={[{ label: "Visit" }]} />
+            <p className="eyebrow">Visit KCU</p>
+            <h1 className="mt-4 text-4xl text-ink sm:text-5xl">See Bunga Hill for yourself</h1>
+            <p className="mt-5 text-lg text-slate-600">
               Our green campus sits on Bunga Hill overlooking Lake Victoria, about 20 minutes from Kampala city centre along Ggaba Road. Watch the film, then come and walk it.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#book" className="inline-flex h-13 items-center rounded-full bg-gold-400 px-7 font-semibold text-ink transition hover:bg-gold-300">
+              <a href="#book" className="inline-flex h-13 items-center rounded-full bg-primary-600 px-7 font-semibold text-ink transition hover:bg-primary-700">
                 Book a campus tour
               </a>
-              <a href={site.contact.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-13 items-center rounded-full border border-white/40 px-7 font-semibold text-white transition hover:bg-white/10">
+              <a href={site.contact.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-13 items-center rounded-full border border-slate-300 bg-white px-7 font-semibold text-ink transition hover:border-ink">
                 Get directions ↗
               </a>
             </div>

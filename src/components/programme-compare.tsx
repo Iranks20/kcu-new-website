@@ -41,7 +41,7 @@ const rows: { label: string; render: (p: Programme) => React.ReactNode }[] = [
 const suggestions = [
   { label: "Medicine · Nursing · Clinical Medicine", slugs: ["bachelor-of-medicine-and-bachelor-of-surgery", "bachelor-of-nursing-science-direct", "diploma-in-clinical-medicine-and-community-health"] },
   { label: "Law · Business · Economics", slugs: ["bachelor-of-laws", "bachelor-of-business-administration", "bachelor-of-applied-economics"] },
-  { label: "Forensics · Petroleum Geoscience · Oil & Gas", slugs: ["bachelor-of-computer-forensics-and-criminal-investigations", "bachelor-of-science-in-petroleum-geoscience", "bachelor-of-oil-gas-and-energy-management"] },
+  { label: "Forensics · Petroleum Geoscience · Oil & Gas", slugs: ["bachelor-of-computer-forensics-and-criminal-investigations", "bachelor-of-science-in-petroleum-geoscience", "bachelor-of-oil-and-gas-management"] },
 ];
 
 /** Side-by-side comparison of up to three programmes. The selection lives in the URL so it can be shared. */
@@ -90,20 +90,20 @@ export function ProgrammeCompare() {
               {slots.map((p, i) => (
                 <th key={p?.slug ?? `empty-${i}`} scope="col" className="h-px px-2 pb-4 align-top font-normal">
                   {p ? (
-                    <div className="relative flex h-full flex-col rounded-2xl bg-primary-900 p-5 text-white">
+                    <div className="relative flex h-full flex-col rounded-2xl border border-slate-200 border-t-4 border-t-primary-600 bg-white p-5 shadow-card">
                       <button
                         type="button"
                         onClick={() => update(selected.filter((s) => s.slug !== p.slug).map((s) => s.slug))}
-                        className="absolute right-3 top-3 grid size-7 place-items-center rounded-full text-white/70 hover:bg-white/10 hover:text-white"
+                        className="absolute right-3 top-3 grid size-7 place-items-center rounded-full text-slate-600 hover:bg-brand-100 hover:text-ink"
                         aria-label={`Remove ${p.title}`}
                       >
                         <X className="size-4" aria-hidden />
                       </button>
-                      <p className="eyebrow text-gold-300">{levelLabels[p.level]}</p>
-                      <p className="heading mt-2 pr-6 text-lg leading-snug text-white">{p.title}</p>
+                      <p className="eyebrow">{levelLabels[p.level]}</p>
+                      <p className="heading mt-2 pr-6 text-lg leading-snug text-ink">{p.title}</p>
                       <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                        <Link href={`/programmes/${p.slug}`} className="inline-flex h-9 items-center rounded-full bg-white px-4 text-sm font-semibold text-ink hover:bg-slate-100">Details</Link>
-                        <a href={site.applyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-9 items-center rounded-full border border-white/40 px-4 text-sm font-semibold text-white hover:bg-white/10">Apply</a>
+                        <Link href={`/programmes/${p.slug}`} className="inline-flex h-9 items-center rounded-full bg-primary-600 px-4 text-sm font-semibold text-ink hover:bg-primary-700">Details</Link>
+                        <a href={site.applyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-9 items-center rounded-full border border-slate-300 px-4 text-sm font-semibold text-ink hover:bg-brand-100">Apply</a>
                       </div>
                     </div>
                   ) : (

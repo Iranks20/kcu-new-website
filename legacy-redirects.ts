@@ -44,6 +44,9 @@ export const legacyRedirects: [source: string, destination: string][] = [
   ["/jobs", "/careers"],
   ["/calendar", "/academic-calendar"],
   ["/media-centre", "/press"],
+  // Programme renamed to match the official flyers (January 2027)
+  ["/programmes/bachelor-of-oil-gas-and-energy-management", "/programmes/bachelor-of-oil-and-gas-management"],
+  ["/programmes/bachelor-of-oil-gas-and-energy-management/brochure", "/programmes/bachelor-of-oil-and-gas-management/brochure"],
   // WordPress news posts
   ["/kcu-signs-strategic-partnership-with-tecnovia-to-enhance-student-skills-and-employment-opportunities", "/news/kcu-signs-strategic-partnership-with-tecnovia-to-enhance-student-skills-and"],
   ["/department-of-law-signs-memorandum-of-understanding-with-praxis-conflict-centre", "/news/department-of-law-signs-memorandum-of-understanding-with-praxis-conflict-centre"],

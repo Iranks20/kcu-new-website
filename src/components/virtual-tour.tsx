@@ -16,6 +16,20 @@ export function VirtualTour({ stops }: { stops: TourStop[] }) {
 
   const go = useCallback((step: number) => setIndex((i) => (i + step + stops.length) % stops.length), [stops.length]);
 
+  // Links such as /visit/virtual-tour#library (from the campus map) open at that stop.
+  useEffect(() => {
+    const fromHash = () => {
+      const i = stops.findIndex((s) => s.slug === window.location.hash.slice(1));
+      if (i >= 0) setIndex(i);
+    };
+    const frame = requestAnimationFrame(fromHash);
+    window.addEventListener("hashchange", fromHash);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", fromHash);
+    };
+  }, [stops]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!frame.current?.contains(document.activeElement) && !full) return;
@@ -43,7 +57,7 @@ export function VirtualTour({ stops }: { stops: TourStop[] }) {
         tabIndex={0}
         aria-roledescription="carousel"
         aria-label="Virtual campus tour"
-        className={cn("group relative overflow-hidden rounded-2xl bg-primary-950 outline-none focus-visible:ring-4 focus-visible:ring-gold-400", full && "flex h-screen flex-col rounded-none")}
+        className={cn("group relative overflow-hidden rounded-2xl bg-slate-900 outline-none focus-visible:ring-4 focus-visible:ring-gold-400", full && "flex h-screen flex-col rounded-none")}
         onTouchStart={(e) => (touch.current = e.touches[0].clientX)}
         onTouchEnd={(e) => {
           if (touch.current === null) return;
@@ -67,7 +81,7 @@ export function VirtualTour({ stops }: { stops: TourStop[] }) {
               />
             </div>
           ))}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary-950/40 via-transparent to-transparent sm:bg-gradient-to-t sm:from-primary-950/90 sm:via-primary-950/25 sm:to-primary-950/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-transparent sm:bg-gradient-to-t sm:from-black/80 sm:via-black/20 sm:to-transparent" />
 
           <div className="absolute inset-x-0 top-0 flex items-center justify-between gap-3 p-3 sm:p-6">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-xs font-medium text-white backdrop-blur sm:text-sm">

@@ -19,7 +19,7 @@ export function MobileApplyBar() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 backdrop-blur transition-transform duration-300 lg:hidden",
+        "fixed inset-x-0 bottom-0 z-40 print:hidden border-t border-slate-200 bg-white/95 p-3 backdrop-blur transition-transform duration-300 lg:hidden",
         "pb-[max(0.75rem,env(safe-area-inset-bottom))]",
         visible ? "translate-y-0" : "translate-y-full",
       )}

@@ -44,12 +44,12 @@ export function VacancyList({ vacancies }: { vacancies: Vacancy[] }) {
       {open.length > 0 ? (
         <ul className="space-y-4">{open.map((v) => <VacancyItem key={v.slug} v={v} />)}</ul>
       ) : (
-        <div className="flex flex-col gap-5 rounded-2xl bg-primary-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div className="flex flex-col gap-5 rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div className="flex gap-4">
-            <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-white/10 text-gold-400"><BellRing className="size-6" aria-hidden /></span>
+            <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-white text-primary-600"><BellRing className="size-6" aria-hidden /></span>
             <div>
               <p className="text-lg font-semibold">All recent positions have closed</p>
-              <p className="mt-1 text-white/75">New academic and administrative vacancies are advertised here and in the national press. Send your CV for future openings.</p>
+              <p className="mt-1 text-slate-600">New academic and administrative vacancies are advertised here and in the national press. Send your CV for future openings.</p>
             </div>
           </div>
           <a href={`mailto:${site.contact.careersEmail}?subject=${encodeURIComponent("Expression of interest: future vacancies")}`} className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-gold-400 px-5 text-sm font-semibold text-ink hover:bg-gold-300">
