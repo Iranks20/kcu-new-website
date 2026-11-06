@@ -21,3 +21,9 @@
   for = "/media/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
+
+# Hero video files are versioned (kcu-hero-v2-*; bump the number for each new encode), so browsers can keep them for a year.
+[[headers]]
+  for = "/media/video/hero/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
