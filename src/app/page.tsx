@@ -7,6 +7,7 @@ import { Reveal } from "@/components/reveal";
 import { CourseSearch } from "@/components/course-search";
 import { Credentials } from "@/components/credentials";
 import { CampusTour } from "@/components/campus-tour";
+import { HeroVideo } from "@/components/hero-video";
 import { stories } from "@/content/stories";
 import { news } from "@/content/news";
 import { events } from "@/content/events";
@@ -57,16 +58,13 @@ export default function HomePage() {
 
   return (
     <>
-      {/* One clear message instead of a rotating slideshow */}
+      {/* One clear message over a silent aerial loop of the campus (poster first, video after load) */}
       <section className="relative isolate overflow-hidden bg-slate-900">
-        <Image
-          src="/images/kcu-2026/graduates-best-of-best.webp"
-          alt="KCU graduates celebrating outside the main campus"
-          fill
-          priority
-          sizes="100vw"
-          className="-z-10 object-cover"
-          style={{ objectPosition: "center 70%" }}
+        <HeroVideo
+          poster="/media/video/hero/kcu-hero-v2-poster.webp"
+          alt="Aerial view of the King Ceasor University campus on Bunga Hill"
+          desktop={{ webm: "/media/video/hero/kcu-hero-v2-720.webm", mp4: "/media/video/hero/kcu-hero-v2-720.mp4" }}
+          mobile={{ webm: "/media/video/hero/kcu-hero-v2-480.webm", mp4: "/media/video/hero/kcu-hero-v2-480.mp4" }}
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
         <div className="absolute inset-0 -z-10 bg-black/25 lg:hidden" />
