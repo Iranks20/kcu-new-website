@@ -32,7 +32,7 @@ export default function AlumniPage() {
             const Icon = icons[i % icons.length];
             return (
               <li key={b.title} className="flex gap-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary-50 text-primary-600">
+                <span className="inline-flex shrink-0 text-primary-600">
                   <Icon className="size-5" aria-hidden />
                 </span>
                 <div>

@@ -12,6 +12,7 @@ import { CurrencyToggle, FeeAmount } from "@/components/fee-amount";
 import { GraduateOutcomes } from "@/components/outcomes";
 import { AskAssistantButton } from "@/components/assistant/ask-button";
 import { pageMeta } from "@/lib/seo";
+import { PhotoBand } from "@/components/photo-band";
 
 export const metadata = pageMeta({
   title: "Admissions",
@@ -39,7 +40,7 @@ export default function AdmissionsPage() {
         intro="Everything you need to apply: requirements, fees, funding and key dates. Most applicants hear back within two weeks."
         image="/images/home/campus-welcome.webp"
       >
-        <Button href={site.applyUrl} size="lg">Apply online</Button>
+        <Button href={site.applyUrl} variant="gold" size="lg">Apply online</Button>
         <Button href="/programmes" variant="outline" size="lg" icon={false}>Find a programme</Button>
         <AskAssistantButton question="Help me apply" size="lg">Help me apply</AskAssistantButton>
       </PageHero>
@@ -259,6 +260,11 @@ export default function AdmissionsPage() {
           </div>
         </div>
       </Section>
+
+      <PhotoBand image="/images/home/campus-group.webp" alt="Students gathered on the KCU campus" eyebrow="Visit before you apply" title="See Bunga Hill for yourself" highlight="Bunga Hill" text="Walk the campus on an open day or a guided tour, or explore it from home with the virtual tour and campus map.">
+        <Button href="/visit" icon={false}>Book a visit</Button>
+        <Button href="/visit/virtual-tour" variant="outline" icon={false}>Virtual tour</Button>
+      </PhotoBand>
 
       <CtaBand />
     </>

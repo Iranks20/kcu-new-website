@@ -35,7 +35,7 @@ export default function InternationalPage() {
         intro={`Students from ${countries.slice(0, -1).join(", ")} and ${countries.at(-1)} graduated with us this year. Fees are in US dollars, and our team supports you from application to arrival.`}
         image="/images/kcu-2026/graduates-welcome-group.webp"
       >
-        <Button href={site.applyUrl} size="lg">Apply online</Button>
+        <Button href={site.applyUrl} variant="gold" size="lg">Apply online</Button>
         <Button href={`mailto:${site.contact.admissionsEmail}`} variant="outline" size="lg" icon={false}>
           Email admissions
         </Button>
@@ -47,7 +47,7 @@ export default function InternationalPage() {
           {steps.map((s, i) => (
             <li key={s.title} className="rounded-2xl border border-slate-200 p-6">
               <div className="flex items-center justify-between">
-                <span className="grid size-11 place-items-center rounded-xl bg-primary-50 text-primary-600">
+                <span className="inline-flex shrink-0 text-primary-600">
                   <s.icon className="size-5" aria-hidden />
                 </span>
                 <span className="heading text-2xl text-slate-300">{String(i + 1).padStart(2, "0")}</span>

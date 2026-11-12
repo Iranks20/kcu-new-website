@@ -74,7 +74,7 @@ export default function AcademicCalendarPage() {
             <div className="space-y-4 lg:sticky lg:top-28">
               <div className="rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink sm:p-7">
                 <div className="flex items-center gap-3">
-                  <span className="grid size-10 place-items-center rounded-xl bg-white text-primary-600"><CalendarDays className="size-5" aria-hidden /></span>
+                  <span className="inline-flex shrink-0 text-primary-600"><CalendarDays className="size-5" aria-hidden /></span>
                   <h2 className="text-xl text-ink">Intakes</h2>
                 </div>
                 <ul className="mt-5 space-y-4">

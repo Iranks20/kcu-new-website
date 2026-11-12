@@ -8,6 +8,7 @@ import { viceChancellor } from "@/content/people";
 import { partners } from "@/content/partners";
 import { asset } from "@/lib/utils";
 import { RecognitionStrip } from "@/components/outcomes";
+import { PhotoBand } from "@/components/photo-band";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
@@ -132,6 +133,11 @@ export default function AboutPage() {
       </Section>
 
       <RecognitionStrip />
+
+      <PhotoBand image="/images/kcu-2026/graduates-library-celebration.webp" alt="KCU graduates celebrating outside the library" eyebrow="Join us" title="Start your KCU story" highlight="KCU story" text="Join a chartered university where practical training and caring lecturers help you graduate ready for work, anywhere in the world." align="right">
+        <Button href="/visit" icon={false}>Visit KCU</Button>
+        <Button href="/request-information" variant="outline" icon={false}>Request information</Button>
+      </PhotoBand>
 
       <CtaBand tone="quiet" />
     </>

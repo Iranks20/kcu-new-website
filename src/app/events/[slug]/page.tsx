@@ -50,7 +50,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
                   { icon: MapPin, label: "Location", value: event.location },
                 ].map((f) => (
                   <div key={f.label} className="flex gap-4">
-                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white text-slate-600 shadow-card"><f.icon className="size-5" aria-hidden /></span>
+                    <span className="inline-flex shrink-0 text-primary-600"><f.icon className="size-5" aria-hidden /></span>
                     <div>
                       <dt className="text-sm text-slate-500">{f.label}</dt>
                       <dd className="font-semibold text-ink">{f.value}</dd>

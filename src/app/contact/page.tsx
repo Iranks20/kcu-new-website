@@ -36,9 +36,9 @@ export default function ContactPage() {
               key={c.title}
               href={c.href}
               {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="group rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-lift"
+              className="group rounded-2xl border border-slate-200 p-6 transition hover:border-slate-300 hover:shadow-lift"
             >
-              <span className="grid size-12 place-items-center rounded-xl bg-slate-50 text-slate-600 transition group-hover:bg-primary-600 group-hover:text-white">
+              <span className="inline-flex shrink-0 text-primary-600">
                 <c.icon className="size-5" aria-hidden />
               </span>
               <p className="mt-5 text-sm text-slate-500">{c.title}</p>
@@ -49,7 +49,7 @@ export default function ContactPage() {
 
         <div className="mt-6 flex flex-col gap-4 rounded-2xl bg-brand-50 ring-1 ring-brand-100 p-6 text-ink sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div className="flex gap-4">
-            <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-gold-400 text-ink"><Sparkles className="size-6" aria-hidden /></span>
+            <span className="inline-flex shrink-0 text-primary-600"><Sparkles className="size-6" aria-hidden /></span>
             <div>
               <p className="text-lg font-semibold">Get an answer right now</p>
               <p className="mt-1 text-slate-600">The KCU Assistant answers questions about programmes, fees, requirements and intakes, day or night.</p>

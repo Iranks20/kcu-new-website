@@ -52,7 +52,7 @@ export function StaffDirectory({ entries }: { entries: StaffProfile[] }) {
       </p>
       <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((e) => (
-          <li key={e.slug} className="group relative flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-card">
+          <li key={e.slug} className="group relative flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-slate-300 hover:shadow-card">
             <div className="relative size-16 shrink-0 overflow-hidden rounded-full bg-primary-50">
               {e.image ? (
                 <Image src={asset(e.image)} alt="" fill sizes="64px" className="object-cover object-top" />

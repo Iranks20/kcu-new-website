@@ -21,6 +21,10 @@ export type SearchItem = {
 const pages: SearchItem[] = [
   { kind: "Page", title: "Admissions", meta: "How to apply, requirements and key dates", href: "/admissions", keywords: "apply application intake deadline" },
   { kind: "Page", title: "Tuition fees", meta: "Fees for every programme", href: "/admissions#fees", keywords: "cost price tuition ugx usd" },
+  { kind: "Page", title: "KCU 2030", meta: "Strategic priorities to 2030", href: "/about/kcu-2030", keywords: "strategy strategic plan vision 2030 priorities" },
+  { kind: "Page", title: "Suppliers & tenders", meta: "Procurement notices and supplier registration", href: "/suppliers", keywords: "tender procurement supplier bid notice" },
+  { kind: "Page", title: "Request information", meta: "Ask admissions for programme details and fees", href: "/request-information", keywords: "enquiry brochure contact admissions info" },
+  { kind: "Page", title: "Employers & partners", meta: "Hire graduates, host interns, verify certificates", href: "/employers", keywords: "employer hire recruit internship placement verify certificate transcript verification" },
   { kind: "Page", title: "January 2027 intake", meta: "Applications open: featured programmes and key dates", href: "/intake", keywords: "intake january 2027 admissions open apply deadline flyer" },
   { kind: "Page", title: "Current students", meta: "Portals, key dates, fee payment and support", href: "/students", keywords: "academia portal timetable results registration exams pay fees student number" },
   { kind: "Page", title: "Parents & sponsors", meta: "Fees, safety, accommodation and contacts", href: "/parents", keywords: "parent guardian sponsor employer pay fees" },

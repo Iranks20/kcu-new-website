@@ -68,7 +68,7 @@ export default function VisitPage() {
         <ul className="grid gap-5 md:grid-cols-3">
           {ways.map((w) => (
             <li key={w.title} className="rounded-2xl border border-slate-200 p-6 sm:p-7">
-              <span className="grid size-12 place-items-center rounded-xl bg-primary-50 text-primary-600">
+              <span className="inline-flex shrink-0 text-primary-600">
                 <w.icon className="size-5" aria-hidden />
               </span>
               <h3 className="mt-5 text-xl">{w.title}</h3>

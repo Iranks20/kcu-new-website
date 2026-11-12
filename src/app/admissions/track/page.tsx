@@ -32,7 +32,7 @@ export default function TrackPage() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="rounded-2xl border border-slate-200 border-t-4 border-t-primary-600 p-6 shadow-card sm:p-8">
-              <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-primary-600"><Lock className="size-5" aria-hidden /></span>
+              <span className="inline-flex shrink-0 text-primary-600"><Lock className="size-5" aria-hidden /></span>
               <h2 className="mt-5 text-2xl">Check your status</h2>
               <p className="mt-2 text-slate-600">
                 To keep your details private, your live application status is shown after you sign in to the application portal with the account you applied with.

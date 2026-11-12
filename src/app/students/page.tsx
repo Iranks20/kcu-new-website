@@ -74,7 +74,7 @@ export default function StudentsPage() {
           <aside className="lg:col-span-5">
             <div className="rounded-2xl bg-white p-6 ring-1 ring-slate-200 sm:p-8">
               <div className="flex items-center gap-3">
-                <span className="grid size-10 place-items-center rounded-xl bg-brand-50 text-primary-600"><CalendarDays className="size-5" aria-hidden /></span>
+                <span className="inline-flex shrink-0 text-primary-600"><CalendarDays className="size-5" aria-hidden /></span>
                 <h2 className="text-xl">Coming up</h2>
               </div>
               <ol className="mt-5 divide-y divide-slate-100">
@@ -94,7 +94,7 @@ export default function StudentsPage() {
       <Section id="fees">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <span className="grid size-12 place-items-center rounded-xl bg-brand-50 text-primary-600"><CreditCard className="size-6" aria-hidden /></span>
+            <span className="inline-flex shrink-0 text-primary-600"><CreditCard className="size-6" aria-hidden /></span>
             <h2 className="mt-5 text-3xl sm:text-4xl">Paying your fees</h2>
             <p className="mt-4 text-lg text-slate-600">Pay at least the minimum required before registration. Instalment plans can be agreed with the Finance Office.</p>
             <p className="mt-4 text-slate-600">

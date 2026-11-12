@@ -134,7 +134,7 @@ export function SiteHeader() {
               href={site.applyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden h-11 items-center whitespace-nowrap rounded-full bg-primary-600 px-6 text-sm font-semibold text-white transition hover:bg-primary-700 sm:inline-flex"
+              className="hidden h-11 items-center whitespace-nowrap rounded-full bg-gold-400 px-6 text-sm font-bold text-ink transition hover:bg-gold-300 sm:inline-flex"
             >
               Apply now
             </a>
@@ -279,7 +279,7 @@ export function SiteHeader() {
           </div>
         </nav>
         <div className="border-t border-slate-100 p-4">
-          <a href={site.applyUrl} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center justify-center rounded-full bg-primary-600 font-semibold text-white">
+          <a href={site.applyUrl} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center justify-center rounded-full bg-gold-400 font-bold text-ink">
             Apply for {site.currentIntake.name}
           </a>
         </div>

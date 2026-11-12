@@ -53,7 +53,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
         intro={school.name}
         image={school.image}
       >
-        <Button href={site.applyUrl} size="lg">Apply now</Button>
+        <Button href={site.applyUrl} variant="gold" size="lg">Apply now</Button>
         <Button href={`/programmes/compare?p=${programme.slug}`} variant="outline" size="lg" icon={false}>Compare</Button>
         <Button href={`/programmes/${programme.slug}/brochure`} variant="outline" size="lg" icon={false}>Brochure (PDF)</Button>
       </PageHero>
@@ -164,7 +164,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
             <div className="lg:sticky lg:top-28">
             <div className="rounded-2xl border border-slate-200 border-t-4 border-t-primary-600 bg-white p-6 shadow-card sm:p-8">
               <div className="flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-primary-600"><Wallet className="size-5" aria-hidden /></span>
+                <span className="inline-flex shrink-0 text-primary-600"><Wallet className="size-5" aria-hidden /></span>
                 <h2 className="text-xl text-ink">Tuition fees</h2>
               </div>
               <CurrencyToggle className="mt-5" />
@@ -180,7 +180,7 @@ export default async function ProgrammePage({ params }: PageProps<"/programmes/[
               </dl>
               <p className="mt-4 text-sm text-slate-600">Per {programme.fees.per}. Instalment plans and HESFB student loans available.</p>
               <div className="mt-6 grid gap-3">
-                <Button href={site.applyUrl} className="w-full">Start your application</Button>
+                <Button href={site.applyUrl} variant="gold" className="w-full">Start your application</Button>
                 <Link href="/admissions#fees" className="text-center text-sm font-semibold text-slate-600 hover:text-ink">See full fees & funding</Link>
               </div>
             </div>

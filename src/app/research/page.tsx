@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpenCheck, FlaskConical, Handshake, Lightbulb, ShieldCheck, Users } from "lucide-react";
-import { CtaBand, PageHero, Section, SectionHeading, TextLink } from "@/components/ui";
+import { Button, CtaBand, PageHero, Section, SectionHeading, TextLink } from "@/components/ui";
 import { NewsCard } from "@/components/cards";
 import { SimpleForm } from "@/components/simple-form";
 import { researchAreas } from "@/content/campus";
@@ -11,6 +11,7 @@ import { allPublications, researchCentres, researchDirector, researchProjects, r
 import { getSchool } from "@/content/schools";
 import { pageMeta } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { PhotoBand } from "@/components/photo-band";
 
 export const metadata = pageMeta({
   title: "Research & Innovation",
@@ -58,7 +59,7 @@ export default function ResearchPage() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {researchAreas.map((r) => (
             <div key={r.title} className="rounded-2xl border border-slate-200 p-6 sm:p-8">
-              <span className="grid size-12 place-items-center rounded-xl bg-brand-50 text-primary-600">
+              <span className="inline-flex shrink-0 text-primary-600">
                 <FlaskConical className="size-6" aria-hidden />
               </span>
               <h3 className="mt-5 text-xl">{r.title}</h3>
@@ -93,7 +94,7 @@ export default function ResearchPage() {
         <SectionHeading eyebrow="Projects & recognition" title="Recent work from our labs and classrooms" />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {researchProjects.map((p) => (
-            <Link key={p.title} href={`/news/${p.news}`} className="group flex flex-col rounded-2xl border border-slate-200 p-6 transition hover:-translate-y-1 hover:shadow-lift">
+            <Link key={p.title} href={`/news/${p.news}`} className="group flex flex-col rounded-2xl border border-slate-200 p-6 transition hover:shadow-lift">
               <div className="flex items-center justify-between gap-3">
                 <span className={cn("rounded-full px-2.5 py-1 text-xs font-semibold", statusStyles[p.status])}>{p.status}</span>
                 <span className="text-xs font-medium text-slate-400">{getSchool(p.school)?.shortName}</span>
@@ -184,7 +185,7 @@ export default function ResearchPage() {
       <Section tone="surface" id="collaborate">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <span className="grid size-12 place-items-center rounded-xl bg-primary-600 text-white"><Handshake className="size-6" aria-hidden /></span>
+            <span className="inline-flex shrink-0 text-primary-600"><Handshake className="size-6" aria-hidden /></span>
             <h2 className="mt-5 text-3xl sm:text-4xl">Collaborate with KCU</h2>
             <p className="mt-4 text-lg text-slate-600">Universities, hospitals, government agencies and companies: tell us about your idea and the Directorate will connect you with the right researchers.</p>
           </div>
@@ -204,6 +205,11 @@ export default function ResearchPage() {
           </div>
         </div>
       </Section>
+      <PhotoBand image="/images/kcu-2026/lab-chemistry-demonstration.webp" alt="A lecturer demonstrating an experiment to students" eyebrow="Students in research" title="Research starts in your first year" highlight="first year" text="Every KCU degree includes a supervised research project, and our best student work is presented at national symposia and competitions.">
+        <Button href="/programmes" icon={false}>Find a programme</Button>
+        <Button href="#collaborate" variant="outline" icon={false}>Partner with us</Button>
+      </PhotoBand>
+
       <CtaBand tone="quiet" title="Study research-led programmes" text="Every KCU degree includes a supervised research project. Find the programme that fits your interests." />
     </>
   );

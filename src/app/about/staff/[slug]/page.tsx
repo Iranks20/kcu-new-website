@@ -149,7 +149,7 @@ export default async function StaffProfilePage({ params }: PageProps<"/about/sta
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {colleagues.map((c) => (
               <li key={c.slug}>
-                <Link href={`/about/staff/${c.slug}`} className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-card ring-1 ring-slate-100 transition hover:-translate-y-0.5 hover:shadow-lift">
+                <Link href={`/about/staff/${c.slug}`} className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-card ring-1 ring-slate-100 transition hover:shadow-lift">
                   <div className="relative size-14 shrink-0 overflow-hidden rounded-full bg-primary-50">
                     {c.image ? <Image src={asset(c.image)} alt="" fill sizes="56px" className="object-cover object-top" /> : <Avatar name={c.name} className="size-full text-base ring-0" />}
                   </div>
