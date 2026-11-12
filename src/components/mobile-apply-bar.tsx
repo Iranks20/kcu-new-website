@@ -29,7 +29,7 @@ export function MobileApplyBar() {
         <a href={site.contact.phoneHref} className="flex h-12 items-center justify-center gap-2 rounded-full border border-slate-300 px-5 font-semibold text-ink" aria-label={`Call admissions on ${site.contact.phone}`}>
           <Phone className="size-4" aria-hidden /> Call
         </a>
-        <a href={site.applyUrl} target="_blank" rel="noopener noreferrer" className="flex h-12 flex-1 items-center justify-center rounded-full bg-primary-600 font-semibold text-white">
+        <a href={site.applyUrl} target="_blank" rel="noopener noreferrer" className="flex h-12 flex-1 items-center justify-center rounded-full bg-gold-400 font-bold text-ink">
           Apply for {site.currentIntake.name.replace(" Intake", "")}
         </a>
       </div>

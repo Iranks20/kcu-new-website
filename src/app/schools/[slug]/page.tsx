@@ -157,7 +157,7 @@ export default async function SchoolPage({ params }: PageProps<"/schools/[slug]"
           eyebrow="Programmes"
           title={`Study at the School of ${school.shortName}`}
           intro="Compare duration, fees and entry requirements, then apply online."
-          action={<Button href={site.applyUrl}>Apply now</Button>}
+          action={<Button href={site.applyUrl} variant="gold">Apply now</Button>}
         />
         <div className="space-y-12">
           {byLevel.map((g) => (

@@ -5,33 +5,56 @@ import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Sources = { webm: string; mp4: string };
+/** One rendition of the loop: an H.264 MP4 every browser can play, and an optional, smaller AV1 MP4. */
+export type HeroRendition = { h264: string; av1?: string; width: number; height: number };
 
 const PREF_KEY = "kcu-hero-motion";
 
+type NetworkInfo = { saveData?: boolean; effectiveType?: string };
+
+/** Picks the rendition for this screen: a portrait cut for phone-shaped heroes, then by real (device) pixels needed. */
+function pickRendition(r: { large: HeroRendition; medium: HeroRendition; portrait: HeroRendition }, slow: boolean) {
+  const w = window.innerWidth;
+  if (w < 768 && window.innerHeight > w) return r.portrait;
+  const devicePixels = w * Math.min(window.devicePixelRatio || 1, 2);
+  return !slow && devicePixels > 1500 ? r.large : r.medium;
+}
+
+/** Uses AV1 only where the device says it can decode it smoothly and power-efficiently (hardware); otherwise H.264. */
+async function pickSource(r: HeroRendition) {
+  if (!r.av1 || !navigator.mediaCapabilities?.decodingInfo) return r.h264;
+  try {
+    const info = await navigator.mediaCapabilities.decodingInfo({
+      type: "file",
+      video: { contentType: 'video/mp4; codecs="av01.0.08M.08"', width: r.width, height: r.height, bitrate: 1_500_000, framerate: 30 },
+    });
+    return info.supported && info.smooth && info.powerEfficient ? r.av1 : r.h264;
+  } catch {
+    return r.h264;
+  }
+}
+
 /**
- * Background video for the homepage hero, built so it never slows the page down:
- * - The poster image renders first (it is the LCP image) and stays as the fallback.
+ * Background video for the homepage hero, built to load fast and play in every browser:
+ * - The poster image renders first (it is the LCP image) and stays underneath as the fallback.
  * - The video is attached only after the page has loaded and the browser is idle.
- * - It is skipped for "reduce motion", Data Saver and 2G, so those visitors just see the poster.
- * - Phones and 3G connections get the light 480p file; larger screens on fast connections get 720p. WebM (VP9) first, MP4 (H.264) for Safari.
- * - It pauses when scrolled out of view or the tab is hidden, and has a pause button (WCAG 2.2.2).
+ * - Each screen gets the right file: portrait for phones, 1280px or 1920px for wider screens.
+ * - H.264 MP4 plays everywhere with hardware decoding; AV1 is used only where it decodes smoothly.
+ * - If the browser blocks autoplay (iPhone Low Power Mode, "reduce motion", Data Saver, 2G), the poster stays and a
+ *   play button lets the visitor start it. It pauses off-screen and in hidden tabs, and has a pause button (WCAG 2.2.2).
  */
-export function HeroVideo({ poster, alt, desktop, mobile, className }: { poster: string; alt: string; desktop: Sources; mobile: Sources; className?: string }) {
-  const [src, setSrc] = useState<Sources | null>(null);
+export function HeroVideo({ poster, alt, large, medium, portrait, className }: { poster: string; alt: string; large: HeroRendition; medium: HeroRendition; portrait: HeroRendition; className?: string }) {
+  const [src, setSrc] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
   const [paused, setPaused] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
 
-  // Decide after load whether this visitor should get motion at all, and which file size.
+  // Decide after load which file this visitor gets, and whether it may start on its own.
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const conn = (navigator as Navigator & { connection?: NetworkInfo }).connection;
     const type = conn?.effectiveType ?? "4g";
-    if (reduce || conn?.saveData || type.endsWith("2g")) return;
-    // On 3G even large screens get the light 480p file (about 1.3 MB).
-    const light = type === "3g";
+    const noAutoplay = window.matchMedia("(prefers-reduced-motion: reduce)").matches || conn?.saveData || type.endsWith("2g");
 
     let stored: string | null = null;
     try {
@@ -39,30 +62,38 @@ export function HeroVideo({ poster, alt, desktop, mobile, className }: { poster:
     } catch {}
 
     let idle = 0;
+    let cancelled = false;
     const attach = () => {
-      const run = () => {
-        if (stored === "paused") setPaused(true);
-        setSrc(!light && window.matchMedia("(min-width: 768px)").matches ? desktop : mobile);
+      const run = async () => {
+        const file = await pickSource(pickRendition({ large, medium, portrait }, type === "3g"));
+        if (cancelled) return;
+        // Without autoplay we still offer the video, paused, behind a play button.
+        if (noAutoplay || stored === "paused") setPaused(true);
+        setSrc(file);
       };
-      idle = "requestIdleCallback" in window ? window.requestIdleCallback(run, { timeout: 2000 }) : Number(setTimeout(run, 300));
+      idle = "requestIdleCallback" in window ? window.requestIdleCallback(() => void run(), { timeout: 2000 }) : Number(setTimeout(() => void run(), 300));
     };
     if (document.readyState === "complete") attach();
     else window.addEventListener("load", attach, { once: true });
     return () => {
+      cancelled = true;
       window.removeEventListener("load", attach);
       if ("cancelIdleCallback" in window) window.cancelIdleCallback(idle);
       else clearTimeout(idle);
     };
-  }, [desktop, mobile]);
+  }, [large, medium, portrait]);
 
-  // Only play while the hero is on screen and the tab is visible, to save battery and data.
+  // Play only while on screen and the tab is visible. If the browser refuses to autoplay, fall back to the play button.
   useEffect(() => {
     const v = video.current;
     if (!v || !src) return;
+    // React sets `muted` as a property only; Safari's autoplay rules also check the attribute.
+    v.muted = true;
+    v.setAttribute("muted", "");
     let onScreen = true;
     const sync = () => {
       if (paused || !onScreen || document.hidden) v.pause();
-      else v.play().catch(() => {});
+      else v.play().catch(() => setPaused(true));
     };
     const io = new IntersectionObserver(([e]) => {
       onScreen = e.isIntersecting;
@@ -87,28 +118,31 @@ export function HeroVideo({ poster, alt, desktop, mobile, className }: { poster:
 
   return (
     <>
-    <div ref={wrap} className={cn("absolute inset-0 -z-10", className)}>
-      <Image src={poster} alt={alt} fill priority sizes="100vw" className="object-cover" />
-      {src && (
-        <video
-          ref={video}
-          muted
-          loop
-          playsInline
-          autoPlay={!paused}
-          preload="auto"
-          disablePictureInPicture
-          disableRemotePlayback
-          aria-hidden
-          tabIndex={-1}
-          onPlaying={() => setVisible(true)}
-          className={cn("absolute inset-0 h-full w-full object-cover transition-opacity duration-1000", visible ? "opacity-100" : "opacity-0")}
-        >
-          <source src={src.webm} type="video/webm" />
-          <source src={src.mp4} type="video/mp4" />
-        </video>
-      )}
-    </div>
+      <div ref={wrap} className={cn("absolute inset-0 -z-10", className)}>
+        <Image src={poster} alt={alt} fill priority sizes="100vw" className="object-cover" />
+        {src && (
+          <video
+            ref={video}
+            src={src}
+            muted
+            loop
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            disableRemotePlayback
+            aria-hidden
+            tabIndex={-1}
+            onPlaying={() => setVisible(true)}
+            onError={() => {
+              // An AV1 file the device turned out not to handle: retry with H.264, otherwise keep the poster.
+              const fallback = [large, medium, portrait].find((r) => r.av1 === src)?.h264;
+              if (fallback) setSrc(fallback);
+              else setSrc(null);
+            }}
+            className={cn("absolute inset-0 h-full w-full object-cover transition-opacity duration-1000", visible ? "opacity-100" : "opacity-0")}
+          />
+        )}
+      </div>
       {/* Outside the background layer so the hero overlay never covers it. */}
       {src && (
         <button

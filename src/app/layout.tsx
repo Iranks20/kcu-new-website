@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { ViewTransition } from "react";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -41,10 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <AnnouncementBar />
         <SiteHeader />
-        <main id="main">
-          {/* Route changes update this boundary, so React crossfades the page content while the header stays put. */}
-          <ViewTransition>{children}</ViewTransition>
-        </main>
+        <main id="main">{children}</main>
         <SiteFooter />
         <MobileApplyBar />
         <ChatAssistant />

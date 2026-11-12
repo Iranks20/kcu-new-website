@@ -45,7 +45,7 @@ export function FeesCalculator({ programmes, schools }: { programmes: Option[]; 
     <div className="grid overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-slate-200 lg:grid-cols-12">
       <div className="p-6 sm:p-8 lg:col-span-7">
         <div className="flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-xl bg-primary-50 text-primary-600">
+          <span className="inline-flex shrink-0 text-primary-600">
             <Calculator className="size-5" aria-hidden />
           </span>
           <h3 className="text-xl sm:text-2xl">Estimate your tuition</h3>

@@ -35,7 +35,7 @@ export default function IntakePage() {
             </p>
             <Countdown deadline={campaign.closes} className="mt-8" />
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={site.applyUrl} size="lg">Apply now</Button>
+              <Button href={site.applyUrl} variant="gold" size="lg">Apply now</Button>
               <AskAssistantButton question="Help me apply" size="lg">Help me apply</AskAssistantButton>
             </div>
           </div>

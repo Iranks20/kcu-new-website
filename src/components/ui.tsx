@@ -15,7 +15,7 @@ type ButtonProps = {
 
 const buttonStyles = {
   primary: "bg-primary-600 text-white hover:bg-primary-700",
-  gold: "bg-gold-400 text-ink hover:bg-gold-300",
+  gold: "bg-gold-400 font-bold text-ink hover:bg-gold-300",
   outline: "border border-slate-300 bg-white text-ink hover:border-ink hover:bg-slate-50",
   "ghost-light": "border border-white/40 text-white hover:bg-white/10",
   white: "bg-white text-ink hover:bg-slate-50",
@@ -55,8 +55,8 @@ export function Section({ children, className, id, tone = "white" }: { children:
     <section
       id={id}
       className={cn(
-        "py-16 sm:py-20 lg:py-24",
-        tone === "surface" && "bg-surface",
+        "py-14 sm:py-16 lg:py-20",
+        tone === "surface" && "bg-surface bg-contours",
         tone === "dark" && "bg-primary-900 text-white",
         className,
       )}
@@ -66,9 +66,23 @@ export function Section({ children, className, id, tone = "white" }: { children:
   );
 }
 
+/** Wraps the first occurrence of `highlight` in the title with the KCU gold highlight. */
+export function Highlighted({ text, highlight }: { text: string; highlight?: string }) {
+  const i = highlight ? text.indexOf(highlight) : -1;
+  if (!highlight || i < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, i)}
+      <mark className="mark-kcu">{highlight}</mark>
+      {text.slice(i + highlight.length)}
+    </>
+  );
+}
+
 export function SectionHeading({
   eyebrow,
   title,
+  highlight,
   intro,
   action,
   align = "left",
@@ -76,6 +90,8 @@ export function SectionHeading({
 }: {
   eyebrow?: string;
   title: string;
+  /** One or two words of the title to mark with the KCU gold highlight. */
+  highlight?: string;
   intro?: string;
   action?: React.ReactNode;
   align?: "left" | "center";
@@ -90,7 +106,9 @@ export function SectionHeading({
     >
       <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
         {eyebrow && <p className={cn("eyebrow mb-3", dark && "text-gold-300")}>{eyebrow}</p>}
-        <h2 className={cn("text-3xl sm:text-4xl", dark && "text-white")}>{title}</h2>
+        <h2 className={cn("text-3xl sm:text-4xl", dark && "text-white")}>
+          <Highlighted text={title} highlight={highlight} />
+        </h2>
         {intro && <p className={cn("mt-4 text-lg", dark ? "text-white/70" : "text-slate-600")}>{intro}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
@@ -117,7 +135,7 @@ export function PageHero({
   crumbs?: Crumb[];
 }) {
   return (
-    <section className="border-b border-slate-100 bg-surface">
+    <section className="border-b border-slate-100 bg-surface bg-contours">
       <div className={cn("container-x grid items-center gap-10 py-12 sm:py-16", image && "lg:grid-cols-12 lg:gap-14 lg:py-16")}>
         <div className={cn("animate-fade-up", image ? "lg:col-span-6" : "max-w-3xl")}>
           {crumbs && <Breadcrumbs items={crumbs} />}
@@ -172,7 +190,7 @@ export function CtaBand({
           <p className="mt-3 text-lg text-slate-600">{text}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button href="https://apply.kcu.ac.ug/" size="lg">
+          <Button href="https://apply.kcu.ac.ug/" variant="gold" size="lg">
             Apply now
           </Button>
           <Button href="/contact" variant="outline" size="lg" icon={false}>

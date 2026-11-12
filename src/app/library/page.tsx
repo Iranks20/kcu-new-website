@@ -43,7 +43,7 @@ export default function LibraryPage() {
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="rounded-2xl bg-white p-6 ring-1 ring-slate-200 sm:p-8">
             <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-xl bg-brand-50 text-primary-600"><Clock className="size-5" aria-hidden /></span>
+              <span className="inline-flex shrink-0 text-primary-600"><Clock className="size-5" aria-hidden /></span>
               <h2 className="text-2xl">Opening hours</h2>
             </div>
             <dl className="mt-6 divide-y divide-slate-100">

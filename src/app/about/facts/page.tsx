@@ -71,7 +71,7 @@ export default function FactsPage() {
       <Section id="policies">
         <div className="flex flex-col gap-6 rounded-2xl bg-brand-50 p-6 ring-1 ring-brand-100 sm:flex-row sm:items-center sm:justify-between sm:p-10">
           <div className="flex gap-4">
-            <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-white text-primary-600"><FileText className="size-6" aria-hidden /></span>
+            <span className="inline-flex shrink-0 text-primary-600"><FileText className="size-6" aria-hidden /></span>
             <div>
               <h2 className="text-2xl sm:text-3xl">University policies</h2>
               <p className="mt-2 max-w-2xl text-slate-600">Academic regulations, student and staff policies, and governance documents approved by the University Council.</p>

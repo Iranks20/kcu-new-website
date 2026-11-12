@@ -9,6 +9,7 @@ import { gallery } from "@/content/gallery";
 import { news } from "@/content/news";
 import { asset } from "@/lib/utils";
 import { stories as studentStories } from "@/content/stories";
+import { PhotoBand } from "@/components/photo-band";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/campus-life" },
@@ -150,6 +151,11 @@ export default function CampusLifePage() {
           </div>
         </Section>
       )}
+      <PhotoBand image="/media/news-images-kcu-soccer-team.webp" alt="The KCU football team" eyebrow="Clubs, sport and service" title="Find your people at KCU" highlight="your people" text="From the Pepsi University Football League to the Rotaract Club and the moot court, there is a place for you to lead, compete and serve." align="right">
+        <Button href="/campus-life#clubs" icon={false}>Clubs & sports</Button>
+        <Button href="/stories" variant="outline" icon={false}>Student stories</Button>
+      </PhotoBand>
+
       <CtaBand tone="quiet" />
     </>
   );

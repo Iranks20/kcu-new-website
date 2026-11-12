@@ -77,7 +77,7 @@ export default function PressPage() {
         <SectionHeading eyebrow="Brand assets" title="Logos and colours" intro="Please use the logos as supplied, without stretching or recolouring, with clear space around them." />
         <div className="grid gap-5 md:grid-cols-2">
           {brandAssets.map((b, i) => (
-            <a key={b.href} href={b.href} download className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-slate-100 transition hover:-translate-y-1 hover:shadow-lift">
+            <a key={b.href} href={b.href} download className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-slate-100 transition hover:shadow-lift">
               <div className={i === 1 ? "relative h-40 bg-primary-900" : "relative h-40 bg-white"}>
                 <Image src={b.href} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-contain p-8" />
               </div>

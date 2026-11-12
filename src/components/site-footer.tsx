@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { BadgeCheck, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { footerNav } from "@/content/navigation";
-import { portals, site } from "@/content/site";
+import { site } from "@/content/site";
 import { SocialLinks } from "./social-icons";
 import { NewsletterForm } from "./newsletter-form";
 
+// Portals live in the top bar and the Students page, and "Report an accessibility problem" is on the Accessibility page,
+// so the footer keeps only the copyright and the legal links.
 const legalLinks = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
@@ -22,7 +24,6 @@ export function SiteFooter() {
             A chartered university on Bunga Hill, Kampala, preparing globally competitive professionals in health, law, business,
             computing and energy.
           </p>
-          <p className="mt-4 text-sm text-primary-300">Chartered by the Government of Uganda · Accredited by the National Council for Higher Education</p>
           <SocialLinks className="mt-6" />
           <div className="mt-10 max-w-sm border-t border-white/10 pt-8">
             <NewsletterForm />
@@ -77,27 +78,27 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-x flex flex-col gap-4 pb-24 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between lg:pb-6">
-          <div className="flex flex-col gap-2 sm:flex-row sm:gap-5">
-            <p>© {new Date().getFullYear()} King Ceasor University. All rights reserved.</p>
-            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+      {/* Gold strip, the footer's last layer: copyright, legal links and the charter badge (benchmark: ASU footer bar) */}
+      <div className="bg-gold-400 text-ink">
+        <div className="container-x flex flex-col gap-5 pb-24 pt-6 lg:flex-row lg:items-center lg:justify-between lg:pb-6">
+          <div className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
+            <p className="font-semibold">© {new Date().getFullYear()} King Ceasor University</p>
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 font-bold">
               {legalLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="hover:text-white">{l.label}</Link>
+                  <Link href={l.href} className="underline-offset-4 hover:underline">{l.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            {portals.map((p) => (
-              <li key={p.href}>
-                <a href={p.href} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                  {p.label.replace(" (Student Portal)", "").replace(" (E-learning)", "")}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <Link href="/about#accreditation" className="flex items-center gap-3">
+            <span className="heading text-xl leading-tight sm:text-2xl">
+              We are a <span className="block sm:inline">Chartered University</span>
+            </span>
+            <span className="grid size-12 shrink-0 place-items-center rounded-full bg-white">
+              <BadgeCheck className="size-7 text-primary-600" aria-hidden />
+            </span>
+          </Link>
         </div>
       </div>
     </footer>

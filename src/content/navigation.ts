@@ -12,6 +12,7 @@ export const audienceLinks: NavLink[] = [
   { label: "Current students", href: "/students" },
   { label: "Parents & sponsors", href: "/parents" },
   { label: "Alumni", href: "/alumni" },
+  { label: "Employers", href: "/employers" },
   { label: "Staff", href: "/about/staff" },
 ];
 
@@ -61,6 +62,7 @@ export const mainNav: NavItem[] = [
           { label: "How to apply", href: "/admissions#apply" },
           { label: "Entry requirements", href: "/admissions#requirements" },
           { label: "Intakes & key dates", href: "/admissions#intakes" },
+          { label: "Request information", href: "/request-information" },
           { label: "Track my application", href: "/admissions/track" },
           { label: "Apply online", href: "https://apply.kcu.ac.ug/" },
         ],
@@ -165,16 +167,20 @@ export const mainNav: NavItem[] = [
           { label: "About KCU", href: "/about" },
           { label: "Vice Chancellor's message", href: "/about#vice-chancellor" },
           { label: "Facts & figures", href: "/about/facts" },
+          { label: "KCU 2030", href: "/about/kcu-2030" },
           { label: "Leadership & governance", href: "/about/leadership" },
           { label: "Policies & strategic plan", href: "/about/facts#policies" },
         ],
       },
       {
-        title: "Connect",
+        title: "Information for",
         links: [
-          { label: "Staff directory", href: "/about/staff" },
+          { label: "Employers & partners", href: "/employers" },
+          { label: "Media", href: "/press" },
+          { label: "Suppliers & tenders", href: "/suppliers" },
+          { label: "Job applicants", href: "/careers" },
           { label: "Alumni", href: "/alumni" },
-          { label: "Careers at KCU", href: "/careers" },
+          { label: "Staff directory", href: "/about/staff" },
           { label: "Contact us", href: "/contact" },
         ],
       },
@@ -194,6 +200,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
       { label: "Scholarships", href: "/scholarships" },
       { label: "International students", href: "/international" },
       { label: "Parents & sponsors", href: "/parents" },
+      { label: "Request information", href: "/request-information" },
     ],
   },
   {
@@ -201,12 +208,15 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "About KCU", href: "/about" },
       { label: "Facts & figures", href: "/about/facts" },
+      { label: "KCU 2030", href: "/about/kcu-2030" },
       { label: "Our schools", href: "/schools" },
       { label: "Research", href: "/research" },
       { label: "Leadership", href: "/about/leadership" },
       { label: "Staff directory", href: "/about/staff" },
+      { label: "Employers & partners", href: "/employers" },
       { label: "Careers", href: "/careers" },
       { label: "Press & media", href: "/press" },
+      { label: "Suppliers & tenders", href: "/suppliers" },
     ],
   },
   {

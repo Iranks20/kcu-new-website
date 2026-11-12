@@ -19,12 +19,12 @@ const levels: { value: Level | "all"; label: string }[] = [
 export function ProgrammeFinder() {
   // Remount when the URL changes (e.g. picking "Diplomas" from the menu while already on this page).
   const params = useSearchParams();
-  const initialLevel = params.get("level") ?? "all";
+  const initialLevel = params.get("level") || "all";
   return (
     <Finder
       key={params.toString()}
       initialLevel={levels.some((l) => l.value === initialLevel) ? (initialLevel as Level | "all") : "all"}
-      initialSchool={params.get("school") ?? "all"}
+      initialSchool={params.get("school") || "all"}
       initialQuery={params.get("q") ?? ""}
     />
   );

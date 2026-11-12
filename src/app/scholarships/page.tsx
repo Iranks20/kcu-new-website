@@ -28,7 +28,7 @@ export default function ScholarshipsPage() {
           {scholarships.map((s) => (
             <article key={s.title} className="flex flex-col rounded-2xl border border-slate-200 p-6 sm:p-7">
               <div className="flex items-start justify-between gap-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-gold-50 text-gold-700 ring-1 ring-gold-200">
+                <span className="inline-flex shrink-0 text-gold-700">
                   <Award className="size-5" aria-hidden />
                 </span>
                 <span className="rounded-full bg-primary-600 px-3 py-1 text-xs font-semibold text-white">{s.value}</span>
